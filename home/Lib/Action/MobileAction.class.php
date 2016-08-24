@@ -264,6 +264,8 @@
                     }
 
                     //查询所有章节
+                    $firstUrl = null;
+                    $firstName = null;
                     foreach($vols as $vol){
                         $where=null;
                         $where['con_vid']=$vol['id'];
@@ -282,11 +284,12 @@
                             $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
 
                         }
-
+                        $firstUrl = $chapters_tmp[0]['con_url'];
                         array_push($vol,$chapters_tmp );
                         $chapters[]=$vol;
                     }
 
+                    $this->assign('firstUrl',$firstUrl);
                     $this->assign('chapters',$chapters);
                     $this->display('mobile:content/vol');
                 }

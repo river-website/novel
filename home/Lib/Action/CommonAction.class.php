@@ -16,15 +16,26 @@
 			$c=M('Class');
 			$classes=$c->select();
 			$siteurl=trim($siteinfo['site_url'],'/');
-			foreach($classes as $cls){
-				$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-				$clsUrl=str_ireplace('%cls_py%',$cls['classpy'],$clsUrl);
-				$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
-				$urlArr=array('clsurl'=>$clsUrl);
-				$newcls[]=array_merge($cls,$urlArr);
+			if (get_class($this) == 'indexAction'){
+				foreach($classes as $cls){
+					$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
+					$clsUrl=str_ireplace('%cls_py%','c/'.$cls['classpy'],$clsUrl);
+					$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
+					$urlArr=array('clsurl'=>$clsUrl);
+					$newcls[]=array_merge($cls,$urlArr);
+				}
+			}else{
+				foreach($classes as $cls){
+					$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
+					$clsUrl=str_ireplace('%cls_py%','m/'.$cls['classpy'],$clsUrl);
+					$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
+					$urlArr=array('clsurl'=>$clsUrl);
+					$newcls[]=array_merge($cls,$urlArr);
+				}
 			}
+
 			$this->assign('classes',$newcls);
-			
+
 			//热词搜索
 			if($siteinfo['hotkeyopen']){
 				$N=M('Novel');
