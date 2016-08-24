@@ -1,0 +1,12 @@
+.float-left{ float:left; }
+.float-right{ float:right; }
+.clear{ clear:both; }
+
+.vol_button_function_block{ background: #5278F0;  border-radius: 3px;  height: 40px;  line-height: 40px;  text-align: center;  width: 49%; }
+.vol_button-bottom{  }
+
+.margin-left-12-percent{ margin-left:12%; }
+.margin-top-2-percent{ margin-top: 2%; }
+.margin-top-5-percent{ margin-top:5%; }
+.margin-left-2-percent{ margin-left: 2%; }
+.margin-left-5-percent{ margin-left:5%; }

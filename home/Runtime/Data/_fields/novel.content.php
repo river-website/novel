@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'con_nid', 2 => 'con_vid', 3 => 'con_name', 4 => 'con_namepy', 5 => 'con_text', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'con_nid' => 'int(11)', 'con_vid' => 'int(11)', 'con_name' => 'varchar(222)', 'con_namepy' => 'varchar(555)', 'con_text' => 'longtext', ), );?>

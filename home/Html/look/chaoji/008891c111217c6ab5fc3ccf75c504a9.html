@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>超级警官 全文阅读第三章 学习幻境 - 爱书之人</title><meta name="keywords" content="第三章 学习幻境"><meta name="description" content="第三章 学习幻境"><link type="text/css" rel="stylesheet" href="/novel/Public/css/base.css" /><link type="text/css" rel="stylesheet" href="/novel/Public/css/list.css" /><link type="text/css" rel="stylesheet" href="/novel/Public/css/style.css" media="all" /><link type="text/css" rel="stylesheet" href="/novel/Public/css/read.css" /><script src="/novel/Public/js/gg.js" type="text/javascript"></script><script src="/novel/Public/js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="/novel/Public/js/playclass.js" type="text/javascript"></script><script src="/novel/Public/js/reader.js" type="text/javascript"></script></head><body><script type="text/javascript" language="javascript">	var preview_page = "http://localhost/novel/book/chaoji/30002";
+	var next_page = "http://localhost/novel/book/chaoji/30004";
+	var index_page = "http://localhost/novel/book/chaoji/";
+	var novelname = "超级警官 全文阅读";
+	var chaptername = "第三章 学习幻境";
+	var novelid= "3";
+	function jumpPage() {
+		var event = document.all ? window.event: arguments[0];
+		if (event.keyCode == 37) 
+			document.location = preview_page;
+		if (event.keyCode == 39) 
+			document.location = next_page;
+		if (event.keyCode == 13) 
+			document.location = index_page;
+	}
+	document.onkeydown = jumpPage;
+
+	$(function(){
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $(window).scroll(function(){
+                if ($(window).scrollTop()>300){
+                    $("#back-to-top").fadeIn(1500);
+                }
+                else
+                {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
+
+            //当点击跳转链接后，回到页面顶部位置
+
+            $("#back-to-top").click(function(){
+                $('body,html').animate({scrollTop:0},1000);
+                return false;
+            });
+        });
+    });
+	function postkey(){
+		document.getElementById('searform').submit();
+		var cb=document.getElementById('key').value;
+		
+		window.location="/novel/search/keyword/"+cb; 
+	}
+	window.load=postkey();
+	
+
+	function addfavorite() { 
+		if (document.all){ 
+			window.external.addFavorite('',''); 
+		} 
+		else if (window.sidebar){ 
+			window.sidebar.addPanel('', '', ""); 
+		} 
+	} 
+
+</script><div id="header"><div id="navbar"><div class="layout fn-clear"><ul id="nav" class="ui-nav"><li class="nav-item" id="nav-home"><a class="nav-link" target="_self" href="http://localhost/novel" title="爱书之人"><i class="ui-icon home-nav"></i></a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/xuanhuanmofa/" title="玄幻魔法"><i class="ui-icon cartoon-nav"></i>玄幻魔法</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/wuxiaxiuzhen/" title="武侠修真"><i class="ui-icon cartoon-nav"></i>武侠修真</a></li><li class="nav-item current" id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/dushiyanqing/" title="都市言情"><i class="ui-icon cartoon-nav"></i>都市言情</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/lishijunshi/" title="历史军事"><i class="ui-icon cartoon-nav"></i>历史军事</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/zhentantuili/" title="侦探推理"><i class="ui-icon cartoon-nav"></i>侦探推理</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/wangyoudongman/" title="网游动漫"><i class="ui-icon cartoon-nav"></i>网游动漫</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/kehuanxiaoshuo/" title="科幻小说"><i class="ui-icon cartoon-nav"></i>科幻小说</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/kongbulingyi/" title="恐怖灵异"><i class="ui-icon cartoon-nav"></i>恐怖灵异</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/sanwenshici/" title="散文诗词"><i class="ui-icon cartoon-nav"></i>散文诗词</a></li><li class="nav-item " id="nav-cartoon"><a class="nav-link" target="_self" href="http://localhost/novel/qitaleixing/" title="其他类型"><i class="ui-icon cartoon-nav"></i>其他类型</a></li></ul><ul id="sign" class="ui-nav"><li class="nav-item drop-down" id="nav-looked"><a class="nav-link drop-title" target="_self"><i class="ui-icon looked-nav"></i>阅读记录</a><div class="drop-box" style="display: none;"><div class="looked-list"><p><a class="close-his" target="_self" href="javascript:;">关闭</a><a href="javascript:;" id="emptybt" data="1" target="_self">你读的最近十个页面会显示在这里</a></p><ul class="highlight" id="playhistory"><li class="no-his"><p>暂无阅读历史列表...</p></li></ul><div class="his-todo" id="morelog" style="display: none;"></div><div class="his-todo" id="his-todo"><A href="http://localhost/novel" target="_blank">爱书之人</A>是你理想的阅读家园</div></div><script type="text/javascript">PlayHistoryObj.viewPlayHistory('playhistory');</script></div></li></ul></div></div><DIV class="clear"></DIV></div><DIV class="warpper div_part_index"><DIV class="div_breadcrumbs"><H2 class="breadcrumbs"><SMALL>如果觉得<A href="http://localhost/novel" target="_blank">爱书之人</A>不错，请加入收藏，或者分享给你的朋友！你的支持是我们最大的动力！ 
+</SMALL></H2><SMALL class="right"><A href="#" rel="nofollow" onclick="window.external.AddFavorite(location.href, document.title)">加入收藏</A></SMALL></DIV><DIV class="div_breadcrumbs" style="height:55px;"><form action="" method="get" id='searform' style="width:100%;padding-top:10px;padding-bottom:5px;"><font color="#c00" size="2">小说搜索：</font><input type="text" placeholder="请输入小说名或者作者" id="key"/><input type="submit" value="提交" onclick="postkey();"/><SMALL style="font-size:15px;font-weight :bold;"><font style="font-size:14px;padding-left:10px;"> 热词：</font><A title="异界之谋夺天下 全文阅读" href="http://localhost/novel/search/keyword/%E5%BC%82%E7%95%8C%E4%B9%8B%E8%B0%8B%E5%A4%BA%E5%A4%A9%E4%B8%8B+%E5%85%A8%E6%96%87%E9%98%85%E8%AF%BB"><font style="padding-left:12px;color:black;">异界之谋夺天下 全文阅读</font></A><A title="奈何飘零风吹过" href="http://localhost/novel/search/keyword/%E5%A5%88%E4%BD%95%E9%A3%98%E9%9B%B6%E9%A3%8E%E5%90%B9%E8%BF%87"><font style="padding-left:12px;color:black;">奈何飘零风吹过</font></A><A title="异界之谋夺天下 全文阅读" href="http://localhost/novel/search/keyword/%E5%BC%82%E7%95%8C%E4%B9%8B%E8%B0%8B%E5%A4%BA%E5%A4%A9%E4%B8%8B+%E5%85%A8%E6%96%87%E9%98%85%E8%AF%BB"><font style="padding-left:12px;color:black;">异界之谋夺天下 全文阅读</font></A></SMALL></form></DIV><DIV class="clear"></DIV></DIV><p id="back-to-top"><a href="#top" title="返回顶部"><span></span>返回顶部</a></p><DIV class="warpper div_index_ad"><DIV class="warpper"><DIV class="ad_biger"><DIV class="ad_biger"><script>ad_top();</script></DIV></DIV></DIV><DIV class=clear></DIV></DIV><div id="webhtml" ><div class="content_read"><div class="box_con"><div class="con_top"><a href="http://localhost/novel">爱书之人</a>&nbsp;&gt;&nbsp;<a href="http://localhost/novel/dushiyanqing/">都市言情</a>&nbsp;&gt;&nbsp;<a href="http://localhost/novel/book/chaoji/">超级警官 全文阅读</a>&nbsp;&gt;&nbsp;第三章 学习幻境</div><div class="zhangjieming"><h1>第三章 学习幻境</h1><div class="lm">&nbsp;随机推荐：
+			<a href="http://localhost/novel/book/chaoji/" title="超级警官 全文阅读" target="_blank">超级警官 全文阅读</a>、<a href="http://localhost/novel/book/yijie2/" title="异界之谋夺天下 全文阅读" target="_blank">异界之谋夺天下 全文阅读</a>、<a href="http://localhost/novel/book/yijie/" title="异界之谋夺天下 全文阅读" target="_blank">异界之谋夺天下 全文阅读</a>、<br><script>textselect();</script></div></div><div class="zhangjieTXT" id="content"><!--go--><dd id="contents">    “欢迎来到级警察辅助仪学习幻境，请宿主做好热身，准备训练。”<br/><br/>    看着这个巨大的操场，四周都是各种各样的器械，杜临目瞪口呆。<br/><br/>    “这就是虚拟幻境吗？难道在这里训练之后，还能让我的身体得到加强？那么我进来的到底是身体还是灵魂？”<br/><br/>    杜临的问题没有人回答他，这级警察辅助仪确实很强，可是说话的声音非常机械，感觉没多大的智慧。<br/><br/>    杜临也不知道怎么回事，只能按照提示所说，做了会热身运动。<br/><br/>    就听到了空传来一道声音：“以最大度绕圈跑o圈，间不得停顿。”<br/><br/>    “什么？”<br/><br/>    就在这时，杜临就感觉到不对劲，转过头就看到一只灰狼朝着他扑过来。那鲜血淋漓的嘴巴，一双浑浊的双眼狠狠盯着他，让杜临莫名的恐慌。<br/><br/>    “应该是假的，肯定是假的。”<br/><br/>    然而就在他胡思乱想的时候，灰狼扑在他身上，一张狼嘴一口咬在他的胳膊上。<br/><br/>    剧烈的痛楚侵袭过来，杜临眼睁睁的看到自己的左臂被灰狼撕下一口血肉，鲜血飙射，痛苦不堪。<br/><br/>    而咬下一口之后，灰狼就退后几步，落在地上啃着从他身上扯下来的血肉。<br/><br/>    这般恐怖的情景，让杜临恐慌之极。<br/><br/>    “难道是真的，如果在这里被狼咬死了，现实里也是一样吗？”<br/><br/>    这个时候，他哪里还敢偷懒，哪里还敢去怀疑什么，连忙挣扎着爬起，快的奔跑起来。<br/><br/>    他一奔跑，身后的灰狼顿时撒开腿追了过来。<br/><br/>    杜临吓了一大跳，地上那块肉你不吃，过来追吃不到的肉，你傻啊。<br/><br/>    心咒骂不已，却依然快撒开腿奔跑着，而此时左臂的鲜血已经停止流淌，无论他怎么动都没关系，可是这个部位非常痛，痛入骨髓。可一旦要停下，那后果简直不敢想象。<br/><br/>    杜临心悲苦万分，这什么学习幻境也太恐怖了，现在从止血的状况上看，自己是死不了的。但就只是这样的痛，就足够让他疯狂了。<br/><br/>    一边疯狂奔跑着，一边看着近在眼前的狼吻，杜临心惊恐、无奈之极。<br/><br/>    这破系统也太恐怖了，完全是折磨人的做法啊。<br/><br/>    疯狂奔跑了两圈，杜临就感觉自己有些承受不了了。按照自己的体质，应该不至于这样，可是毫无节制的奔跑，消耗的体力太大了。<br/><br/>    但身后的大灰狼并没有因为他的体力而停止，反而冲上来就朝着他屁股咬去。<br/><br/>    杜临顿时惊恐万分，连忙奋起全力继续狂奔。时断时续，惨叫声不断，到了最后，杜临都有些迷糊，不知道过去多长时间，只知道身体被狼吻的次数越来越多。到了最后，大脑都一片空白了，只知道机械的奔跑着。<br/><br/>    当系统的提示到来之后，杜临趴在地上再没一点力气。而身后的大灰狼也随之消失，只剩下屁股和双腿各个地上失去血肉时的剧痛。<br/><br/>    “这也太过分了，要是多来几次，我非被痛死不可。”<br/><br/>    正在自言自语着，忽然间身体各处闪动着一道光芒，顿时剧痛消失，而且伤口也完全恢复。<br/><br/>    杜临大是欢喜，这辅助仪果然不一样啊。<br/><br/>    给他的感觉，仿佛磕了药一样。<br/><br/>    “继续o个圈。”<br/><br/>    系统的话一传出，身后就多出了一只大灰狼，杜临想都不想直接爬起来继续奔跑着。<br/><br/>    还好体力受到那光芒的照耀完全恢复，不然这样倒下去根本别想爬起来继续。<br/><br/>    痛苦的煎熬还在继续着，不知不觉，十六个小时过去。当他看到四周熟悉的房间，漆黑的夜空，<br/><br/>    看着墙壁上的闹钟，居然只是过去了八个小时。<br/><br/>    “R，那学习幻境能够延长时间吗？”<br/><br/>    “不错，学习幻境和现实的时间是有比例的，暂时为：，系统赠送。如果宿主的实力提高，这样的比例会提高。”<br/><br/>    杜临顿时欢喜，不过想到在学习幻境的经历，就忍不住一阵抽搐。那也太恐怖了，要不是R说过每晚必须进入，而且也只有在成为正式警察的时候，才有机会在一周的时间选出一天自由活动。<br/><br/>    而现在，每天都要进行这样的训练。虽然回到现实世界，一切的疲累都会消失，可杜临现在依然还能感觉到身上的剧痛。<br/><br/>    “恭喜宿主，第一次训练，意志增加点。”<br/><br/>    看着屏幕上的字，杜临非常兴奋，意志居然真的增加了点。想想那时候受的苦，疯狂奔跑，体质没什么进步反而是最少的意志能进步。<br/><br/>    不过想想，任何进步都是需要过程的，或许过个几天就行了吧。<br/><br/>    这般想着，也就不再多虑，浏览着屏幕，出现很多的分类。<br/><br/>    除了身体属性、技能表外，还有各类的任务。<br/><br/>    技能也分为基础、普通和完美三个等级，自己拥有的几个技能都是基础类的，并不算多强的技能，只能说是个人花费点时间就能拥有的。<br/><br/>    而任务暂时只看到五个，学习任务、成长任务、基本任务、突任务和级任务。除了突任务和级任务今天算是碰上了，其他的几个还都是一知半解来着。<br/><br/>    最重要的也是让杜临最兴奋的，莫过于那还是灰色，没有激活的技能商店和物品商店了。<br/><br/>    虽然没有激活，可是看到这符号杜临就兴奋不已。很显然，这辅助仪是真的有好多让人惊讶的地方啊。<br/><br/>    不过里面的物品都需要技能点来购买，看来也该尽快做任务，积累技能点，以后可以呼风唤雨了啊。<br/><br/>    一想到这，杜临就嘿嘿大笑不已。<br/><br/>    笑声，有些凄厉和低沉。想到自己的一生都是这般平凡的过来，他的心里再也忍受不住的火热。<br/><br/>    然而就在这时，耳边听到门外的脚步声，笑声戛然而止，连忙抱着枕头睡觉。<br/><br/>    可惜，怎么都睡不着，训练的八个小时身体机能实际上也是在睡眠，精神虽然消耗很大，可辅助仪似乎有特殊的修补作用，让他的精神保持最佳状态。<br/><br/>    眼看睡不着，杜临起床穿衣，走出房间就看到李兰已经准备做早餐了。<br/><br/>    “妈，怎么不多睡会？”<br/><br/>    李兰看到杜临，擦了擦眼睛不可思议道：“阿临，你平常不是一直都赖床的吗？怎么今天起这么早？”<br/><br/>    “睡不着了，就起来锻炼一下。”<br/><br/>    在学习幻境跑了这么久，杜临也想看看现实是否也是一样。<br/><br/>    李兰看了看杜临，好长一会才叹了口气：“你也老大不小了，该找个女朋友了啊。”<br/><br/>    杜临一阵苦笑，知道李兰想歪了，但也懒得计较了。</dd><font class="in">爱书之人 http://www.aishuzhiren.com</font> <BR><!--over--><div class="bdlikebutton" style="margin-top:5px;"></div></div><div class="bottem"><div class="main-btn"><a href="http://localhost/novel/book/chaoji/30002" class="prevC">&larr;上一章</a><a href="http://localhost/novel/book/chaoji/" id="viewList">章节目录 Enter</a><a href="http://localhost/novel/book/chaoji/30004" id="prev">下一章&rarr;</a></div></div><div id="msg"><div id="SOHUCS"></div><script>	  (function(){
+		var appid = 'cyrmeQ6jB',
+		conf = 'prod_dd47d91caada5d3dda12619a6fab549d';
+		var doc = document,
+		s = doc.createElement('script'),
+		h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+		s.type = 'text/javascript';
+		s.charset = 'utf-8';
+		s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+		h.insertBefore(s,h.firstChild);
+		window.SCS_NO_IFRAME = true;
+	  })()
+	</script></div></div></div></div><DIV class="warpper div_index_ad"><DIV class="warpper"><DIV class="ad_biger"><DIV class="ad_biger"><script>ad_bottom();</script></DIV></DIV></DIV><DIV class=clear></DIV></DIV><script language="javaScript" type="text/javascript">PlayHistoryObj.addPlayHistory(novelname + "|" + chaptername, window.location.href ,window.novelid);</script><!--版权--><DIV class="div_copyright"><DIV class="warpper"><DIV class="div_aboutus"><P>精彩小说尽在爱书之人。爱书之人提供的小说类型有玄幻小说,修真小说,都市小说,穿越小说,网游小说,科幻小说,其它小说（包括历史小说,军事小说,恐怖小说等等）</P><P>Copyright &copy; 2014 by <a  href="http://localhost/novel" title="爱书之人"><B>爱书之人</B></a> | 版权所有. <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1819652'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s6.cnzz.com/stat.php%3Fid%3D1819652' type='text/javascript'%3E%3C/script%3E"));</script></P><P class="link_quick"><A href="http://localhost/novel">爱书之人</A>| <a  target="_self" href="http://localhost/novel/xuanhuanmofa/" title="玄幻魔法">玄幻魔法</a>| <a  target="_self" href="http://localhost/novel/wuxiaxiuzhen/" title="武侠修真">武侠修真</a>| <a  target="_self" href="http://localhost/novel/dushiyanqing/" title="都市言情">都市言情</a>| <a  target="_self" href="http://localhost/novel/lishijunshi/" title="历史军事">历史军事</a>| <a  target="_self" href="http://localhost/novel/zhentantuili/" title="侦探推理">侦探推理</a>| <a  target="_self" href="http://localhost/novel/wangyoudongman/" title="网游动漫">网游动漫</a>| <a  target="_self" href="http://localhost/novel/kehuanxiaoshuo/" title="科幻小说">科幻小说</a>| <a  target="_self" href="http://localhost/novel/kongbulingyi/" title="恐怖灵异">恐怖灵异</a>| <a  target="_self" href="http://localhost/novel/sanwenshici/" title="散文诗词">散文诗词</a>| <a  target="_self" href="http://localhost/novel/qitaleixing/" title="其他类型">其他类型</a></P></DIV><DIV class="clear"></DIV></DIV></DIV></body></HTML>
