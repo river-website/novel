@@ -261,24 +261,23 @@
                     $w['vol_nid']=0;
                     $vols=$v->where($w)->select();
 
-                    //查询最新的几章节
+                    //查询最新章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name,con_namepy')->where('con_nid='.$novelInfo['id'])->order('id desc limit 9')->select();
+                    $newChapters=$c->field('id,con_name,con_namepy')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
                         $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-                        $conUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$conUrl);
+                        $conUrl=str_ireplace('%book_py%','m/'.$novelInfo['novelpy'],$conUrl);
                         $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
 
                         $conUrl=str_ireplace('%post_py%',$newChapter['con_namepy'],$conUrl);
                         $conUrl=str_ireplace('%post_id%',$newChapter['id'],$conUrl);
-                        $chapters_tmp[]=array_merge($newChapter,array('con_url'=>$conUrl));
+                        $this->assign('newestUrl',$conUrl);
+                        $this->assign('newestName',$newChapter['con_name']);
                     }
-                    array_push($vol,$chapters_tmp );
-                    $chapters[]=$vol;
-                    //查询最新的几章节
 
+                    //查询所有章节
                     foreach($vols as $vol){
                         $where=null;
                         $where['con_vid']=$vol['id'];
@@ -289,8 +288,7 @@
                         foreach($chapter as $chp){
                             //con URl
                             $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-
-                            $conUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$conUrl);
+                            $conUrl=str_ireplace('%book_py%','m/'.$novelInfo['novelpy'],$conUrl);
                             $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
 
                             $conUrl=str_ireplace('%post_py%',$chp['con_namepy'],$conUrl);
@@ -304,8 +302,6 @@
                     }
 
                     $this->assign('chapters',$chapters);
-
-                    echo 'mobile';
                     $this->display('mobile:content/vol');
                 }
             }else{
