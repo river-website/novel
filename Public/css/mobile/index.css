@@ -1,0 +1,101 @@
+﻿/*nav*/
+.nav {
+    background-color:#ECF0F0;
+    height:35px;
+    line-height:35px;
+    text-align: center;
+    overflow:hidden;
+    display:block;
+
+}
+
+.nav ul li{
+    color:#333;
+    display:block;
+    width:20%;
+    overflow:hidden;
+    float:left;
+    text-align: center;
+}
+.nav_read{
+    height:35px;
+    line-height:35px;
+    font-size: 16px;
+    color: #666;
+    background-color: #ECF0F0;
+    text-indent: 8px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+
+}
+
+/*article*/
+.article {
+    margin: 10px auto 10px auto;
+}
+
+.title {
+	height:35px;
+	background:#ECF0F0;
+	border-bottom:2px solid #5278F0;
+	color:#000;
+	font-size:16px;
+	padding-left:10px;
+	line-height:35px;
+	font-weight:normal;
+	font-weight:bold;
+}
+
+.title a {
+    float: right;
+    padding-right: 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.title span a{
+	float:left;font-size:16px;font-weight:bold;
+}
+
+.title a.on {
+	color:#623f01;
+}
+.title .more{
+	float:right;
+	margin-right:10px;
+}
+.title .more a{
+	color:#fff;
+}
+/*block*/
+.block{
+	text-indent:10px;
+}
+
+.block li {
+    line-height: 35px;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.block_img {
+    height: auto;
+    border: 0px;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+.div_breadcrumbs H2 {
+	FLOAT: left; FONT-WEIGHT: bold; MARGIN-RIGHT: 5px
+}

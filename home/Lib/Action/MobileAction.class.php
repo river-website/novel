@@ -15,67 +15,52 @@
 
             $n=M('Novel');
             //查询推荐小说
-            $tuinovels=$n->order('tuitime desc limit 6')->select();
+            $tuinovels=$n->order('tuitime desc limit 8')->select();
+            $ret = $this->gettui($tuinovels, $siteinfo, $siteurl);
+
+            $this->assign('firsttui',$ret['first']);
+            $this->assign('tuinovels',$ret['tui']);
+
+            $c = M('Class');
+            $classs = $c->select();
+            foreach($classs as $class){
+                $where['novel_cid'] = $class['id'];
+                $class_tuinovels = $n->where($where)->order('clickmonth desc limit 8')->select();
+
+//			$class_tuinovels = $n->order('clickmonth desc limit 8')->select();
+                $ret = $this->gettui($class_tuinovels, $siteinfo, $siteurl);
+                $class_tui['class'] = $class;
+                $class_tui['tuinovels'] = $ret;
+                $classs_tui[] = $class_tui;
+            }
+
+            $this->assign('classs_tuinovels', $classs_tui);
+            $this->display('mobile:index/index');
+        }
+
+
+        private function gettui($tuinovels, $siteinfo, $siteurl){
             foreach($tuinovels as $tuinovel){
                 //book URL
                 $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
 
                 $des=mb_substr($tuinovel['noveldes'],0,60,'utf-8')."...";
-                $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                if ($tuinovels[0] == $tuinovel){
+                    $first = array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                }
+                else{
+                    $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                }
             }
-
-            $this->assign('tuinovels',$tui);
-            //查询最新更新的小说
-            $novels=$n->field('id,novel_cid,novelname,novelpy,novelauthor,update_time')->order('update_time desc limit 15')->select();
-
-            $C=M('Content');
-            $novelinfos=array();
-            foreach($novels as $novel){
-                $where['con_nid']=$novel['id'];
-                $novelname=$novel['novelname'];
-                $novelpy=$novel['novelpy'];
-
-                $novelauthor=$novel['novelauthor'];
-                $update_time=$novel['update_time'];
-
-                //book URL
-                //$bookUrl=str_ireplace('%book_name%',urlencode($novelname),$bookUrl);绝世武神
-                $bookUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novel);
-                $c=M('Class');
-                $classes=$c->select();
-                //分类
-                $cid=$novel['novel_cid']-1;
-                $class=$classes[$cid]['classname'];
-
-
-                $coninfo=$C->where($where)->order('id desc limit 1')->select();
-
-                //con URl
-                $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-
-                $conUrl=str_ireplace('%book_py%',$novelpy,$conUrl);
-                $conUrl=str_ireplace('%book_id%',$novel['id'],$conUrl);
-
-
-                $conUrl=str_ireplace('%post_py%',$coninfo[0]['con_namepy'],$conUrl);
-                $conUrl=str_ireplace('%post_id%',$coninfo[0]['id'],$conUrl);
-
-
-
-                if($coninfo != null )
-                    $novelinfos[]=array_merge( array('novelname' => $novelname,'novelauthor'=>$novelauthor,'update_time'=>$update_time,'class'=>$class,'bookurl'=>$bookUrl,'conurl'=>$conUrl) , $coninfo[0]);
-            }
-            $this->assign('novels',$novelinfos);
-
-
-
-            $this->display('mobile:index/index');
+            $ret['first'] = $first;
+            $ret['tui'] = $tui;
+            return $ret;
         }
 
         //book伪静态化------------------有三个参数，第1个是URL的原样式
         private function bookToUrl($urlrewrite_book,$siteurl,$novel){
             $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
-            $bookUrl=str_ireplace('%book_py%',$novel['novelpy'],$bookUrl);
+            $bookUrl=str_ireplace('%book_py%','m/'.$novel['novelpy'],$bookUrl);
             return $bookUrl=str_ireplace('%book_id%',$novel['id'],$bookUrl);
         }
         //book伪静态化------------------
