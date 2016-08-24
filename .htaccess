@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteOptions MaxRedirects=1
+   RewriteBase /novel/
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-l
+   
+   RewriteRule ^s/([a-zA-Z]+)/$ index.php/index/search/key/$1 [L]
+   RewriteRule ^s/([a-zA-Z]+)$ index.php/index/search/key/$1 [L]
+
+   RewriteRule ^c/([a-zA-Z]+)/([0-9]+)/$ index.php/index/cls/classname/$1/p/$2 [L]
+   RewriteRule ^c/([a-zA-Z]+)/([0-9]+)$ index.php/index/cls/classname/$1/p/$2 [L]
+
+   RewriteRule ^c/([a-zA-Z]+)/$ index.php/index/cls/classname/$1/ [L]
+   RewriteRule ^c/([a-zA-Z]+)$ index.php/index/cls/classname/$1/ [L]
+   
+   RewriteRule ^([0-9]+)/([0-9]+)/$ index.php/index/look/name/$1/id/$2 [L]
+   RewriteRule ^([0-9]+)/([0-9]+)$ index.php/index/look/name/$1/id/$2 [L]
+   
+   RewriteRule ^([0-9]+)/$ index.php/index/look/name/$1 [L]
+   RewriteRule ^([0-9]+)$ index.php/index/look/name/$1 [L]
+
+   RewriteRule ^m/$ index.php/mobile [L]
+   RewriteRule ^m$ index.php/mobile [L]
+
+   RewriteRule ^m/s/([a-zA-Z]+)/$ index.php/mobile/search/key/$1 [L]
+   RewriteRule ^m/s/([a-zA-Z]+)$ index.php/mobile/search/key/$1 [L]
+
+   RewriteRule ^m/c/([a-zA-Z]+)/([0-9]+)/$ index.php/mobile/cls/classname/$1/p/$2 [L]
+   RewriteRule ^m/c/([a-zA-Z]+)/([0-9]+)$ index.php/mobile/cls/classname/$1/p/$2 [L]
+
+   RewriteRule ^m/c/([a-zA-Z]+)/$ index.php/mobile/cls/classname/$1/ [L]
+   RewriteRule ^m/c/([a-zA-Z]+)$ index.php/mobile/cls/classname/$1/ [L]
+
+   RewriteRule ^m/([0-9]+)/$ index.php/mobile/look/name/$1 [L]
+   RewriteRule ^m/([0-9]+)$ index.php/mobile/look/name/$1 [L]
+
+   RewriteRule ^m/([0-9]+)/([0-9]+)/$ index.php/mobile/look/name/$1/id/$2 [L]
+   RewriteRule ^m/([0-9]+)/([0-9]+)$ index.php/mobile/look/name/$1/id/$2 [L]
+</IfModule>
