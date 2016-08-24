@@ -27,7 +27,7 @@
 			}else{
 				foreach($classes as $cls){
 					$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-					$clsUrl=str_ireplace('%cls_py%','m/'.$cls['classpy'],$clsUrl);
+					$clsUrl=str_ireplace('%cls_py%','m/c/'.$cls['classpy'],$clsUrl);
 					$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
 					$urlArr=array('clsurl'=>$clsUrl);
 					$newcls[]=array_merge($cls,$urlArr);
