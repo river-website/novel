@@ -40,6 +40,8 @@
 
 
         private function gettui($tuinovels, $siteinfo, $siteurl){
+            $first = null;
+            $tui = null;
             foreach($tuinovels as $tuinovel){
                 //book URL
                 $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
@@ -60,7 +62,7 @@
         //book伪静态化------------------有三个参数，第1个是URL的原样式
         private function bookToUrl($urlrewrite_book,$siteurl,$novel){
             $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
-            $bookUrl=str_ireplace('%book_py%','m/'.$novel['novelpy'],$bookUrl);
+            $bookUrl=str_ireplace('%book_py%','m/'.$novel['id'],$bookUrl);
             return $bookUrl=str_ireplace('%book_id%',$novel['id'],$bookUrl);
         }
         //book伪静态化------------------
@@ -84,7 +86,7 @@
 
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
-                    $page=new Page($count,9);
+                    $page=new Page($count,25);
                     $pageshow=$page->show();
 
                     $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl,$pageshow);
@@ -101,7 +103,6 @@
                     }
                     $this->assign('pageshow',$pageshow);
                     $this->assign('tuinovels',$tui);
-
 
                     $this->display('mobile:Content/cls');
                 }else{
