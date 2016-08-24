@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		<{$siteinfo.site_name}>-
+		<{$siteinfo.site_title}></title>
+	<meta name="keywords" content="<{$siteinfo.site_keywords}>">
+	<meta name="description" content="<{$siteinfo.site_des}>">
+	<meta name="MobileOptimized" content="240">
+	<meta http-equiv="Cache-Control" content="max-age=300" />
+	<meta http-equiv="Cache-Control" content="no-transform" />
+	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/base.css" />
+	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/chapter.css" />
+</head>
+<body>
+<div class="header">header</div>
+<div class="con_top">
+	<a href="<{$novelinfo.classurl}>">
+		<{$novelinfo.classname}></a>&nbsp;&gt;&nbsp;
+	<a href="<{$novelinfo.bookurl}>">
+		<{$novelinfo.novelname}></a>&nbsp;&gt;&nbsp;
+	<{$coninfo.con_name}></div>
+<div class="set">
+	<div id="lightdiv" class="set1" onclick="nr_setbg('light')">关灯</div>
+	<div id="huyandiv" class="set1" onclick="nr_setbg('huyan')">护眼</div>
+	<div class="set2">
+		<div>字体：</div>
+		<div id="fontbig" onclick="nr_setbg('big')">大</div>
+		<div id="fontmiddle" onclick="nr_setbg('middle')">中</div>
+		<div id="fontsmall" onclick="nr_setbg('small')">小</div></div>
+</div>
+<div class="search">
+	<form name="articlesearch" action="http://zhannei.baidu.com/cse/search">
+		<input type="hidden" name="s" value="15772447660171623812">
+		<table cellpadding="0" cellspacing="0" style="width:100%;">
+			<tbody>
+			<tr>
+				<td style="background-color:#fff; border:1px solid #CCC;">
+					<input id="s_key" name="q" type="text" class="key" value="输入书名后搜索，宁可少字不要错字" onfocus="this.value=''"></td>
+				<td style="width:35px; background-color:#2f468f; background-image:url('/wap/search.png'); background-repeat:no-repeat; background-position:center">
+					<input name="submit" type="submit" value="" class="go" onclick="check()"></td>
+			</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<DIV class="clear"></DIV>
+<p id="back-to-top">
+	<a href="#top" title="返回顶部">
+		<span></span>返回顶部</a>
+</p>
+<DIV class="warpper div_index_ad">
+	<DIV class="warpper">
+		<DIV class="ad_biger">
+			<DIV class="ad_biger">
+				<script>ad_top();</script></DIV>
+		</DIV>
+	</DIV>
+	<DIV class=clear></DIV>
+</DIV>
+<DIV class="warpper div_index_ad">
+	<DIV class="warpper">
+		<DIV class="ad_biger">
+			<DIV class="ad_biger">
+				<script>ad_top();</script></DIV>
+		</DIV>
+	</DIV>
+	<DIV class=clear></DIV>
+</DIV>
+<div id="webhtml">
+	<div class="content_read">
+		<div class="box_con">
+			<div class="zhangjieming">
+				<h1>
+					<{$coninfo.con_name}></h1>
+				<div class="bottem">
+					<div class="main-btn">
+						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
+						<a href="<{$novelinfo.bookurl}>" id="viewList">章节目录 Enter</a>
+						<a href="<{$coninfo.nextPage}>" id="prev">下一章&rarr;</a></div>
+				</div>
+				<div class="zhangjieTXT" id="content">
+					<!--go-->
+					<{$coninfo.con_text}>
+					<!--over-->
+					<div class="bdlikebutton" style="margin-top:5px;"></div>
+				</div>
+				<div class="bottem">
+					<div class="main-btn">
+						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
+						<a href="<{$novelinfo.bookurl}>" id="viewList">章节目录 Enter</a>
+						<a href="<{$coninfo.nextPage}>" id="prev">下一章&rarr;</a></div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hot">
+	<dl>
+		<dt>本站推荐</dt>
+		<foreach name='pagetuis' item='pagetui'>
+		<dd>
+			<a href="<{pagetui.txturl}>" target="_blank">[下载]</a>
+			<a href="<{pagetui.tuiUrl}>" target="_blank"><{$pagetui.novelname}></a></dd>
+		</foreach>>
+	</dl>
+</div>
+<script type="text/javascript" language="javascript">$(function() {
+		//当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+		$(function() {
+			$(window).scroll(function() {
+				if ($(window).scrollTop() > 300) {
+					$("#back-to-top").fadeIn(1500);
+				} else {
+					$("#back-to-top").fadeOut(1500);
+				}
+			});
+
+			//当点击跳转链接后，回到页面顶部位置
+			$("#back-to-top").click(function() {
+				$('body,html').animate({
+							scrollTop: 0
+						},
+						1000);
+				return false;
+			});
+		});
+	});</script>
+</body>
+</html>
