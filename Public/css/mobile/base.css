@@ -1,0 +1,17 @@
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, dl, dt, dd, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #007BB1;
+    color: #fff;
+    height: 52px;
+    text-align: center;
+    overflow: hidden;
+    display: block;
+}
+
+.search {
+    padding: 10px 5px 0px 5px;
+}
