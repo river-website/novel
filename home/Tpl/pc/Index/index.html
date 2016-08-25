@@ -158,7 +158,7 @@
 	<tbody style="padding: 2px 4px 4px;overflow: hidden;">
 	<foreach name='novels' item='n'>
 		<tr style="border-bottom: dashed 1px #DDDDDD;height: 50px;line-height: 28px;overflow: hidden;">
-		<td  style="font-size:15px;font-weight:bold;">[<{$n.class}>]</td>
+		<td  style="font-size:15px;font-weight:bold;">[<a href="c/<{$n.class.classpy}>"><{$n.class.classname}></a>]</td>
 		<td  style="font-size:22px;font-weight:bold;"><a href="<{$n.bookurl}>"><{$n.novelname}></a></td>
 		<td style="font-size:16px;font-weight:bold;"><a href="<{$n.conurl}>"><{$n.con_name}></a></td>
 		<td style="font-size:18px;font-weight:bold;"><{$n.novelauthor}></td>

@@ -1,0 +1,68 @@
+/*nav*/
+.nav {
+    background-color:#ECF0F0;
+    height:35px;
+    line-height:35px;
+    text-align: center;
+    overflow:hidden;
+    display:block;
+
+}
+
+.nav ul li{
+    color:#333;
+    display:block;
+    width:20%;
+    overflow:hidden;
+    float:left;
+    text-align: center;
+}
+
+.cover {
+    width: 99%;
+    margin: 10px auto 10px auto;
+    height: auto;
+    overflow: hidden;
+}
+
+
+.cover p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.line {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    color: #999;
+}
+
+.blue {
+    color: #2f468f;
+    font-size: 18px;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+.content {
+    width: 98%;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: #000;
+}
+.prev {
+    width: 49%;
+    height:34px;
+    float: left;
+    overflow: hidden;
+}
+.prev a, .mulu a, .next a {
+    display: block;
+    text-align: center;
+    padding: 4px 0px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #999;
+}
