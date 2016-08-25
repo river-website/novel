@@ -72,6 +72,27 @@
             $this->display('pc:index/index');
         }
 
+        //分类的全部小说链接
+        public function map(){
+            //内容
+            $c=M('Novel');
+            $clsId = $_GET['name'];
+            $w = 'novel_cid='.$clsId;
+            $novelInfos = $c->where($w)->select();
+            if(!is_array($novelInfos)){
+                $this->error('错误的访问！');
+            }
+            $this->assign('novelInfos',$novelInfos);
+
+
+            $class=M('Class');
+            $where='id='.$clsId;
+            $classInfos = $class->where($where)->select();
+            $this->assign('classname',$classInfos);
+
+            $this->display('pc:content/map');
+        }
+
         //book伪静态化------------------有三个参数，第1个是URL的原样式
         private function bookToUrl($urlrewrite_book,$siteurl,$novel){
             $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
