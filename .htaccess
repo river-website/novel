@@ -21,6 +21,9 @@
    RewriteRule ^([0-9]+)/$ index.php/index/look/name/$1 [L]
    RewriteRule ^([0-9]+)$ index.php/index/look/name/$1 [L]
 
+   RewriteRule ^map/([0-9]+)/$ index.php/index/map/name/$1 [L]
+   RewriteRule ^map/([0-9]+)$ index.php/index/map/name/$1 [L]
+
    RewriteRule ^m/$ index.php/mobile [L]
    RewriteRule ^m$ index.php/mobile [L]
 
