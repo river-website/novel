@@ -45,7 +45,7 @@
                 $classes=$c->select();
                 //分类
                 $cid=$novel['novel_cid']-1;
-                $class=$classes[$cid]['classname'];
+                $class=$classes[$cid];
 
 
                 $coninfo=$C->where($where)->order('id desc limit 1')->select();
