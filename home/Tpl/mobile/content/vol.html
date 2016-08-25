@@ -37,7 +37,7 @@
                     <div>作者：<a href=""><{$novelinfo.novelauthor}></a></div>
                     <div>分类：<a href=""><{$novelinfo.classname}></a></div>
                     <div>状态：<if condition='$novelinfo.novelstate eq 0'>连载中<else/>已完本</if></div>
-                    <div>更新：<{$novelinfo.update_time|date='Y-m-d H:i:s',###}></div>
+                    <div>字数：<{$novelinfo.novelwords}></div>
                     <div>最新：<a href="<{$newestUrl}>" class="red"><{$newestName}></a></div>
                 </div>
             </div>

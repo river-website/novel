@@ -122,7 +122,7 @@
       <div id="fmimg"><img alt="<{$novelinfo.novelname}>" src="<{$novelinfo.novelimg}>"></div>
       <div id="info" style="height: auto">
         <h1><{$novelinfo.novelname}></h1>
-        <p><B>作者：<{$novelinfo.novelauthor}></B> <label class="zhanwei"></label>更新时间：<{$novelinfo.update_time|date='Y-m-d H:i:s',###}></p>
+        <p><B>作者：<{$novelinfo.novelauthor}></B> <label class="zhanwei"></label>字数：<{$novelinfo.novelwords}></p>
 		<p>小说类别：<a href="<{$novelinfo.classurl}>"><{$novelinfo.classname}></a><label class="zhanwei"></label> 状态：<if condition='$novelinfo.novelstate eq 0'>连载中<else/>已完本</if> </p>
         <p>今日阅读：<{$novelinfo.clicktoday}> <label class="zhanwei"></label>本月阅读：<{$novelinfo.clickmonth}> <label class="zhanwei"></label>总阅读数：<{$novelinfo.clicksum}></p>
 		<div id="infodes">简介：<{$novelinfo.noveldes}></div>

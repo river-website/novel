@@ -26,14 +26,14 @@
 
             $this->assign('tuinovels',$tui);
             //查询最新更新的小说
-            $novels=$n->field('id,novel_cid,novelname,novelpy,novelauthor,update_time')->order('update_time desc limit 15')->select();
+            $novels=$n->field('id,novel_cid,novelname,novelauthor,update_time')->order('update_time desc limit 15')->select();
 
             $C=M('Content');
             $novelinfos=array();
             foreach($novels as $novel){
                 $where['con_nid']=$novel['id'];
                 $novelname=$novel['novelname'];
-                $novelpy=$novel['novelpy'];
+                $novelpy=$novel['id'];
 
                 $novelauthor=$novel['novelauthor'];
                 $update_time=$novel['update_time'];
@@ -96,7 +96,7 @@
         //book伪静态化------------------有三个参数，第1个是URL的原样式
         private function bookToUrl($urlrewrite_book,$siteurl,$novel){
             $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
-            $bookUrl=str_ireplace('%book_py%',$novel['novelpy'],$bookUrl);
+            $bookUrl=str_ireplace('%book_py%',$novel['id'],$bookUrl);
             return $bookUrl=str_ireplace('%book_id%',$novel['id'],$bookUrl);
         }
         //book伪静态化------------------
@@ -162,7 +162,7 @@
             //print_r($_GET);
             //查询小说信息
             $n=M('Novel');
-            $where='`novelpy` LIKE  "'.$_GET['name'].'" OR `id`=\''.$_GET['name'].'\'';
+            $where='`id`=\''.$_GET['name'].'\'';
             $novelInfo=$n->where($where)->find();
 
             if(is_array($novelInfo)){
@@ -177,7 +177,7 @@
 
                 //当前小说的链接
                 $tuiUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_book']);
-                $tuiUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$tuiUrl);
+                $tuiUrl=str_ireplace('%book_py%',$novelInfo['id'],$tuiUrl);
                 $tuiUrl=str_ireplace('%book_id%',$novelInfo['id'],$tuiUrl);
                 $NovelUrl=$tuiUrl;	//当前URL，保存一份，用于上下翻页时没有页面
                 $novelInfo=array_merge($novelInfo,array('classname'=>$clssss['classname'] , 'classurl'=>$clsUrl,'bookurl'=>$tuiUrl) );
@@ -198,7 +198,7 @@
                     //随机推荐小说
                     $strLength=0;
                     $strMaxLength=225;
-                    $tuinovels=$n->field('id,novelname,novelpy')->order('rand() limit 15')->select();
+                    $tuinovels=$n->field('id,novelname')->order('rand() limit 15')->select();
                     foreach($tuinovels as $tuinovel){
                         //book URL
                         $strLength+=strlen($tuinovel['novelname']);
@@ -224,7 +224,7 @@
                     if(is_array($Pre)){
                         $prePage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
 
-                        $prePage=str_ireplace('%book_py%',$novelInfo['novelpy'],$prePage);
+                        $prePage=str_ireplace('%book_py%',$novelInfo['id'],$prePage);
                         $prePage=str_ireplace('%book_id%',$novelInfo['id'],$prePage);
 
                         $prePage=str_ireplace('%post_py%',$Pre['con_namepy'],$prePage);
@@ -235,7 +235,7 @@
                     if(is_array($Nex)){
                         $nextPage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
 
-                        $nextPage=str_ireplace('%book_py%',$novelInfo['novelpy'],$nextPage);
+                        $nextPage=str_ireplace('%book_py%',$novelInfo['id'],$nextPage);
                         $nextPage=str_ireplace('%book_id%',$novelInfo['id'],$nextPage);
 
                         $nextPage=str_ireplace('%post_py%',$Nex['con_namepy'],$nextPage);
@@ -289,7 +289,7 @@
                     foreach($newChapters as $newChapter){
                         //con URl
                         $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-                        $conUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$conUrl);
+                        $conUrl=str_ireplace('%book_py%',$novelInfo['id'],$conUrl);
                         $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
 
                         $conUrl=str_ireplace('%post_py%',$newChapter['con_namepy'],$conUrl);
@@ -311,7 +311,7 @@
                             //con URl
                             $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
 
-                            $conUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$conUrl);
+                            $conUrl=str_ireplace('%book_py%',$novelInfo['id'],$conUrl);
                             $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
 
                             $conUrl=str_ireplace('%post_py%',$chp['con_namepy'],$conUrl);

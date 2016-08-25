@@ -1,5 +1,7 @@
 <?php
 	class CommonAction extends Action{
+		protected $common_classs = null;
+
 		public function _initialize(){
 			//网站信息
 			$s=M('Site');
@@ -34,6 +36,7 @@
 				}
 			}
 
+			$this->common_classs = $newcls;
 			$this->assign('classes',$newcls);
 
 			//热词搜索
