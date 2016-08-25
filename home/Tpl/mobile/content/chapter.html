@@ -78,8 +78,8 @@
 				<div class="bottem">
 					<div class="main-btn">
 						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
-						<a href="<{$novelinfo.bookurl}>" id="viewList">章节目录 Enter</a>
-						<a href="<{$coninfo.nextPage}>" id="prev">下一章&rarr;</a></div>
+						<a href="<{$novelinfo.bookurl}>" id="tviewList">章节目录 Enter</a>
+						<a href="<{$coninfo.nextPage}>" id="tprev">下一章&rarr;</a></div>
 				</div>
 				<div class="zhangjieTXT" id="content">
 					<!--go-->
@@ -90,8 +90,8 @@
 				<div class="bottem">
 					<div class="main-btn">
 						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
-						<a href="<{$novelinfo.bookurl}>" id="viewList">章节目录 Enter</a>
-						<a href="<{$coninfo.nextPage}>" id="prev">下一章&rarr;</a></div>
+						<a href="<{$novelinfo.bookurl}>" id="bviewList">章节目录 Enter</a>
+						<a href="<{$coninfo.nextPage}>" id="bprev">下一章&rarr;</a></div>
 				</div>
 				</div>
 			</div>
@@ -103,8 +103,8 @@
 		<dt>本站推荐</dt>
 		<foreach name='pagetuis' item='pagetui'>
 		<dd>
-			<a href="<{pagetui.txturl}>" target="_blank">[下载]</a>
-			<a href="<{pagetui.tuiUrl}>" target="_blank"><{$pagetui.novelname}></a></dd>
+			<a href="<{$pagetui.tuiUrl}>" target="_blank">[下载]</a>
+			<a href="<{$pagetui.tuiUrl}>" target="_blank"><{$pagetui.novelname}></a></dd>
 		</foreach>>
 	</dl>
 </div>

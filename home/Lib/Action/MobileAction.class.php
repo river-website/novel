@@ -86,10 +86,10 @@
 
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
-                    $page=new Page($count,25);
+                    $page=new Page($count,10);
                     $pageshow=$page->show();
 
-                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl,$pageshow);
+                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/m/c',$pageshow);
 
 
                     $tuinovels=$n->where($novel)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
@@ -137,12 +137,12 @@
 
                 //当前小说分类的链接
                 $clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-                $clsUrl=str_ireplace('%cls_py%',$clssss['classpy'],$clsUrl);
+                $clsUrl=str_ireplace('%cls_py%','m/c/'.$clssss['classpy'],$clsUrl);
                 $clsUrl=str_ireplace('%cls_id%',$clssss['id'],$clsUrl);
 
                 //当前小说的链接
                 $tuiUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_book']);
-                $tuiUrl=str_ireplace('%book_py%',$novelInfo['novelpy'],$tuiUrl);
+                $tuiUrl=str_ireplace('%book_py%','m/'.$novelInfo['novelpy'],$tuiUrl);
                 $tuiUrl=str_ireplace('%book_id%',$novelInfo['id'],$tuiUrl);
                 $NovelUrl=$tuiUrl;	//当前URL，保存一份，用于上下翻页时没有页面
                 $novelInfo=array_merge($novelInfo,array('classname'=>$clssss['classname'] , 'classurl'=>$clsUrl,'bookurl'=>$tuiUrl) );
@@ -189,7 +189,7 @@
                     if(is_array($Pre)){
                         $prePage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
 
-                        $prePage=str_ireplace('%book_py%',$novelInfo['novelpy'],$prePage);
+                        $prePage=str_ireplace('%book_py%','m/'.$novelInfo['novelpy'],$prePage);
                         $prePage=str_ireplace('%book_id%',$novelInfo['id'],$prePage);
 
                         $prePage=str_ireplace('%post_py%',$Pre['con_namepy'],$prePage);
@@ -200,7 +200,7 @@
                     if(is_array($Nex)){
                         $nextPage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
 
-                        $nextPage=str_ireplace('%book_py%',$novelInfo['novelpy'],$nextPage);
+                        $nextPage=str_ireplace('%book_py%','m/'.$novelInfo['novelpy'],$nextPage);
                         $nextPage=str_ireplace('%book_id%',$novelInfo['id'],$nextPage);
 
                         $nextPage=str_ireplace('%post_py%',$Nex['con_namepy'],$nextPage);
