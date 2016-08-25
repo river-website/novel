@@ -123,7 +123,7 @@
                     $page=new Page($count,9);
                     $pageshow=$page->show();
 
-                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl,$pageshow);
+                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/c',$pageshow);
 
 
                     $tuinovels=$n->where($novel)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
@@ -172,7 +172,7 @@
 
                 //当前小说分类的链接
                 $clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-                $clsUrl=str_ireplace('%cls_py%',$clssss['classpy'],$clsUrl);
+                $clsUrl=str_ireplace('%cls_py%','c/'.$clssss['classpy'],$clsUrl);
                 $clsUrl=str_ireplace('%cls_id%',$clssss['id'],$clsUrl);
 
                 //当前小说的链接
