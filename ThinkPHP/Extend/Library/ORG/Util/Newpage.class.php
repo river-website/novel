@@ -92,7 +92,9 @@ class Page {
             }
             $parameter[$p]  =   '__PAGE__';
             $url            =   U('',$parameter);
+            $url = str_replace('p/__PAGE__','__PAGE__',$url);
         }
+
         //上下翻页字符串
         $upRow          =   $this->nowPage-1;
         $downRow        =   $this->nowPage+1;
