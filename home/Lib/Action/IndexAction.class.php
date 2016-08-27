@@ -1,5 +1,5 @@
 <?php
-    import("Think.Util.Newpage");
+    import("ORG.Util.Newpage");
     class indexAction extends CommonAction {
         public function index(){
             //网站信息

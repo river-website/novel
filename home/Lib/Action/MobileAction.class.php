@@ -1,4 +1,5 @@
 <?php
+    import("ORG.Util.Newpage");
     class MobileAction extends CommonAction {
         public function index(){
             //网站信息
