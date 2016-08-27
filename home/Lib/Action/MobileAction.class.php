@@ -110,7 +110,7 @@
                     $this->assign('pageshow',$pageshow);
                     $this->assign('tuinovels',$tui);
 
-                    $this->display('mobile:Content/cls');
+                    $this->display('mobile:content/cls');
                 }else{
                     $this->error('错误的访问！');
                 }
@@ -336,7 +336,7 @@
             }
             $this->assign('searchkey',$_GET['key']);
 
-            $this->display('mobile:Content/search');
+            $this->display('mobile:content/search');
         }
     }
 ?>

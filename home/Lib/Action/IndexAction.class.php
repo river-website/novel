@@ -1,4 +1,5 @@
 <?php
+    import("Think.Util.Newpage");
     class indexAction extends CommonAction {
         public function index(){
             //网站信息
@@ -139,7 +140,7 @@
                     $this->assign('tuinovels',$tui);
 
 
-                    $this->display('pc:Content/cls');
+                    $this->display('pc:content/cls');
                 }else{
                     $this->error('错误的访问！');
                 }
@@ -366,7 +367,7 @@
             }
             $this->assign('searchkey',$_GET['key']);
 
-            $this->display('pc:Content/search');
+            $this->display('pc:content/search');
         }
     }
 ?>
