@@ -6,7 +6,8 @@
 			$client = $_SERVER['HTTP_USER_AGENT'];
 			#$url = $_SERVER['HTTP_HOST'];
 			$url = $_SERVER['REQUEST_URI'];
-			$is_include_m = strpos($url,'m');
+			$is_include_m = strpos($url,'/m');
+			#$is_include_m = strpos($url,'m.');
 			$clientkeywords = array('iphone','mobile','ipod','ipad','android','symbianos','windows phone','phone');
 			// 从HTTP_USER_AGENT中查找手机浏览器的关键字
 			$is_mobile = preg_match("/(".implode('|', $clientkeywords).")/i", strtolower($client));
