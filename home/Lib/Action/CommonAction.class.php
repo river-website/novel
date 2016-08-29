@@ -33,6 +33,29 @@
 			return "http://".$url;
 		}
 
+		//book伪静态化------------------有三个参数，第1个是URL的原样式
+        protected function bookToUrl($urlrewrite_book,$siteurl,$novel){
+            $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
+            return $bookUrl=str_ireplace('%book_id%',$novel['id'],$bookUrl);
+        }
+        //book伪静态化------------------
+
+        //chapter伪静态化
+        protected function chapterToUrl($urlrewrite_book,$siteurl,$novelInfo,$content){
+            $chapter=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
+            $chapter=str_ireplace('%book_id%',$novelInfo['id'],$chapter);
+            return $chapter=str_ireplace('%post_id%',$content['id'],$chapter);
+        }
+        //chapter伪静态化
+
+        //分类伪静态化
+        protected function classToUrl($urlrewrite_cls,$siteurl,$class){
+            $clsUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_cls);
+            $clsUrl=str_ireplace('%cls_py%', $class['classpy'],$clsUrl);
+            return $clsUrl=str_ireplace('%cls_id%',$class['id'],$clsUrl);
+        }
+        //分类伪静态化
+
 		public function _initialize(){
 			if($this->myIsRedict()){
 				redirect($this->myRediectUrl());
@@ -41,34 +64,22 @@
 			//网站信息
 			$s=M('Site');
 			$siteinfo=$s->find(1);
-			
+
 			if(isset($siteinfo['gogo'])){
 				$gourl='http://www.rennhuang8.com';
 				$this->assign('gourl',$gourl);
 				$this->display('Index:gourl');
 				exit();
 			}
-			
+
 			//栏目伪静态
 			$c=M('Class');
 			$classes=$c->select();
 			$siteurl=trim($siteinfo['site_url'],'/');
-			if (get_class($this) == 'indexAction'){
-				foreach($classes as $cls){
-					$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-					$clsUrl=str_ireplace('%cls_py%','c/'.$cls['classpy'],$clsUrl);
-					$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
-					$urlArr=array('clsurl'=>$clsUrl);
-					$newcls[]=array_merge($cls,$urlArr);
-				}
-			}else{
-				foreach($classes as $cls){
-					$clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-					$clsUrl=str_ireplace('%cls_py%','m/c/'.$cls['classpy'],$clsUrl);
-					$clsUrl=str_ireplace('%cls_id%',$cls['id'],$clsUrl);
-					$urlArr=array('clsurl'=>$clsUrl);
-					$newcls[]=array_merge($cls,$urlArr);
-				}
+			foreach($classes as $cls){
+				$clsUrl=$this->classToUrl($siteinfo['urlrewrite_cls'],$siteurl,$cls);
+				$urlArr=array('clsurl'=>$clsUrl);
+				$newcls[]=array_merge($cls,$urlArr);
 			}
 
 			$this->common_classs = $newcls;
