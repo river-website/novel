@@ -167,12 +167,29 @@
 						<span class="hidden-phone">关于</span>
 					</a>
 				</li>
-				
-				<li>
-					<a onclick="alert('开发中！')">
+
+				<li class="dropdown<{$checkhtml}>">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="micon-database"></i>
-						<span class="hidden-phone">统计</span>
+						<span class="hidden-phone">静态化</span>
 					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="__APP__/Html/index">
+								<i class="icon-large icon-th-large"></i> 全部静态化
+							</a>
+						</li>
+						<li>
+							<a href="__APP__/Html/add">
+								<i class="icon-large icon-th-large"></i> 增加静态化
+							</a>
+						</li>
+						<li>
+							<a href="__APP__/Html/del">
+								<i class="icon-large icon-th-large"></i> 删除静态化
+							</a>
+						</li>
+					</ul>
 				</li>
 			
 				<li>
