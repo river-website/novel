@@ -36,6 +36,12 @@
    RewriteRule ^m/c/([a-zA-Z]+)/$ index.php/mobile/cls/classname/$1/ [L]
    RewriteRule ^m/c/([a-zA-Z]+)$ index.php/mobile/cls/classname/$1/ [L]
 
+   RewriteRule ^m/d/$ index.php/mobile/done/ [L]
+   RewriteRule ^m/d$ index.php/mobile/done/ [L]
+
+   RewriteRule ^m/d/([0-9]+)/$ index.php/mobile/done/p/$1/ [L]
+   RewriteRule ^m/d/([0-9]+)$ index.php/mobile/done/p/$1/ [L]
+
    RewriteRule ^m/([0-9]+)/$ index.php/mobile/look/name/$1 [L]
    RewriteRule ^m/([0-9]+)$ index.php/mobile/look/name/$1 [L]
 

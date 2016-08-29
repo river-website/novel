@@ -27,8 +27,6 @@
             foreach($classs as $class){
                 $where['novel_cid'] = $class['id'];
                 $class_tuinovels = $n->where($where)->order('clickmonth desc limit 8')->select();
-
-//			$class_tuinovels = $n->order('clickmonth desc limit 8')->select();
                 $ret = $this->gettui($class_tuinovels, $siteinfo, $siteurl);
                 $class_tui['class'] = $class;
                 $class_tui['tuinovels'] = $ret;
@@ -38,7 +36,6 @@
             $this->assign('classs_tuinovels', $classs_tui);
             $this->display('mobile:index/index');
         }
-
 
         private function gettui($tuinovels, $siteinfo, $siteurl){
             $first = null;
@@ -66,14 +63,6 @@
             return $ret;
         }
 
-        //book伪静态化------------------有三个参数，第1个是URL的原样式
-        private function bookToUrl($urlrewrite_book,$siteurl,$novel){
-            $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);
-            $bookUrl=str_ireplace('%book_py%','m/'.$novel['id'],$bookUrl);
-            return $bookUrl=str_ireplace('%book_id%',$novel['id'],$bookUrl);
-        }
-        //book伪静态化------------------
-
         public function cls(){
             //网站信息
             $s=M('Site');
@@ -88,15 +77,14 @@
                 $classinfo=$C->where($where)->find();
                 if(is_array($classinfo)){
                     $n=M('Novel');
-                    import('ORG.UTIL.Newpage');
                     $this->assign('classinfo',$classinfo);
 
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
-                    $page=new Page($count,10);
+                    $page=new NewPage($count,10);
                     $pageshow=$page->show();
 
-                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/m/c',$pageshow);
+                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/c',$pageshow);
 
 
                     $tuinovels=$n->where($novel)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
@@ -143,14 +131,9 @@
                 $clssss=$C->find($novelInfo['novel_cid']);
 
                 //当前小说分类的链接
-                $clsUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_cls']);
-                $clsUrl=str_ireplace('%cls_py%','m/c/'.$clssss['classpy'],$clsUrl);
-                $clsUrl=str_ireplace('%cls_id%',$clssss['id'],$clsUrl);
-
+                $clsUrl = $this->classToUrl($siteinfo['urlrewrite_cls'],$siteurl,$clssss);
                 //当前小说的链接
-                $tuiUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_book']);
-                $tuiUrl=str_ireplace('%book_py%','m/'.$novelInfo['id'],$tuiUrl);
-                $tuiUrl=str_ireplace('%book_id%',$novelInfo['id'],$tuiUrl);
+                $tuiUrl = $this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novelInfo);
                 $NovelUrl=$tuiUrl;	//当前URL，保存一份，用于上下翻页时没有页面
                 $novelInfo=array_merge($novelInfo,array('classname'=>$clssss['classname'] , 'classurl'=>$clsUrl,'bookurl'=>$tuiUrl) );
 
@@ -181,10 +164,6 @@
                         $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl) );
                     }
                     $this->assign('pagetuis',$tui);
-                    if($_GET['id'] > 2000){
-                        define("APP_IMP","PGZvbnQgY2xhc3M9ImluIj7niLHkuabkuYvkurogaHR0cDovL3d3dy5haXNodXpoaXJlbi5jb208L2ZvbnQ+IDxCUj4=");
-                        $coninfo['con_text']=$coninfo['con_text'].base64_decode(APP_IMP);
-                    }
 
                     //上一章，下一章
                     $Pre=$c->where('id <'.$coninfo['id'].' and con_nid='.$novelInfo['id'])->order('id desc')->find();
@@ -193,29 +172,14 @@
                     $prePage=$NovelUrl;
                     $nextPage=$NovelUrl;
                     //伪静态化
-                    if(is_array($Pre)){
-                        $prePage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-
-                        $prePage=str_ireplace('%book_py%','m/'.$novelInfo['id'],$prePage);
-                        $prePage=str_ireplace('%book_id%',$novelInfo['id'],$prePage);
-
-                        $prePage=str_ireplace('%post_py%',$Pre['con_namepy'],$prePage);
-                        $prePage=str_ireplace('%post_id%',$Pre['id'],$prePage);
-
-                    }
+                    if(is_array($Pre))
+                        $prePage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$Pre);
+                    
                     //伪静态化
-                    if(is_array($Nex)){
-                        $nextPage=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-
-                        $nextPage=str_ireplace('%book_py%','m/'.$novelInfo['id'],$nextPage);
-                        $nextPage=str_ireplace('%book_id%',$novelInfo['id'],$nextPage);
-
-                        $nextPage=str_ireplace('%post_py%',$Nex['con_namepy'],$nextPage);
-                        $nextPage=str_ireplace('%post_id%',$Nex['id'],$nextPage);
-
-                    }
-
-                    $coninfo=array_merge($coninfo,array('prePage'=>$prePage , 'nextPage'=>$nextPage ) );
+                    if(is_array($Nex))
+                        $nextPage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$Nex);
+                    
+                    $coninfo=array_merge($coninfo,array('prePage'=>$prePage , 'nextPage'=>$nextPage ));
 
                     $this->assign('coninfo',$coninfo);
 
@@ -260,12 +224,7 @@
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
-                        $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-                        $conUrl=str_ireplace('%book_py%','m/'.$novelInfo['id'],$conUrl);
-                        $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
-
-                        $conUrl=str_ireplace('%post_py%',$newChapter['con_namepy'],$conUrl);
-                        $conUrl=str_ireplace('%post_id%',$newChapter['id'],$conUrl);
+                        $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$newChapter);
                         $this->assign('newestUrl',$conUrl);
                         $this->assign('newestName',$newChapter['con_name']);
                     }
@@ -282,12 +241,7 @@
                         $chapters_tmp=null;
                         foreach($chapter as $chp){
                             //con URl
-                            $conUrl=str_ireplace('%siteurl%',$siteurl,$siteinfo['urlrewrite_con']);
-                            $conUrl=str_ireplace('%book_py%','m/'.$novelInfo['id'],$conUrl);
-                            $conUrl=str_ireplace('%book_id%',$novelInfo['id'],$conUrl);
-
-                            $conUrl=str_ireplace('%post_py%',$chp['con_namepy'],$conUrl);
-                            $conUrl=str_ireplace('%post_id%',$chp['id'],$conUrl);
+                            $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$chp);
                             $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
 
                         }
@@ -304,6 +258,35 @@
                 $this->error('错误的访问！');
             }
         }
+
+
+        public function done(){
+
+            //网站信息
+            $s=M('Site');
+            $siteinfo=$s->find(1);
+            $this->assign('siteinfo',$siteinfo);
+            $siteurl=trim($siteinfo['site_url'],'/');
+            
+            $n=M('novel');
+            $count=$n->where('novelstate=1')->count();
+            $page=new NewPage($count,10);
+            $pageshow=$page->show();
+            $pageshow=str_ireplace(__ACTION__,$siteurl.'/d',$pageshow);
+            $this->assign('pageshow',$pageshow);
+            $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($page->firstRow.','.$page->listRows)->select();
+            foreach($donenovels as $donenovel){
+                //book URL
+                $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$donenovel);
+
+                $des=mb_substr($donenovel['noveldes'],0,60,'utf-8')."...";
+                $tui[]=array_merge($donenovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+            }    
+            $this->assign('pageshow',$pageshow);
+            $this->assign('tuinovels',$tui); 
+            $this->display('mobile:content/done');       
+        }
+
 
         //搜索功能
         public function search(){
@@ -338,6 +321,131 @@
             $this->assign('searchkey',$_GET['key']);
 
             $this->display('mobile:content/search');
+        }
+
+        public function getState() {
+            $c = M('caiji');
+            $caiji = $c->select();
+            if (count($caiji) > 0) return true;
+            else return false;
+        }
+
+        public function chapter_build($n, $c, $content, $novelInfo, $siteurl, $siteinfo, $NovelUrl) {
+            if (file_exists(HTML_PATH . 'pc/' . $novelInfo['id'] . '/' . $content['id'] . '.html')) return;
+            //随机推荐小说
+            $strLength = 0;
+            $strMaxLength = 225;
+            $tuinovels = $n->field('id,novelname')->order('rand() limit 15')->select();
+            $tui = null;
+            foreach ($tuinovels as $tuinovel) {
+                //book URL
+                $strLength+= strlen($tuinovel['novelname']);
+                if ($strLength >= $strMaxLength) {
+                    break;
+                }
+                $tuiUrl = $this->bookToUrl($siteinfo['urlrewrite_book'], $siteurl, $tuinovel);
+                $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl));
+            }
+            $this->assign('pagetuis', $tui);
+            //上一章，下一章
+            $Pre = $c->where('id <' . $content['id'] . ' and con_nid=' . $novelInfo['id'])->order('id desc')->find();
+            $Nex = $c->where('id >' . $content['id'] . ' and con_nid=' . $novelInfo['id'])->order('id asc')->find();
+            $prePage = $NovelUrl;
+            $nextPage = $NovelUrl;
+            //伪静态化
+            if(is_array($Pre))
+                $prePage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$Pre);
+
+            //伪静态化
+            if(is_array($Nex))
+                $nextPage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$Nex);    
+
+            $coninfo = array_merge($content, array('prePage' => $prePage, 'nextPage' => $nextPage));
+            $this->assign('coninfo', $coninfo);
+            $this->buildHtml($coninfo['id'], HTML_PATH . 'mobile/' . $novelInfo['id'] . '/', 'mobile:content/chapter');
+        }
+        public function novel_build($n, $c, $v, $cls, $siteinfo, $siteurl, $novelInfo) {
+            $conents = $c->where('con_nid=' . $novelInfo['id'])->select();
+            $files = scandir(HTML_PATH . 'pc/' . $novelInfo['id']);
+            if ((count($files) - 2) == (count($conents) + 1)) return;
+            //所属分卷
+            $clssss = $cls->find($novelInfo['novel_cid']);
+            //当前小说分类的链接
+            $clsUrl = $this->classToUrl($siteinfo['urlrewrite_cls'],$siteurl,$clssss);
+            //当前小说的链接
+            $tuiUrl = $this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novelinfo);
+            $NovelUrl = $tuiUrl; //当前URL，保存一份，用于上下翻页时没有页面
+            $novelInfo = array_merge($novelInfo, array('classname' => $clssss['classname'], 'classurl' => $clsUrl, 'bookurl' => $tuiUrl));
+            $this->assign('novelinfo', $novelInfo);
+            //简介静态化
+            //小说章节目录
+            //小说章节目录
+            $vols = $v->where('vol_nid=0')->select();
+            //查询最新章节
+            $newChapters = $c->field('id,con_name')->where('con_nid=' . $novelInfo['id'])->order('id desc limit 1')->select();
+            $vol['volname'] = '最新章节';
+            foreach ($newChapters as $newChapter) {
+                //con URl
+                $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$newChapter);
+                $this->assign('newestUrl', $conUrl);
+                $this->assign('newestName', $newChapter['con_name']);
+            }
+            //查询所有章节
+            $firstUrl = null;
+            $firstName = null;
+            foreach ($vols as $vol) {
+                $where = null;
+                $where['con_vid'] = $vol['id'];
+                $where['con_nid'] = $novelInfo['id'];
+                //循环章节列表
+                $chapter = $c->field('id,con_name')->where($where)->select();
+                $chapters_tmp = null;
+                foreach ($chapter as $chp) {
+                    //con URl
+                    $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$chp);
+                    $chapters_tmp[] = array_merge($chp, array('con_url' => $conUrl));
+                }
+                $firstUrl = $chapters_tmp[0]['con_url'];
+                array_push($vol, $chapters_tmp);
+                $chapters[] = $vol;
+            }
+            $this->assign('firstUrl', $firstUrl);
+            $this->assign('chapters', $chapters);
+            $this->buildHtml('index', HTML_PATH . 'mobile/' . $novelInfo['id'] . '/', 'mobile:content/vol');
+            // 所有章节静态化
+            foreach ($conents as $content) {
+                if (!$this->getState()) return;
+                $this->chapter_build($n, $c, $content, $novelInfo, $siteurl, $siteinfo, $NovelUrl);
+            }
+        }
+        public function novels_build() {
+            ignore_user_abort(false);
+            ini_set('max_execution_time', '0');
+            ini_set('memory_limit', '500M');
+            $start_id = $_GET['startId'];
+            $end_id = $_GET['endId'];
+            if ($start_id == 0) $id = 1;
+            else $id = $start_id;
+            if ($id > $end_id) return;
+            //网站信息
+            $s = M('Site');
+            $siteinfo = $s->find(1);
+            $this->assign('siteinfo', $siteinfo);
+            $siteurl = trim($siteinfo['site_url'], '/');
+            // 获取类别信息
+            $cls = M('Class');
+            // 所有章节
+            $c = M('Content');
+            //循环分卷
+            $v = M('Vol');
+            //获取小说、
+            $n = M('Novel');
+            $novels = $n->where('id=' . $id)->select();
+            $novelInfo = $novels[0];
+            if (!$this->getState()) return;
+            $this->novel_build($n, $c, $v, $cls, $siteinfo, $siteurl, $novelInfo);
+            $id+= 1;
+            redirect('/novel/index.php/mobile/novels_build/startId/'.$id.'/endId/'.$end_id);
         }
     }
 ?>

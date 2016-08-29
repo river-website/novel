@@ -1,0 +1,62 @@
+<include file='Public:header' />
+
+<!-- post wrapper -->
+<div class="row-fluid">
+
+    <div class="span6">
+        <div class="well widget">
+            <div class="widget-header">
+                <h3 class="title">开始静态化</h3>
+            </div>
+            <dd>
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">开始小说ID</label>
+                    <div class="controls">
+                        <input type="text" id="startId" name="allid"  />
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    <label class="control-label" for="inputEmail">结束小说ID</label>
+                    <div class="controls">
+                        <input type="text" id="endId" name="caijiname" />
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button  class="btn btn-warning" id="start">开始</button>
+                    </div>
+                </div>
+            </dd>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- ./ post wrapper -->
+</div>
+<!-- end main content -->
+
+
+<include file='Public:footer' />
+<script type="text/javascript" language="javascript">
+		$("#start").bind('click',function(){
+			var startId = $('#startId').val();
+			var endId = $('#endId').val();
+			if ((startId == null)||(endId == null))
+				alert('添值');
+			else{
+				var url = '__ROOT__/index.php/index/novels_build/startId/'+startId+'/endId/'+endId;
+				$.ajax({
+				  type: 'POST',
+				  url: url,
+				  data: {},
+				  success: {},
+				  dataType: 'json'
+				});}
+		});
+</script>
