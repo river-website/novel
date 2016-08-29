@@ -224,7 +224,7 @@
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
-                        $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$newChapter);
+                        $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$newChapter);
                         $this->assign('newestUrl',$conUrl);
                         $this->assign('newestName',$newChapter['con_name']);
                     }
@@ -241,7 +241,7 @@
                         $chapters_tmp=null;
                         foreach($chapter as $chp){
                             //con URl
-                            $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$chp);
+                            $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
                             $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
 
                         }
