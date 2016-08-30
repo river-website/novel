@@ -110,6 +110,31 @@
 
         }
 
+        public function history(){
+                      //网站信息
+            $s=M('Site');
+            $siteinfo=$s->find(1);
+            $this->assign('siteinfo',$siteinfo);
+            $siteurl=trim($siteinfo['site_url'],'/');
+            
+            $n=M('novel');
+            $c=M('content');
+            $hislist=cookie('histlist');
+            $keys=array_keys($hislist);
+            foreach ($keys as $key) {
+                $novels =$n->field('id,novelname,novelauthor,novelstate,novelimg')->where('id='.$key)->select();
+                $novel=$novels[0];
+                $contents=$c->field('id,con_name')->where('id='.$hislist[$key])->select();
+                $content=$contents[0];
+                $bookurl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novel);
+                $contenturl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novel,$content);
+                $con=array_merge($content,array('contenturl'=>$contenturl));
+                $tui[]=array_merge($novel,array('bookurl' => $bookurl,'con'=>$con));
+            }
+            $this->assign('hislist',$tui);
+            $this->display('mobile:content/his');
+        }
+
 
         public function look(){
 
@@ -207,7 +232,15 @@
 
                     $n->save($click);
 
-
+                    $hislist=cookie('histlist');
+                    if($hislist==null){
+                        $hislist=array();
+                    }
+                    unset($hislist[$novelInfo['id']]);
+                    $hislist=array($novelInfo['id']=>$coninfo['id'])+$hislist;
+                    if(count($hislist)>10)
+                        $hislist=array_slice($hislist,0,10);
+                    cookie('histlist',$hislist,3600);
                     $this->display('mobile:content/chapter');
                 }else{
                     //小说章节目录

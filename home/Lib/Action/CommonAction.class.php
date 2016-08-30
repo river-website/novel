@@ -27,8 +27,9 @@
 			if(strpos($url,'m')){
 				$url = preg_replace("/(m\.)|(\/m)/","",$url);
 			}else{
-				$url = $url.'m';
+				#$url = $url.'m';
 				#$url = 'm.'.$url;
+				$url = str_replace('localhost/novel', 'localhost/novel/m', $url);
 			}
 			return "http://".$url;
 		}
