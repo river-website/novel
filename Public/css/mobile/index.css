@@ -1,36 +1,4 @@
-﻿/*nav*/
-.nav {
-    background-color:#ECF0F0;
-    height:35px;
-    line-height:35px;
-    text-align: center;
-    overflow:hidden;
-    display:block;
-
-}
-
-.nav ul li{
-    color:#333;
-    display:block;
-    width:20%;
-    overflow:hidden;
-    float:left;
-    text-align: center;
-}
-.nav_read{
-    height:35px;
-    line-height:35px;
-    font-size: 16px;
-    color: #666;
-    background-color: #ECF0F0;
-    text-indent: 8px;
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
-
-}
-
-/*article*/
+﻿/*article*/
 .article {
     margin: 10px auto 10px auto;
 }
@@ -87,15 +55,39 @@
     float: left;
 }
 
-a {
-    color: #000;
-    text-decoration: none;
-}
 
-li {
-    list-style: none;
-}
 
 .div_breadcrumbs H2 {
 	FLOAT: left; FONT-WEIGHT: bold; MARGIN-RIGHT: 5px
+}
+
+.logo {
+    float: left;
+    margin-left: 10px;
+}
+.header h2 {
+    font-size: 18px;
+    font-weight: bolder;
+    padding-top: 6px;
+}
+.logo a {
+    color: #fff;
+}
+.header a {
+    color: #FFF;
+}
+.header p {
+    font-size: 15px;
+    line-height: 80%;
+}
+.block_txt h2 a, .block_txt2 h2 a, .index_block h2 a {
+    color: #2f468f;
+}
+.blue {
+    color: #2f468f;
+    font-size: 18px;
+}
+body {
+    background: #fff;
+    color: #999;
 }

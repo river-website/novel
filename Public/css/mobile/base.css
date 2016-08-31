@@ -1,4 +1,22 @@
+html {
+    background: #fff;
+    font: 16px/1.5 'microsoft yahei';
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: "microsoft yahei";
+}
+
 body, h1, h2, h3, h4, h5, h6, p, div, ul, li, dl, dt, dd, h1 {  margin: 0;  padding: 0; }
+
+li {    list-style: none;}
+
+a {    color: #000;text-decoration: none;}
 
 .header {  background-color: #007BB1;  color: #fff;  height: 52px;  text-align: center;  overflow: hidden;  display: block; }
 
@@ -13,3 +31,35 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, dl, dt, dd, h1 {  margin: 0;  padd
 .margin-top-5-percent{ margin-top:5%; }
 .margin-left-2-percent{ margin-left: 2%; }
 .margin-left-5-percent{ margin-left:5%; }
+
+/*nav*/
+.nav {
+    background-color:#ECF0F0;
+    height:35px;
+    line-height:35px;
+    text-align: center;
+    overflow:hidden;
+    display:block;
+
+}
+
+.nav ul li{
+    color:#333;
+    display:block;
+    width:25%;
+    overflow:hidden;
+    float:left;
+    text-align: center;
+}
+.nav_read{
+    height:35px;
+    line-height:35px;
+    font-size: 16px;
+    color: #666;
+    background-color: #ECF0F0;
+    text-indent: 8px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+
+}

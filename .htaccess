@@ -39,6 +39,10 @@
    RewriteRule ^m/d/$ index.php/mobile/done/ [L]
    RewriteRule ^m/d$ index.php/mobile/done/ [L]
 
+   RewriteRule ^m/h/$ index.php/mobile/history/ [L]
+   RewriteRule ^m/h/$ index.php/mobile/history/ [L]
+   
+
    RewriteRule ^m/d/([0-9]+)/$ index.php/mobile/done/p/$1/ [L]
    RewriteRule ^m/d/([0-9]+)$ index.php/mobile/done/p/$1/ [L]
 
