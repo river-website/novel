@@ -480,5 +480,45 @@
             $id+= 1;
             redirect('/novel/index.php/mobile/novels_build/startId/'.$id.'/endId/'.$end_id);
         }
+
+        private function novel_rank(){
+            $novel_cid_dict =array(1=>100,2=>100,3=>100,4=>100,5=>100,6=>100,7=>100,8=>100,9=>50,10=>50);
+            $novel_name_dict=array();
+            $novel_author_dict=array();
+            $novel_state_dict=array(1=>5000,0=>rand(1000,3000));
+            $fields_arr =array_merge(array($novel_cid_dict),array($novel_name_dict));
+            $fields_arr =  array_merge($fields_arr,array($novel_author_dict));
+            $fields_arr = array_merge($fields_arr,array($novel_state_dict));
+            $novel_fields = 'novel_cid,novelname,novelauthor,novelstate,clicktoday,clickmonth,clicksum,novelwords';
+            $novel_field_arr = explode(',',$novel_fields);
+            $n=M('Novel');
+            $novels = $n->field('id,'.$novel_fields)->select();
+            foreach($novels as $novel){
+                $novel_grade = 0;
+                $count = 0;
+                foreach($novel_field_arr as $novel_field){
+                    $novel_grade += $this->get_field_grade($fields_arr,$novel[$novel_field],$count);
+                    $count++;
+                }
+                echo($novel_grade.'<br>');
+                $data['novelgrade'] = $novel_grade;
+                $n->where('id='.$novel['id'])->save($data);
+            }
+        }
+
+        private function get_field_grade($field_arr,$f,$count){
+            $filed_grade = null;
+            if($count < 4){
+                $filed_grade = $field_arr[$count][$f];
+                if($filed_grade == null){
+                    $filed_grade = rand(100,1000);
+                }
+            }else if($count < 7){
+                $filed_grade = floor(((10/($count - 3))*$f)/20);
+            }else{
+                $filed_grade = floor($f/1000);
+            }
+            return $filed_grade;
+        }
     }
 ?>
