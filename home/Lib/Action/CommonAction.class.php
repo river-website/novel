@@ -34,6 +34,12 @@
 			return "http://".$url;
 		}
 
+		protected function getContentByPath($coninfo){
+			$path='home/book/'.$coninfo['con_nid'].'/'.$coninfo['id'];
+			$txt=file_get_contents($path);
+			return array_merge($coninfo,array('con_text'=>$txt));
+		}
+
 		//book伪静态化------------------有三个参数，第1个是URL的原样式
         protected function bookToUrl($urlrewrite_book,$siteurl,$novel){
             $bookUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_book);

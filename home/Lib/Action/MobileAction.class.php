@@ -169,12 +169,12 @@
                 if(isset($_GET['id']) ){	//内容
                     //内容
                     $c=M('Content');
-                    $data['con_namepy']=$_GET['id'];
-                    $w='con_namepy LIKE "'.$_GET['id'].'" OR id='.$_GET['id'].' AND con_nid='.$novelInfo['id'];
+                    $w='id='.$_GET['id'].' AND con_nid='.$novelInfo['id'];
                     $coninfo=$c->where($w)->find();
                     if(!is_array($coninfo)){
                         $this->error('错误的访问！');
                     }
+                    $coninfo=$this->getContentByPath($coninfo);
                     //随机推荐小说
                     $strLength=0;
                     $strMaxLength=225;
@@ -246,14 +246,9 @@
                     //小说章节目录
                     //小说章节目录
 
-                    //循环分卷
-                    $v=M('Vol');
-                    $w['vol_nid']=0;
-                    $vols=$v->where($w)->select();
-
                     //查询最新章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name,con_namepy')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
+                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
@@ -265,23 +260,23 @@
                     //查询所有章节
                     $firstUrl = null;
                     $firstName = null;
-                    foreach($vols as $vol){
-                        $where=null;
-                        $where['con_vid']=$vol['id'];
-                        $where['con_nid']=$novelInfo['id'];
-                        //循环章节列表
-                        $chapter=$c->field('id,con_name,con_namepy')->where($where)->select();
-                        $chapters_tmp=null;
-                        foreach($chapter as $chp){
-                            //con URl
-                            $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
-                            $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
+                    $vol=null;
+                    $vol['volname']='所有章节';
+                    $where=null;
+                    $where['con_nid']=$novelInfo['id'];
+                    //循环章节列表
+                    $chapter=$c->field('id,con_name')->where($where)->select();
+                    $chapters_tmp=null;
+                    foreach($chapter as $chp){
+                        //con URl
+                        $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
+                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
 
-                        }
-                        $firstUrl = $chapters_tmp[0]['con_url'];
-                        array_push($vol,$chapters_tmp );
-                        $chapters[]=$vol;
                     }
+                    $firstUrl = $chapters_tmp[0]['con_url'];
+                    array_push($vol,$chapters_tmp );
+                    $chapters[]=$vol;
+                    
 
                     $this->assign('firstUrl',$firstUrl);
                     $this->assign('chapters',$chapters);

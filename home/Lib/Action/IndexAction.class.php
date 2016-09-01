@@ -27,7 +27,7 @@
 
             $this->assign('tuinovels',$tui);
             //查询最新更新的小说
-            $novels=$n->field('id,novel_cid,novelname,novelauthor,update_time')->order('update_time desc limit 15')->select();
+            $novels=$n->field('id,novel_cid,novelname,novelauthor,insert_time')->order('insert_time desc limit 15')->select();
 
             $C=M('Content');
             $novelinfos=array();
@@ -37,7 +37,7 @@
                 $novelpy=$novel['id'];
 
                 $novelauthor=$novel['novelauthor'];
-                $update_time=$novel['update_time'];
+                $insert_time=$novel['insert_time'];
 
                 //book URL
                 //$bookUrl=str_ireplace('%book_name%',urlencode($novelname),$bookUrl);绝世武神
@@ -55,7 +55,7 @@
                 $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novel,$coninfo[0]);
 
                 if($coninfo != null )
-                    $novelinfos[]=array_merge( array('novelname' => $novelname,'novelauthor'=>$novelauthor,'update_time'=>$update_time,'class'=>$class,'bookurl'=>$bookUrl,'conurl'=>$conUrl) , $coninfo[0]);
+                    $novelinfos[]=array_merge( array('novelname' => $novelname,'novelauthor'=>$novelauthor,'update_time'=>$insert_time,'class'=>$class,'bookurl'=>$bookUrl,'conurl'=>$conUrl) , $coninfo[0]);
             }
             $this->assign('novels',$novelinfos);
 
@@ -169,11 +169,12 @@
                     //内容
                     $c=M('Content');
                     $data['con_namepy']=$_GET['id'];
-                    $w='con_namepy LIKE "'.$_GET['id'].'" OR id='.$_GET['id'].' AND con_nid='.$novelInfo['id'];
+                    $w='id='.$_GET['id'].' AND con_nid='.$novelInfo['id'];
                     $coninfo=$c->where($w)->find();
                     if(!is_array($coninfo)){
                         $this->error('错误的访问！');
                     }
+                    $coninfo=$this->getContentByPath($coninfo);
                     //随机推荐小说
                     $strLength=0;
                     $strMaxLength=225;
@@ -237,14 +238,10 @@
                     //小说章节目录
                     //小说章节目录
 
-                    //循环分卷
-                    $v=M('Vol');
-                    $w['vol_nid']=0;
-                    $vols=$v->where($w)->select();
 
                     //查询最新的几章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name,con_namepy')->where('con_nid='.$novelInfo['id'])->order('id desc limit 9')->select();
+                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 9')->select();
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
@@ -255,27 +252,24 @@
                     $chapters[]=$vol;
                     //查询最新的几章节
 
-                    foreach($vols as $vol){
-                        $where=null;
-                        $where['con_vid']=$vol['id'];
-                        $where['con_nid']=$novelInfo['id'];
-                        //循环章节列表
-                        $chapter=$c->field('id,con_name,con_namepy')->where($where)->select();
-                        $chapters_tmp=null;
-                        foreach($chapter as $chp){
-                            //con URl
-                            $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
-                            $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
+                    $vol=null;
+                    $vol['volname']='所有章节';
+                    $where=null;
+                    $where['con_nid']=$novelInfo['id'];
+                    //循环章节列表
+                    $chapter=$c->field('id,con_name')->where($where)->select();
+                    $chapters_tmp=null;
+                    foreach($chapter as $chp){
+                        //con URl
+                        $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
+                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
 
-                        }
-
-                        array_push($vol,$chapters_tmp );
-                        $chapters[]=$vol;
                     }
 
+                    array_push($vol,$chapters_tmp );
+                    $chapters[]=$vol;
                     $this->assign('chapters',$chapters);
 
-                    echo 'mobile';
                     $this->display('pc:content/vol');
                 }
             }else{
