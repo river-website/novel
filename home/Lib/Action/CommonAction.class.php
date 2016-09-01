@@ -2,15 +2,20 @@
 	class CommonAction extends Action{
 		protected $common_classs = null;
 
-		protected function myIsRedict(){
+		protected function isMobile(){
 			$client = $_SERVER['HTTP_USER_AGENT'];
+			$clientkeywords = array('iphone','mobile','ipod','ipad','android','symbianos','windows phone','phone');
+			// 从HTTP_USER_AGENT中查找手机浏览器的关键字
+			$is_mobile = preg_match("/(".implode('|', $clientkeywords).")/i", strtolower($client));
+			return $is_mobile;
+		}
+
+		protected function myIsRedict(){
 			#$url = $_SERVER['HTTP_HOST'];
 			$url = $_SERVER['REQUEST_URI'];
 			#$is_include_m = strpos($url,'/m');
 			$is_include_m = strpos($url,'m.');
-			$clientkeywords = array('iphone','mobile','ipod','ipad','android','symbianos','windows phone','phone');
-			// 从HTTP_USER_AGENT中查找手机浏览器的关键字
-			$is_mobile = preg_match("/(".implode('|', $clientkeywords).")/i", strtolower($client));
+			$is_mobile = $this->isMobile();
 			$flag = false;
 			if (!$is_mobile && $is_include_m){
 				$flag = true;
@@ -36,7 +41,7 @@
 		}
 
 		protected function getContentByPath($coninfo){
-			$path='/home/book/'.$coninfo['con_nid'].'/'.$coninfo['id'];
+			$path='/Users/bill/Downloads/test'.$coninfo['con_nid'].'/'.$coninfo['id'];
 			$txt=file_get_contents($path);
 			return array_merge($coninfo,array('con_text'=>$txt));
 		}
@@ -63,6 +68,36 @@
             return $clsUrl=str_ireplace('%cls_id%',$class['id'],$clsUrl);
         }
         //分类伪静态化
+
+		//分类的全部小说链接
+		public function map(){
+			//内容
+			$c=M('Novel');
+			$clsId = $_GET['name'];
+			$w = 'novel_cid='.$clsId;
+			$novelInfos = $c->where($w)->select();
+			if(!is_array($novelInfos)){
+				$this->error('错误的访问！');
+			}
+			$this->assign('novelInfos',$novelInfos);
+
+			$class=M('Class');
+			$where='id='.$clsId;
+			$classInfos = $class->where($where)->select();
+			$this->assign('classname',$classInfos);
+
+			//网站信息
+			$s=M('Site');
+			$siteinfo=$s->find(1);
+			$this->assign('siteinfo',$siteinfo);
+
+			$page_path = 'pc:content/map';
+			$is_mobile = $this->isMobile();
+			if($is_mobile){
+				$page_path = 'mobile:content/map';
+			}
+			$this->display($page_path);
+		}
 
 		public function _initialize(){
 //			if($this->myIsRedict()){
