@@ -65,9 +65,9 @@
         //分类伪静态化
 
 		public function _initialize(){
-			if($this->myIsRedict()){
-				redirect($this->myRediectUrl());
-			}
+//			if($this->myIsRedict()){
+//				redirect($this->myRediectUrl());
+//			}
 
 			//网站信息
 			$s=M('Site');
