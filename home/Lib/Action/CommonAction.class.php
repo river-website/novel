@@ -36,7 +36,7 @@
 		}
 
 		protected function getContentByPath($coninfo){
-			$path='home/book/'.$coninfo['con_nid'].'/'.$coninfo['id'];
+			$path='/home/book/'.$coninfo['con_nid'].'/'.$coninfo['id'];
 			$txt=file_get_contents($path);
 			return array_merge($coninfo,array('con_text'=>$txt));
 		}
