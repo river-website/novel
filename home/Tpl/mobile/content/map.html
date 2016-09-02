@@ -5,24 +5,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="keywords" content="<{$siteinfo.site_keywords}>">
         <meta name="description" content="<{$siteinfo.site_des}>">
-        <link rel="stylesheet" href="__ROOT__/Public/css/map.css" type="text/css" media="all">
+        <meta name="applicable-device" content="mobile">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="__ROOT__/Public/css/mobile/map.css" type="text/css" media="all">
+        <link rel="stylesheet" href="__ROOT__/Public/css/mobile/base.css" type="text/css" media="all">
     </head>
-    <body marginwidth="0" marginheight="0">
+    <body>
         <div id="main" class="list">
-            <div class="title margin-top-5">点小说大全_全部<{$classname[0].classname}>小说列表</div>
-            <div class="margin-top-5">
-                <a class="nav-item" href="__ROOT__">首页</a>
-                <a class="nav-item" href="__ROOT__/map/1">玄幻魔法</a>
-                <a class="nav-item" href="__ROOT__/map/2">武侠修真</a>
-                <a class="nav-item" href="__ROOT__/map/3">都市言情</a>
-                <a class="nav-item" href="__ROOT__/map/5">侦探推理</a>
-                <a class="nav-item" href="__ROOT__/map/6">网游动漫</a>
-                <a class="nav-item" href="__ROOT__/map/7">科幻小说</a>
-                <a class="nav-item" href="__ROOT__/map/8">恐怖灵异</a>
-                <a class="nav-item" href="__ROOT__/map/4">历史军事</a>
-                <a class="nav-item" href="__ROOT__/map/9">散文诗词</a>
-                <a class="nav-item" href="__ROOT__/map/10">其他</a>
+            <div class="title margin-top-5"><a  href="__ROOT__">点小说大全_全部<{$classname[0].classname}>小说列表</a></div>
+            <div class="margin-top-5 nav-item">
+                <a  href="__ROOT__/map/1">玄幻魔法</a>
+                <a  href="__ROOT__/map/2">武侠修真</a>
+                <a  href="__ROOT__/map/3">都市言情</a>
+                <a  href="__ROOT__/map/5">侦探推理</a>
+                <a  href="__ROOT__/map/6">网游动漫</a>
+                <a  href="__ROOT__/map/7">科幻小说</a>
+                <a  href="__ROOT__/map/8">恐怖灵异</a>
+                <a  href="__ROOT__/map/4">历史军事</a>
+                <a  href="__ROOT__/map/9">散文诗词</a>
+                <a  href="__ROOT__/map/10">其他</a>
             </div>
+            <div class="clear"></div>
             <div class="tip margin-top-5">提示：本站收录的全部<{$classname[0].classname}>小说均在此页，推荐使用Ctrl+F来查找小说<span>(橘色为已完结小说)</span></div>
             <div class="margin-top-10">
                 <foreach name="novelInfos" item="novelInfo">

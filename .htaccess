@@ -51,4 +51,7 @@
 
    RewriteRule ^m/([0-9]+)/([0-9]+)/$ index.php/mobile/look/name/$1/id/$2 [L]
    RewriteRule ^m/([0-9]+)/([0-9]+)$ index.php/mobile/look/name/$1/id/$2 [L]
+
+   RewriteRule ^m/map/([0-9]+)/$ index.php/mobile/map/name/$1 [L]
+   RewriteRule ^m/map/([0-9]+)$ index.php/mobile/map/name/$1 [L]
 </IfModule>
