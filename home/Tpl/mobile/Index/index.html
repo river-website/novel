@@ -28,20 +28,21 @@
 			<a href="__ROOT__/h/">历史</a></li>
 	</ul>
 </div>
-<div class="search">
-	<form name="articlesearch" action="http://zhannei.baidu.com/cse/search">
-		<input type="hidden" name="s" value="15772447660171623812">
-		<table cellpadding="0" cellspacing="0" style="width:100%;">
-			<tbody><tr>
-				<td style="background-color:#fff; border:1px solid #CCC;"><input id="s_key" name="q" type="text" class="key" value="输入书名后搜索，宁可少字不要错字" onfocus="this.value=''"></td>
-				<td style="width:35px; background-color:#2f468f; background-image:url('/wap/search.png'); background-repeat:no-repeat; background-position:center"><input name="submit" type="submit" value="" class="go" onclick="check()"></td>
-			</tr>
-			</tbody></table>
-	</form>
+<div class="search_box">
+    <div class="search_cont">
+        <div class="s_input">
+            <input type="text" placeholder="快速搜索、找书、找武侠">
+        </div>
+        <input type="button" class="s_btn" onclick="Common.toSearch(this);">
+    </div>
+</div>
+<div class="div_head_gg">
+	<img class="img_head_gg" src="__ROOT__/Public/images/gg.jpg">
 </div>
 <div class="article">
 	<h2 class="title">
         <span>
+           <i class="home-icon-tit home-icon-tit-a"></i>
           <a href="###">小说风云榜</a></span>
 		<a href="###">更多...</a></h2>
 	<dv class="block">
@@ -52,14 +53,14 @@
 				<h2><a href="<{$firsttui.tuiUrl}>"><{$firsttui.novelname}></a></h2>
 				<p></p>
 				<p>作者：<a href="s/<{$firsttui.novelauthor}>"><{$firsttui.novelauthor}></a></p>
-				<p><a href="<{$firsttui.tuiUrl}>"><{$firsttui.des}></a></p>
+				<p><a href="<{$firsttui.tuiUrl}>" class="limit_lines"><{$firsttui.noveldes}></a></p>
 			</div>
 		</div>
 		<div style="clear:both"></div>
 		<ul>
 			<foreach name='tuinovels' item='tuinovel'>
 				<li>
-					<a href="<{$tuinovel.classurl}>">[<{$tuinovel.classname}>]</a>
+					<a href="<{$tuinovel.classurl}>" class="gray">[<{$tuinovel.classname}>]</a>
 					<a href="<{$tuinovel.tuiUrl}>" class="blue">
 						<{$tuinovel.novelname}></a>/
 					<a href="s/<{$tuinovel.novelauthor}>">
@@ -69,8 +70,10 @@
 	</dv>
 </div>
 <foreach name='classs_tuinovels' item='class_tuinovels'>
+<div class="split_block"></div>	
 <h2 class="title">
         <span>
+           <i class="home-icon-tit home-icon-tit-a"></i>
           <a href="###"><{$class_tuinovels.class.classname}></a></span>
 	<a href="c/<{$class_tuinovels.class.classpy}>">更多...</a></h2>
 <div class="block">
@@ -81,7 +84,7 @@
 			<h2><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><{$class_tuinovels.tuinovels.first.novelname}></a></h2>
 			<p></p>
 			<p>作者：<a href="s/<{$class_tuinovels.tuinovels.first.novelauthor}>"><{$class_tuinovels.tuinovels.first.novelauthor}></a></p>
-			<p><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><{$class_tuinovels.tuinovels.first.des}></a></p>
+			<p><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>" class="limit_lines"><{$class_tuinovels.tuinovels.first.noveldes}></a></p>
 		</div>
 	</div>
 	<div style="clear:both"></div>
