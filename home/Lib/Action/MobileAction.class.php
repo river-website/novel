@@ -267,17 +267,50 @@
                     //循环章节列表
                     $chapter=$c->field('id,con_name')->where($where)->select();
                     $chapters_tmp=null;
+                    $chp_num = 1;
                     foreach($chapter as $chp){
                         //con URl
                         $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
-                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
-
+                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl,'chp_num'=>$chp_num));
+                        $chp_num++;
                     }
+                    $vol['chapter_num'] = $chp_num - 1;
                     $firstUrl = $chapters_tmp[0]['con_url'];
                     array_push($vol,$chapters_tmp );
                     $chapters[]=$vol;
-                    
 
+                    $chapter_info = array('con_nid'=>$novelInfo['id'],'id'=>$newChapters[0]['id']);
+                    $first_con = $this->getContentByPath($chapter_info);
+                    $first_con['con_text']=mb_substr($first_con['con_text'],0,150,'utf-8')."...";
+
+                    //查询同一作家的作品
+                    $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
+                    $author_novels=$n->where($where)->order('novelgrade desc limit 10')->select();
+                    $is_first_novel = true;
+                    $author_first_novels = null;
+                    $author_second_novels = array();
+                    foreach ($author_novels as $author_novel) {
+                        if($is_first_novel){
+                            $author_first_novels = $author_novel;
+                            $is_first_novel = false;
+                        }else{
+                            array_push($author_second_novels,$author_novel);
+                        }
+                    }
+
+                    //查询同一类型评分相近的十本小说
+                    $com_condition='novel_cid='.$novelInfo['novel_cid'].' and id!='.$novelInfo['id'];
+                    $top_novel_array=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
+                        ->order('novelgrade asc limit 5')->select();
+                    $bottom_novel_array=$n->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])
+                        ->order('novelgrade desc limit 5')->select();
+
+                    $this->assign('author_first_novels',$author_first_novels);
+                    $this->assign('author_second_novels',$author_second_novels);
+                    $this->assign('top_novel_array',$top_novel_array);
+                    $this->assign('bottom_novel_array',$bottom_novel_array);
+                    $this->assign('novelInfo',$novelInfo);
+                    $this->assign('first_con',$first_con);
                     $this->assign('firstUrl',$firstUrl);
                     $this->assign('chapters',$chapters);
                     $this->display('mobile:content/vol');
