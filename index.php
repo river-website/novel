@@ -33,9 +33,9 @@
 		return "http://".$url;
 	}
 
-	if(myIsRedict()){
-		header(myRediectUrl());
-	}
+	// if(myIsRedict()){
+	// 	header(myRediectUrl());
+	// }
 	
 	define('THINK_PATH',"./ThinkPHP/");
 	define("APP_NAME","home");

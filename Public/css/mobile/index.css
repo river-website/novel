@@ -1,12 +1,12 @@
 ﻿/*article*/
 .article {
-    margin: 10px auto 10px auto;
+    margin: 0px auto 0px auto;
 }
 
 .title {
 	height:35px;
-	background:#ECF0F0;
-	border-bottom:2px solid #5278F0;
+	/*background:#ECF0F0;*/
+	/*border-bottom:2px solid #5278F0;*/
 	color:#000;
 	font-size:16px;
 	padding-left:10px;
@@ -15,7 +15,7 @@
 	font-weight:bold;
 }
 
-.title a {
+.title>a {
     float: right;
     padding-right: 10px;
     font-size: 14px;
@@ -23,7 +23,8 @@
 }
 
 .title span a{
-	float:left;font-size:16px;font-weight:bold;
+	font-size:19.55px
+    font-weight:bold;
 }
 
 .title a.on {
@@ -42,7 +43,7 @@
 }
 
 .block li {
-    line-height: 35px;
+    line-height: 45px;
     border-bottom: 1px solid #ECECEC;
 }
 
@@ -50,13 +51,30 @@
     height: auto;
     border: 0px;
     overflow: hidden;
-    padding-top: 10px;
-    padding-bottom: 10px;
     float: left;
 }
 
+.block_txt h2{
+    color: #333;
+    font-size: 1rem;
+    height: 24px;
+    line-height: 24px;
+    padding-bottom: 12px;
+}
 
+.block_txt p{
+    color: #8c8c8c;
+    font-size: .875rem;
+}
 
+.block_txt a{
+    color: #8c8c8c;
+    font-size: .875rem;
+}
+.block_txt h2lo a{
+    color: #333;
+    font-size: 1rem;    
+}
 .div_breadcrumbs H2 {
 	FLOAT: left; FONT-WEIGHT: bold; MARGIN-RIGHT: 5px
 }
@@ -64,23 +82,21 @@
 .logo {
     float: left;
     margin-left: 10px;
+    height: 38px;
 }
 .header h2 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bolder;
-    padding-top: 6px;
-}
-.logo a {
-    color: #fff;
 }
 .header a {
-    color: #FFF;
+    color: #333;
 }
 .header p {
     font-size: 15px;
     line-height: 80%;
+    color: red;
 }
-.block_txt h2 a, .block_txt2 h2 a, .index_block h2 a {
+.block_txt2 h2 a, .index_block h2 a {
     color: #2f468f;
 }
 .blue {
@@ -89,5 +105,29 @@
 }
 body {
     background: #fff;
-    color: #999;
+    /*color: #999;*/
+}
+
+.home-icon-tit {
+    height: .85rem;
+    display: inline-block;
+    border-radius: .1rem;
+    vertical-align: -0.1rem;
+    margin-right: .2rem;
+}
+ .home-icon-tit-a{
+    background: url(../../images/icon.png) no-repeat;
+    background-size: 12.5rem;
+}
+.home-icon-tit-a {
+    padding-left: .5rem;
+    background-position: -1.5rem .18rem;
+    background-color: none;
+}
+.gray{
+    color: #8c8c8c;
+}
+.split_block{
+    height: 10px;
+    background-color: #f5f5f5;
 }
