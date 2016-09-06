@@ -115,6 +115,9 @@ class Dispatcher {
                 if(!isset($_GET[C('VAR_MODULE')])) {// 还没有定义模块名称
                     $var[C('VAR_MODULE')]  =   array_shift($paths);
                 }
+                else{
+                    array_shift($paths);
+                }
                 $var[C('VAR_ACTION')]  =   array_shift($paths);
                 // 解析剩余的URL参数
                 preg_replace('@(\w+)\/([^\/]+)@e', '$var[\'\\1\']=strip_tags(\'\\2\');', implode('/',$paths));

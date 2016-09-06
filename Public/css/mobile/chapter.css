@@ -50,3 +50,83 @@
     position: relative;
     height: 100%;
 }
+.ret_span{
+    display: block;
+    height: 25px;
+    margin: 12px auto 0 auto;
+    width: 25px;
+    background: url(../../images/read_sprite.png) scroll no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+    background-position: 0 -350px;
+    background-size: cover;
+    float: left;
+
+}
+.topMenu{
+    background-color: #f7f7f7;
+    height:50px;
+    width:100%;
+    position:fixed;
+    top:0px;  
+    border-bottom: 1px solid #ccc;
+}
+.bmMenu{
+    background-color: #f7f7f7;
+    height:50px;
+    width:100%;
+    position:fixed; 
+    bottom:0px;
+}
+.fontset{
+    position:fixed;
+    bottom:50px;
+    background:transparent; 
+    background-color:rgba(0,0,0,0.15);
+    height: 50px;
+    width:100px;
+    left:45px;
+
+}
+.left{
+    float: left;
+    margin: 12px auto auto 8px;
+}
+.right{
+    float:right;
+    margin: 12px 5px auto auto;
+}
+.zhangjieming{
+    background: url("../../images/readbg1.jpg") 0% 0% / 100%;
+}
+.zhangjieming h1{
+    text-align: center;
+    padding: 30px 5px 10px 5px;
+}
+
+.zhangjieTXT{
+    font-size: 18px;
+    line-height: 32px;
+}
+.bm_bt{
+    width: 19%;
+    float: left;
+    margin-top: 12px;
+}
+.bm_bt.pre{
+    margin-left: 8px;
+}
+.con_name{
+    float: left;
+    margin: 12px auto auto 35%;
+}
+#font_s{
+    font-size: 18px;
+    background-color: #09b396;
+    color: #efefef；
+}
+#font_l{
+    font-size: 18px;
+    background-color: #09b396;
+    color: #efefef；
+}

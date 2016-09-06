@@ -13,98 +13,48 @@
 	<meta http-equiv="Cache-Control" content="no-transform" />
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/base.css" />
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/chapter.css" />
+
+
 </head>
 <body>
-<div class="header">header</div>
-<div class="con_top">
-	<a href="<{$novelinfo.classurl}>">
-		<{$novelinfo.classname}></a>&nbsp;&gt;&nbsp;
-	<a href="<{$novelinfo.bookurl}>">
-		<{$novelinfo.novelname}></a>&nbsp;&gt;&nbsp;
-	<{$coninfo.con_name}></div>
-<div class="set">
-	<div id="lightdiv" class="set1" onclick="nr_setbg('light')">关灯</div>
-	<div id="huyandiv" class="set1" onclick="nr_setbg('huyan')">护眼</div>
-	<div class="set2">
-		<div>字体：</div>
-		<div id="fontbig" onclick="nr_setbg('big')">大</div>
-		<div id="fontmiddle" onclick="nr_setbg('middle')">中</div>
-		<div id="fontsmall" onclick="nr_setbg('small')">小</div></div>
-</div>
-<div class="search">
-	<form name="articlesearch" action="http://zhannei.baidu.com/cse/search">
-		<input type="hidden" name="s" value="15772447660171623812">
-		<table cellpadding="0" cellspacing="0" style="width:100%;">
-			<tbody>
-			<tr>
-				<td style="background-color:#fff; border:1px solid #CCC;">
-					<input id="s_key" name="q" type="text" class="key" value="输入书名后搜索，宁可少字不要错字" onfocus="this.value=''"></td>
-				<td style="width:35px; background-color:#2f468f; background-image:url('/wap/search.png'); background-repeat:no-repeat; background-position:center">
-					<input name="submit" type="submit" value="" class="go" onclick="check()"></td>
-			</tr>
-			</tbody>
-		</table>
-	</form>
-</div>
+
+	<div class="topMenu" style="display:none">
+		<a href="<{$novelinfo.bookurl}>" class="ret_span"></a>
+		<p class="con_name"><{$coninfo.con_name}></p>
+		<a href="" class="right">首页</a>
+	</div>
+
 <div id="webhtml">
 	<div class="content_read">
 		<div class="box_con">
 			<div class="zhangjieming">
 				<h1>
-					<{$coninfo.con_name}></h1>
-				<div class="bottem">
-					<div class="main-btn">
-						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
-						<a href="<{$novelinfo.bookurl}>" id="tviewList">章节目录 Enter</a>
-						<a href="<{$coninfo.nextPage}>" id="tprev">下一章&rarr;</a></div>
-				</div>
+					<{$coninfo.con_name}>
+				</h1>
 				<div class="zhangjieTXT" id="content">
 					<!--go-->
 					<{$coninfo.con_text}>
 					<!--over-->
 					<div class="bdlikebutton" style="margin-top:5px;"></div>
 				</div>
-				<div class="bottem">
-					<div class="main-btn">
-						<a href="<{$coninfo.prePage}>" class="prevC">&larr;上一章</a>
-						<a href="<{$novelinfo.bookurl}>" id="bviewList">章节目录 Enter</a>
-						<a href="<{$coninfo.nextPage}>" id="bprev">下一章&rarr;</a></div>
-				</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="hot">
-	<dl>
-		<dt>本站推荐</dt>
-		<foreach name='pagetuis' item='pagetui'>
-		<dd>
-			<a href="<{$pagetui.tuiUrl}>" target="_blank">[下载]</a>
-			<a href="<{$pagetui.tuiUrl}>" target="_blank"><{$pagetui.novelname}></a></dd>
-		</foreach>>
-	</dl>
+<div class="fontset" style="display:none">
+	<div class="left" id="font_s">小</div>
+	<div class="right" id="font_l">大</div>
 </div>
-<script type="text/javascript" language="javascript">$(function() {
-		//当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
-		$(function() {
-			$(window).scroll(function() {
-				if ($(window).scrollTop() > 300) {
-					$("#back-to-top").fadeIn(1500);
-				} else {
-					$("#back-to-top").fadeOut(1500);
-				}
-			});
+<div class="bmMenu" style="display:none">
+	<a href="<{$coninfo.prePage}>" class="bm_bt pre" >上一章</a>
+	<div class="bm_bt bm_size">字体</div>
+	<div class="bm_bt bm_ry">夜间</div>
+	<div class="bm_bt bm_bg">背景</div>
+	<a href="<{$coninfo.nextPage}>" class="bm_bt" >下一章</a>
+</div>
 
-			//当点击跳转链接后，回到页面顶部位置
-			$("#back-to-top").click(function() {
-				$('body,html').animate({
-							scrollTop: 0
-						},
-						1000);
-				return false;
-			});
-		});
-	});</script>
 </body>
+    <script src="__ROOT__/Public/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__ROOT__/Public/js/mobile/chapter.js" type="text/javascript"></script>
 </html>

@@ -14,7 +14,7 @@
     text-overflow: ellipsis;
 }
 .line {
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #e0e0e0;
     padding-bottom: 5px;
     padding-top: 5px;
     color: #999;
@@ -27,7 +27,6 @@
 .content {
     width: 98%;
     margin-left: 5px;
-    margin-top: 10px;
     color: #000;
 }
 .prev {
@@ -44,4 +43,21 @@
     background-color: #fff;
     color: #000;
     border: 1px solid #999;
+}
+.header a {
+    color: #333;
+}
+.header p {
+    font-size: 15px;
+    line-height: 80%;
+    color: red;
+}
+.logo {
+    float: left;
+    margin-left: 10px;
+    height: 38px;
+}
+.header h2 {
+    font-size: 16px;
+    font-weight: bolder;
 }
