@@ -10,36 +10,6 @@
 			return $is_mobile;
 		}
 
-		protected function myIsRedict(){
-			#$url = $_SERVER['HTTP_HOST'];
-			$url = $_SERVER['REQUEST_URI'];
-			#$is_include_m = strpos($url,'/m');
-			$is_include_m = strpos($url,'m.');
-			$is_mobile = $this->isMobile();
-			$flag = false;
-			if (!$is_mobile && $is_include_m){
-				$flag = true;
-			}
-
-			if($is_mobile && !$is_include_m){
-				$flag = true;
-			}
-			return $flag;
-		}
-
-		protected function myRediectUrl(){
-			$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-			if(strpos($url,'m.')){
-				$url = preg_replace("/(m\.)/","",$url);
-				#$url = preg_replace("/(\/m)/","",$url);
-			}else{
-				#$url = $url.'m';
-				$url = 'm.'.$url;
-				#$url = str_replace('localhost/novel', 'localhost/novel/m', $url);
-			}
-			return "http://".$url;
-		}
-
 		protected function getContentByPath($coninfo){
 			$path='/Users/bill/Downloads/test'.$coninfo['con_nid'].'/'.$coninfo['id'];
 			$txt=file_get_contents($path);
@@ -100,9 +70,6 @@
 		}
 
 		public function _initialize(){
-//			if($this->myIsRedict()){
-//				redirect($this->myRediectUrl());
-//			}
 
 			//网站信息
 			$s=M('Site');
