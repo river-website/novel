@@ -4,7 +4,7 @@
         public function index(){
             //网站信息
             $s=M('Site');//echo ROOT;
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $this->assign('currentindex','current');
             $siteurl=trim($siteinfo['site_url'],'/');
@@ -53,8 +53,8 @@
                 }
                 else{
                     $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des,
-                        'classname'=>$this->common_classs[$tuinovel['novel_cid']]['classname'],
-                        'classurl'=>$this->common_classs[$tuinovel['novel_cid']]['clsurl'])
+                            'classname'=>$this->common_classs[$tuinovel['novel_cid']]['classname'],
+                            'classurl'=>$this->common_classs[$tuinovel['novel_cid']]['clsurl'])
                     );
                 }
             }
@@ -66,7 +66,7 @@
         public function cls(){
             //网站信息
             $s=M('Site');
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $siteurl=trim($siteinfo['site_url'],'/');
 
@@ -111,12 +111,12 @@
         }
 
         public function history(){
-                      //网站信息
+            //网站信息
             $s=M('Site');
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $siteurl=trim($siteinfo['site_url'],'/');
-            
+
             $n=M('novel');
             $c=M('content');
             $hislist=cookie('histlist');
@@ -140,7 +140,7 @@
 
             //网站信息
             $s=M('Site');
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $siteurl=trim($siteinfo['site_url'],'/');
 
@@ -199,11 +199,11 @@
                     //伪静态化
                     if(is_array($Pre))
                         $prePage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$Pre);
-                    
+
                     //伪静态化
                     if(is_array($Nex))
                         $nextPage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$Nex);
-                    
+
                     $coninfo=array_merge($coninfo,array('prePage'=>$prePage , 'nextPage'=>$nextPage ));
 
                     $this->assign('coninfo',$coninfo);
@@ -287,11 +287,11 @@
                     $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
                     $author_novels=$n->where($where)->order('novelgrade desc limit 10')->select();
                     $is_first_novel = true;
-                    $author_first_novels = null;
+                    $author_first_novels = array();
                     $author_second_novels = array();
                     foreach ($author_novels as $author_novel) {
                         if($is_first_novel){
-                            $author_first_novels = $author_novel;
+                            array_push($author_first_novels,$author_novel);
                             $is_first_novel = false;
                         }else{
                             array_push($author_second_novels,$author_novel);
@@ -300,15 +300,23 @@
 
                     //查询同一类型评分相近的十本小说
                     $com_condition='novel_cid='.$novelInfo['novel_cid'].' and id!='.$novelInfo['id'];
-                    $top_novel_array=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
+                    $similar_novels=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
                         ->order('novelgrade asc limit 5')->select();
                     $bottom_novel_array=$n->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])
                         ->order('novelgrade desc limit 5')->select();
+                    if(!$similar_novels){
+                        $similar_novels = array();
+                    }
+                    foreach ($bottom_novel_array as $bottom_novel){
+                        array_push($similar_novels,$bottom_novel);
+                    }
+                    $top_similars = array();
+                    array_push($top_similars,array_shift($similar_novels));
 
                     $this->assign('author_first_novels',$author_first_novels);
                     $this->assign('author_second_novels',$author_second_novels);
-                    $this->assign('top_novel_array',$top_novel_array);
-                    $this->assign('bottom_novel_array',$bottom_novel_array);
+                    $this->assign('top_similars',$top_similars);
+                    $this->assign('similar_novels',$similar_novels);
                     $this->assign('novelInfo',$novelInfo);
                     $this->assign('first_con',$first_con);
                     $this->assign('firstUrl',$firstUrl);
@@ -325,10 +333,10 @@
 
             //网站信息
             $s=M('Site');
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $siteurl=trim($siteinfo['site_url'],'/');
-            
+
             $n=M('novel');
             $count=$n->where('novelstate=1')->count();
             $page=new NewPage($count,10);
@@ -342,10 +350,10 @@
 
                 $des=mb_substr($donenovel['noveldes'],0,60,'utf-8')."...";
                 $tui[]=array_merge($donenovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
-            }    
+            }
             $this->assign('pageshow',$pageshow);
-            $this->assign('tuinovels',$tui); 
-            $this->display('mobile:content/done');       
+            $this->assign('tuinovels',$tui);
+            $this->display('mobile:content/done');
         }
 
 
@@ -354,7 +362,7 @@
 
             //网站信息
             $s=M('Site');
-            $siteinfo=$s->find(1);
+            $siteinfo=$s->find(2);
             $this->assign('siteinfo',$siteinfo);
             $siteurl=trim($siteinfo['site_url'],'/');
 
@@ -419,7 +427,7 @@
 
             //伪静态化
             if(is_array($Nex))
-                $nextPage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$Nex);    
+                $nextPage = $this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelinfo,$Nex);
 
             $coninfo = array_merge($content, array('prePage' => $prePage, 'nextPage' => $nextPage));
             $this->assign('coninfo', $coninfo);
