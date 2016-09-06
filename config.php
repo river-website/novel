@@ -9,7 +9,7 @@ return array(
 	'DB_NAME'=>'novel',//设置数据库名
 	'DB_USER'=>'root',    //设置用户名
 //	'DB_PWD'=>'YW8zqyvbwjY',
-'DB_PWD'=>'123',
+	'DB_PWD'=>'123',
 	'DB_PORT'=>'3306',   //设置端口号
 	'DB_PREFIX'=>'ck_',  //设置表前缀
 	'SHOW_PAGE_TRACE'=>false,//开启页面Trace
