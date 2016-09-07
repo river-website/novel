@@ -22,12 +22,12 @@
    RewriteRule ^/$ index.php/index [L]
    RewriteRule ^$ index.php/index [L]
 
-   RewriteRule ^d/$ index.php/mobile/done/ [L]
-   RewriteRule ^d$ index.php/mobile/done/ [L]
+   RewriteRule ^d/$ index.php/index/done/ [L]
+   RewriteRule ^d$ index.php/index/done/ [L]
 
-   RewriteRule ^h/$ index.php/mobile/history/ [L]
-   RewriteRule ^h/$ index.php/mobile/history/ [L]
+   RewriteRule ^h/$ index.php/index/history/ [L]
+   RewriteRule ^h$ index.php/index/history/ [L]
 
-   RewriteRule ^d/([0-9]+)/$ index.php/mobile/done/p/$1/ [L]
-   RewriteRule ^d/([0-9]+)$ index.php/mobile/done/p/$1/ [L]
+   RewriteRule ^d/([0-9]+)/$ index.php/index/done/p/$1/ [L]
+   RewriteRule ^d/([0-9]+)$ index.php/index/done/p/$1/ [L]
 </IfModule>
