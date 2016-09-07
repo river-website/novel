@@ -19,7 +19,9 @@
 			// 'index:cls'=>array('{:action}/{$_SERVER.REQUEST_URI}',1200),	//��Ŀҳ����20����
 			//'index:search'=>array('',false),	//����ҳ�����л���
 			//'*'=>array('{:action}/{$_SERVER.REQUEST_URI|md5}',600),	//����10����{:module}/
-		)
+		),
+		'APP_SUB_DOMAIN_DEPLOY'=>1,
+		'APP_SUB_DOMAIN_RULES'=>array('m'=>array('home/Mobile'))
 	);
 	
 	return array_merge($arr1,$arr2);
