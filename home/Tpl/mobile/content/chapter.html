@@ -8,6 +8,7 @@
 		<{$siteinfo.site_title}></title>
 	<meta name="keywords" content="<{$siteinfo.site_keywords}>">
 	<meta name="description" content="<{$siteinfo.site_des}>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta name="MobileOptimized" content="240">
 	<meta http-equiv="Cache-Control" content="max-age=300" />
 	<meta http-equiv="Cache-Control" content="no-transform" />
@@ -20,14 +21,14 @@
 
 	<div class="topMenu" style="display:none">
 		<a href="<{$novelinfo.bookurl}>" class="ret_span"></a>
-		<p class="con_name"><{$coninfo.con_name}></p>
-		<a href="" class="right">首页</a>
+		<a class="con_name"><{$coninfo.con_name}></a>
+		<a href="<{$commonurl.mainurl}>" class="right colorcha">首页</a>
 	</div>
 
 <div id="webhtml">
 	<div class="content_read">
 		<div class="box_con">
-			<div class="zhangjieming">
+			<div class="zhangjieming" id='zhangjieming'>
 				<h1>
 					<{$coninfo.con_name}>
 				</h1>
@@ -37,21 +38,27 @@
 					<!--over-->
 					<div class="bdlikebutton" style="margin-top:5px;"></div>
 				</div>
+				<div class="ZhangjieOperate">
+					<ul>
+		                <li><a href="<{$coninfo.prePage}>">上一章</a></li>
+		                <li><a href="<{$novelinfo.bookurl}>">查看目录</a></li>
+		                <li><a href="<{$coninfo.nextPage}>">下一章</a></li>
+		            </ul>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="fontset" style="display:none">
-	<div class="left" id="font_s">小</div>
-	<div class="right" id="font_l">大</div>
+	<div id="font_s" class="left fontsetbutton"><a>W-</a></div>
+	<div id="font_l" class="right fontsetbutton"><a>W+</a></div>
 </div>
 <div class="bmMenu" style="display:none">
-	<a href="<{$coninfo.prePage}>" class="bm_bt pre" >上一章</a>
-	<div class="bm_bt bm_size">字体</div>
-	<div class="bm_bt bm_ry">夜间</div>
-	<div class="bm_bt bm_bg">背景</div>
-	<a href="<{$coninfo.nextPage}>" class="bm_bt" >下一章</a>
+	<a href="<{$coninfo.prePage}>" class="bm_bt pre colorcha" >上一章</a>
+	<div class="bm_bt bm_size colorcha">字体</div>
+	<a href='<{$novelinfo.bookurl}>' class="bm_bt colorcha">目录</a>
+	<div class="bm_bt bm_ry colorcha">夜间</div>
+	<a href="<{$coninfo.nextPage}>" class="bm_bt colorcha" >下一章</a>
 </div>
 
 </body>

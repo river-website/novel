@@ -15,29 +15,7 @@
     <link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/cls.css" /></head>
 
 <body>
-<div class="header">
-    <div class="logo"><h2><a href="<{$commonurl.mainurl}>">点点小说手机版</a></h2><p><{$commonurl.mainurl}></p></div>
-</div>
-<div class="nav">
-    <ul>
-        <li>
-            <a href="<{$commonurl.mainurl}>">首页</a></li>
-        <li>
-            <a href="<{$commonurl.classurl}>">分类</a></li>
-        <li>
-            <a href="<{$commonurl.doneurl}>">全本</a></li>
-        <li>
-            <a href="<{$commonurl.hisurl}>">历史</a></li>
-    </ul>
-</div>
-<div class="search_box">
-    <div class="search_cont">
-        <div class="s_input">
-            <input type="text" placeholder="快速搜索、找书、找武侠">
-        </div>
-        <input type="button" class="s_btn" onclick="Common.toSearch(this);">
-    </div>
-</div>
+<include file='mobile:Public/header'/>
 <div class="cover">
     <foreach name='tuinovels' item='tuinovel'>
         <p class="line">
@@ -46,11 +24,6 @@
         </p>
     </foreach>
 </div>
-<div class="postnav">
-    <div class="wp-pagenavi">
-        <{$pageshow}>
-    </div>
-    <DIV class=clear></DIV>
-</div>
+<include file='mobile:Public/pages'/>
 </body>
 </html>

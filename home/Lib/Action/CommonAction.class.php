@@ -34,7 +34,6 @@
         //分类伪静态化
         protected function classToUrl($urlrewrite_cls,$siteurl,$class){
             $clsUrl=str_ireplace('%siteurl%',$siteurl,$urlrewrite_cls);
-            $clsUrl=str_ireplace('%cls_py%', $class['classpy'],$clsUrl);
             return $clsUrl=str_ireplace('%cls_id%',$class['id'],$clsUrl);
         }
         //分类伪静态化
@@ -58,7 +57,12 @@
 
 			//网站信息
 			$s=M('Site');
-			$siteinfo=$s->find(1);
+			$is_mobile = $this->isMobile();
+			if($is_mobile){
+				$siteinfo=$s->find(2);
+			}else{
+				$siteinfo=$s->find(1);
+			}
 			$this->assign('siteinfo',$siteinfo);
 
 			$page_path = 'pc:content/map';
@@ -73,7 +77,12 @@
 
 			//网站信息
 			$s=M('Site');
-			$siteinfo=$s->find(1);
+			$is_mobile = $this->isMobile();
+			if($is_mobile){
+				$siteinfo=$s->find(2);
+			}else{
+				$siteinfo=$s->find(1);
+			}
 
 			if(isset($siteinfo['gogo'])){
 				$gourl='http://www.rennhuang8.com';
@@ -95,6 +104,12 @@
 			$this->common_classs = $newcls;
 			$this->assign('classes',$newcls);
 
+			$commonurl['mainurl'] = $siteurl;
+			$commonurl['classurl'] = $newcls[0]['clsurl'];
+			$commonurl['doneurl'] = $siteurl.'/d';
+			$commonurl['hisurl'] = $siteurl.'/h';
+			$commonurl['searchurl']=$siteurl.'/s/';
+			$this->assign('commonurl',$commonurl);
 			//热词搜索
 			if($siteinfo['hotkeyopen']){
 				$N=M('Novel');
