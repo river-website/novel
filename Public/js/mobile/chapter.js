@@ -26,6 +26,10 @@ function setScrollTop(height){
 $('#webhtml').click(function(event) {
   	y=event.clientY;
   	height=window.screen.height;
+    if (y > 1024)
+      y = y / window.devicePixelRatio;
+    if (height > 1024)
+      height = height /window.devicePixelRatio
   	if ($(".topMenu").attr("style")=="display:none"){
   		height3 = height /3;
   		state = parseInt(y / height3) +1;
