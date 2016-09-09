@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        <{$siteinfo.site_name}>-
+        <{$siteinfo.site_title}></title>
+    <meta name="keywords" content="<{$siteinfo.site_keywords}>">
+    <meta name="description" content="<{$siteinfo.site_des}>">
+    <meta name="MobileOptimized" content="240">
+    <meta http-equiv="Cache-Control" content="max-age=300" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/base.css" />
+    <link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/cls.css" /></head>
+<body>
+<include file='mobile:Public/header'/>
+<div class="cover">
+    <foreach name='tuinovels' item='tuinovel'>
+        <p class="line">
+            <a href="<{$tuinovel.tuiUrl}>" class="blue"><{$tuinovel.novelname}></a>
+            <a href="<{$commonurl.searchurl}><{$tuinovel.novelauthor}>"><{$tuinovel.novelauthor}></a>
+        </p>
+    </foreach>
+</div>
+</body>
+</html>
