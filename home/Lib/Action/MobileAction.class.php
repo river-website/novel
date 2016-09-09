@@ -51,8 +51,8 @@
                 }
                 else{
                     $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des,
-                            'classname'=>$this->common_classs[$tuinovel['novel_cid']]['classname'],
-                            'classurl'=>$this->common_classs[$tuinovel['novel_cid']]['clsurl'])
+                            'classname'=>$this->common_classs[$tuinovel['novel_cid']-1]['classname'],
+                            'classurl'=>$this->common_classs[$tuinovel['novel_cid']-1]['clsurl'])
                     );
                 }
             }
@@ -77,6 +77,9 @@
                     $n=M('Novel');
                     $this->assign('classinfo',$classinfo);
 
+                    $clsid=$classinfo['id'] - 1;
+                    $this->common_classs[$clsid]=array_merge($this->common_classs[$clsid],array('clscls'=>'active'));
+                    $this->assign('classes',$this->common_classs);
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
 
@@ -84,8 +87,10 @@
                     if($p==null)$p=1;
                     if($p==1)$preclass='disable';
                     $firstRow = ($p-1) *10;
-                    $tempurl = $this->common_classs[$_GET['classname']]['clsurl'];
-                    $preurl = $tempurl.($p-1);
+                    $tempurl = $this->common_classs[$_GET['classname']-1]['clsurl'];
+                    if ($p!=1){
+                        $preurl = $tempurl.($p-1);
+                    }
                     $nexturl=$tempurl.($p+1);
                     $tuinovels=$n->where($novel)->order('id desc')->limit($firstRow.',10')->select();
 
@@ -346,7 +351,9 @@
             if($p==1)$preclass='disable';
             $firstRow = ($p-1) *10;
             $tempurl = $siteurl.'/d/';
-            $preurl = $tempurl.($p-1);
+            if ($p!=1){
+                $preurl = $tempurl.($p-1);
+            }
             $nexturl=$tempurl.($p+1);
             $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($firstRow.',10')->select();
             foreach($donenovels as $donenovel){
