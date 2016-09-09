@@ -1,8 +1,8 @@
 <IfModule mod_rewrite.c>
    RewriteEngine on
    RewriteOptions MaxRedirects=1
-   RewriteRule ^s/([a-zA-Z]+)/$ index.php/index/search/key/$1 [L]
-   RewriteRule ^s/([a-zA-Z]+)$ index.php/index/search/key/$1 [L]
+   RewriteRule ^s/(.*)/$ index.php/index/search/key/$1 [L]
+   RewriteRule ^s/(.*)$ index.php/index/search/key/$1 [L]
 
    RewriteRule ^c/([a-zA-Z]+)/([0-9]+)/$ index.php/index/cls/classname/$1/p/$2 [L]
    RewriteRule ^c/([a-zA-Z]+)/([0-9]+)$ index.php/index/cls/classname/$1/p/$2 [L]
