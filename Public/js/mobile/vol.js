@@ -2,7 +2,7 @@
  * Created by bill on 16/9/6.
  */
 var chp_page_size = 50;
-var total = $("#chp_all_num").val() - '0';
+var total = parseInt($("#chp_all_num").val());
 $(function(){
     for(var i = chp_page_size + 1; i <= total; i++){
         $(".chapter-"+i).addClass("hidden");
@@ -10,7 +10,7 @@ $(function(){
 });
 
 $(function(){
-    var page_num = $("#page_num").val() - '0';
+    var page_num = parseInt($("#page_num").val());
     $("#selText1").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
     $("#selText2").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
 });
@@ -56,8 +56,8 @@ function switch_tab(obj,id){
 }
 
 function show_chp_list(id){
-    var old_page_num = $("#page_num").val() - '0';
-    var page_num = $("#volumeList"+id).find("option:selected").val() - '0';
+    var old_page_num = parseInt($("#page_num").val());
+    var page_num = parseInt($("#volumeList"+id).find("option:selected").val());
     var old_page_total = old_page_num * chp_page_size;
     var new_page_total = page_num * chp_page_size;
     $("#page_num").val(page_num);
@@ -78,7 +78,7 @@ function show_chp_list(id){
 }
 
 function pre_page_list(id){
-    var page_num = $("#page_num").val() - '0';
+    var page_num = parseInt($("#page_num").val());
     if(page_num > 1){
         page_num -= 1;
         $("#volumeList"+id+" option[value='"+page_num+"']").attr("selected",true);
@@ -87,7 +87,7 @@ function pre_page_list(id){
 }
 
 function next_page_list(id){
-    var page_num = $("#page_num").val() - '0';
+    var page_num = parseInt($("#page_num").val());
     if(page_num < page_total){
         page_num += 1;
         $("#volumeList"+id+" option[value='"+page_num+"']").attr("selected",true);
