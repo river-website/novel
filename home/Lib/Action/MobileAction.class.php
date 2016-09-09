@@ -84,7 +84,7 @@
                     if($p==null)$p=1;
                     if($p==1)$preclass='disable';
                     $firstRow = ($p-1) *10;
-                    $tempurl = $this->common_classs[$_GET['id']]['clsurl'].'p/';
+                    $tempurl = $this->common_classs[$_GET['classname']]['clsurl'];
                     $preurl = $tempurl.($p-1);
                     $nexturl=$tempurl.($p+1);
                     $tuinovels=$n->where($novel)->order('id desc')->limit($firstRow.',10')->select();
@@ -345,11 +345,10 @@
             if($p==null)$p=1;
             if($p==1)$preclass='disable';
             $firstRow = ($p-1) *10;
-            $tempurl = $siteurl.'/d/p/';
+            $tempurl = $siteurl.'/d/';
             $preurl = $tempurl.($p-1);
             $nexturl=$tempurl.($p+1);
             $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($firstRow.',10')->select();
-            echo($firstRow);
             foreach($donenovels as $donenovel){
                 //book URL
                 $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$donenovel);
