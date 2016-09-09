@@ -4,11 +4,11 @@
    RewriteRule ^s/(.*)/$ index.php/index/search/key/$1 [L]
    RewriteRule ^s/(.*)$ index.php/index/search/key/$1 [L]
 
-   RewriteRule ^c/([a-zA-Z]+)/([0-9]+)/$ index.php/index/cls/classname/$1/p/$2 [L]
-   RewriteRule ^c/([a-zA-Z]+)/([0-9]+)$ index.php/index/cls/classname/$1/p/$2 [L]
+   RewriteRule ^c/([0-9]+)/([0-9]+)/$ index.php/index/cls/classname/$1/p/$2 [L]
+   RewriteRule ^c/([0-9]+)/([0-9]+)$ index.php/index/cls/classname/$1/p/$2 [L]
 
-   RewriteRule ^c/([a-zA-Z]+)/$ index.php/index/cls/classname/$1/ [L]
-   RewriteRule ^c/([a-zA-Z]+)$ index.php/index/cls/classname/$1/ [L]
+   RewriteRule ^c/([0-9]+)/$ index.php/index/cls/classname/$1/ [L]
+   RewriteRule ^c/([0-9]+)$ index.php/index/cls/classname/$1/ [L]
    
    RewriteRule ^([0-9]+)/([0-9]+)/$ index.php/index/look/name/$1/id/$2 [L]
    RewriteRule ^([0-9]+)/([0-9]+)$ index.php/index/look/name/$1/id/$2 [L]
