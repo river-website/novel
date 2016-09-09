@@ -15,142 +15,150 @@
     <link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/base.css">
     <link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/vol.css">
 </head>
-<body>
-<header class="head">
-    <div class="topnav1">
-        <a class="return" href="../"><span>返回</span></a>
-        <a class="top_novel_name" href="javascript:void(0)"><{$novelinfo.novelname}></a>
-        <a class="r_home" href="__ROOT__">首页</a>
-    </div>
-</header>
-
-<div class="">
-    <div class="float-left">
-        <img alt="<{$novelinfo.novelname}>" src="<{$novelinfo.novelimg}>" border="0" width="85" height="100">
-    </div>
-    <div class="float-left">
-        <div><a href="javascript:void(0)"><{$novelinfo.novelname}></a></div>
-        <div class="">作者：<a href=""><{$novelinfo.novelauthor}></a></div>
-        <div class="">分类：<a href=""><{$novelinfo.classname}></a></div>
-        <div class="">状态：<if condition='$novelinfo.novelstate eq 0'>连载中<else/>已完本</if></div>
-        <div class="">字数：<{$novelinfo.novelwords}></div>
-        <div>最新：<a href="<{$newestUrl}>" class="red"><{$newestName}></a></div>
-    </div>
-    <div class="clear"></div>
-</div>
-
-<div class="margin-top-2-percent">
-    <div class="vol_button_function_block float-left"><a href="<{$firstUrl}>">开始阅读</a></div>
-    <div class="vol_button_function_block float-left margin-left-2-percent"><a href="">TXT下载</a></div>
-    <div class="clear"></div>
-</div>
-<div class="margin-top-2-percent">
-    <div class="vol_button_function_block float-left"><a href="">加入书架</a></div>
-    <div class="vol_button_function_block float-left margin-left-2-percent"><a href="">投推荐票</a></div>
-    <div class="clear"></div>
-</div>
-
-<div class="margin-top-2-percent">小说简介：</div>
-<div id="infodes"><{$novelinfo.noveldes}></div>
-
-<div class="margin-top-2-percent">最新章节</div>
-<div class=""><{$first_con.con_text}></div>
-
-<div class="margin-top-2-percent">作品信息</div>
-<div class="">
-    <div class="float-left" style="width:50%">总点击:<{$novelInfo.clicksum}></div>
-    <div class="float-left" style="width:50%">月点击:<{$novelInfo.clickmonth}></div>
-    <div class="float-left" style="width:50%">日点击:<{$novelInfo.clicktoday}></div>
-    <div class="float-left" style="width:50%">评分:<{$novelInfo.novelgrade}></div>
-</div>
-
-<div class="margin-top-2-percent">
-    <div id="list">
-        <input class="hidden" value="<{$con.chp_num}>">
-        <foreach name='chapters' item='chapter'>
-            <div>
-                <span><{$chapter.volname}></span>
-                <span><{$chapter.chapter_num}></span>
+    <body>
+        <header class="head">
+            <div class="topnav1">
+                <a class="return" href="<{$siteinfo.site_url}>"><span>返回</span></a>
+                <a class="top_novel_name"><{$novelinfo.novelname}></a>
+                <a class="r_home" href="<{$siteinfo.site_url}>">首页</a>
             </div>
-            <dl>
-                <foreach name='chapter[0]' item='con'>
-                    <li><a class="hidden chapter-<{$con.chp_num}>" href="<{$con.con_url}>"  title="<{$con.con_name}>"><{$con.con_name}></a></li>
-                </foreach>
-            </dl>
+        </header>
+
+        <div class="margin-top-10">
+            <div class="float-left book_info_img">
+                <a href="<{$siteinfo.site_url}><{$novelinfo.id}>"><img alt="<{$novelinfo.novelname}>" src="<{$novelinfo.novelimg}>" border="0" width="85" height="100"></a>
+            </div>
+            <div class="float-left book_info">
+                <div class="book_info_box width_100_percent book_info_novelname"><a href="<{$siteinfo.site_url}><{$novelinfo.id}>"><{$novelinfo.novelname}></a></div>
+                <div class="book_info_box width_50_percent">作者：<a href="<{$siteinfo.site_url}>s/<{$novelinfo.novelauthor}>"><{$novelinfo.novelauthor}></a></div>
+                <div class="book_info_box width_50_percent">分类：<a href="<{$siteinfo.site_url}>c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a></div>
+                <div class="book_info_box width_50_percent">状态：<if condition='$novelinfo.novelstate eq 0'>连载中<else/>已完本</if></div>
+                <div class="book_info_box width_50_percent">字数：<{$novelinfo.novelwords}></div>
+                <div class="book_info_box width_100_percent limit_lines-1">最新：<a href="<{$newestUrl}>" class=""><{$newestName}></a></div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="padding-horizontal-10">
+            <div class="chapter_tabs">
+                <a href="javascript:void(0);" class="cur tab" onclick="switch_tab(this,'1')">最新章节</a>
+                <a href="javascript:void(0);" class="tab" onclick="switch_tab(this,'2')">作品简介</a>
+                <a href="javascript:void(0);" class="tab" onclick="switch_tab(this,'3')">作品信息</a>
+            </div>
+
+            <div class="tab_info">
+                <div id="tab_1" class="limit_lines-3">
+                    <a href="<{$newestUrl}>"><{$newestName}></a>
+                    <a href="<{$newestUrl}>"><{$first_con.con_text}></a>
+                </div>
+                <div id="tab_2" class="hidden"><{$novelinfo.noveldes}></div>
+                <div class="hidden" onclick="show_introduce();"></div>
+                <div class="clear"></div>
+                <div id="tab_3" class="hidden tab_book_info_box">
+                    <div class="float-left">总点击:<{$novelInfo.clicksum}></div>
+                    <div class="float-left">月点击:<{$novelInfo.clickmonth}></div>
+                    <div class="float-left">日点击:<{$novelInfo.clicktoday}></div>
+                    <div class="float-left">评分:<{$novelInfo.novelgrade}></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="list" class="padding-horizontal-10">
+            <foreach name='chapters' item='chapter'>
+                <div class="t_head">
+                    <input id="chp_all_num" class="hidden" value="<{$chapter.chapter_num}>">
+                    <h2>《<{$novelinfo.novelname}>》目录&nbsp;<span class="g_num">共<{$chapter.chapter_num}>章节</span></h2>
+                </div>
+                <dl>
+                    <input id="page_num" class="hidden" value="1">
+                    <div class="pages" style="padding-bottom: 5px;">
+                        <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('1');">上一页</a>
+                        <span class="selectbox"> <span id="selText1" class="cur"><{$novelinfo.novelname}></span>
+                        <select id="volumeList1" onchange="show_chp_list('1');"></select>
+                        </span><a class="page-next" href="javascript:void(0)" onclick="next_page_list('1');">下一页</a>
+                    </div>
+                    <foreach name='chapter[0]' item='con'>
+                        <li><a class="chapter_list chapter-<{$con.chp_num}>" href="<{$con.con_url}>"><{$con.chp_num}>.<{$con.con_name}></a></li>
+                        <li class="chapter_border chapter-<{$con.chp_num}>"></li>
+                    </foreach>
+                    <div class="pages" style="padding-bottom: 5px;">
+                        <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('2');">上一页</a>
+                        <span class="selectbox"> <span id="selText2" class="cur"><{$novelinfo.novelname}></span>
+                        <select id="volumeList2" onchange="show_chp_list('2');"></select>
+                        </span><a class="page-next" href="javascript:void(0)" onclick="next_page_list('2');">下一页</a>
+                    </div>
+                </dl>
+            </foreach>
+        </div>
+
+        <foreach name="author_first_novels" item="author_first_novel">
+            <div class="split_block"></div>
+            <h2 class="title">
+                <span>
+                    <i class="home-icon-tit home-icon-tit-a"></i>
+                    <a>作者其他作品</a>
+                </span>
+            </h2>
+            <div class="block">
+                <div class="block">
+                    <div class="block_img"><a href="../<{$author_first_novel.id}>"><img height="100" width="80" src="<{$author_first_novel.novelimg}>"></a></div>
+                    <div class="block_txt">
+                        <h2><a href="../<{$author_first_novel.id}>"><{$author_first_novel.novelname}></a></h2>
+                        <p></p>
+                        <p>作者：<a href="../s/<{$author_first_novel.novelauthor}>"><{$author_first_novel.novelauthor}></a></p>
+                        <p><a href="../<{$author_first_novel.id}>" class="limit_lines"><{$author_first_novel.noveldes}></a></p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <foreach name='author_second_novels' item='author_second_novel'>
+                        <li>
+                            <a href="../<{$author_second_novel.id}>" class="blue">
+                                <{$author_second_novel.novelname}></a>/
+                            <a href="../s/<{$author_second_novel.novelauthor}>">
+                                <{$author_second_novel.novelauthor}></a></li>
+                    </foreach>
+                </ul>
+            </div>
         </foreach>
-    </div>
-</div>
 
-<foreach name="author_first_novels" item="author_first_novel">
-    <div class="split_block"></div>
-    <h2 class="title">
+        <foreach name="top_similars" item="top_similar">
+            <div class="split_block"></div>
+            <h2 class="title">
                 <span>
                     <i class="home-icon-tit home-icon-tit-a"></i>
-                    <a href="javascript:void(0)">作者其他作品</a>
+                    <a>相似作品推荐</a>
                 </span>
-    </h2>
-    <div class="block">
-        <div class="block">
-            <div class="block_img"><a href="../<{$author_first_novel.id}>"><img height="100" width="80" src="<{$author_first_novel.novelimg}>"></a></div>
-            <div class="block_txt">
-                <h2><a href="../<{$author_first_novel.id}>"><{$author_first_novel.novelname}></a></h2>
-                <p></p>
-                <p>作者：<a href="../s/<{$author_first_novel.novelauthor}>"><{$author_first_novel.novelauthor}></a></p>
-                <p><a href="../<{$author_first_novel.id}>" class="limit_lines"><{$author_first_novel.noveldes}></a></p>
+            </h2>
+            <div class="block">
+                <div class="block">
+                    <div class="block_img"><a href="../<{$top_similar.id}>"><img height="100" width="80" src="<{$top_similar.novelimg}>"></a></div>
+                    <div class="block_txt">
+                        <h2><a href="../<{$top_similar.id}>"><{$top_similar.novelname}></a></h2>
+                        <p></p>
+                        <p>作者：<a href="../s/<{$top_similar.novelauthor}>"><{$top_similar.novelauthor}></a></p>
+                        <p><a href="../<{$top_similar.id}>" class="limit_lines"><{$top_similar.noveldes}></a></p>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <ul>
+                    <foreach name='similar_novels' item='similar_novel'>
+                        <li>
+                            <a href="../<{$similar_novel.id}>" class="blue">
+                                <{$similar_novel.novelname}></a>/
+                            <a href="../s/<{$similar_novel.novelauthor}>">
+                                <{$similar_novel.novelauthor}></a></li>
+                    </foreach>
+                </ul>
             </div>
-        </div>
-        <div class="clear"></div>
-        <ul>
-            <foreach name='author_second_novels' item='author_second_novel'>
-                <li>
-                    <a href="../<{$author_second_novel.id}>" class="blue">
-                        <{$author_second_novel.novelname}></a>/
-                    <a href="../s/<{$author_second_novel.novelauthor}>">
-                        <{$author_second_novel.novelauthor}></a></li>
-            </foreach>
-        </ul>
-    </div>
-</foreach>
+        </foreach>
 
-<foreach name="top_similars" item="top_similar">
-    <div class="split_block"></div>
-    <h2 class="title">
-                <span>
-                    <i class="home-icon-tit home-icon-tit-a"></i>
-                    <a href="javascript:void(0)">相似作品推荐</a>
-                </span>
-    </h2>
-    <div class="block">
-        <div class="block">
-            <div class="block_img"><a href="../<{$top_similar.id}>"><img height="100" width="80" src="<{$top_similar.novelimg}>"></a></div>
-            <div class="block_txt">
-                <h2><a href="../<{$top_similar.id}>"><{$top_similar.novelname}></a></h2>
-                <p></p>
-                <p>作者：<a href="../s/<{$top_similar.novelauthor}>"><{$top_similar.novelauthor}></a></p>
-                <p><a href="../<{$top_similar.id}>" class="limit_lines"><{$top_similar.noveldes}></a></p>
-            </div>
+        <div class="crumb">
+            <a href="<{$siteinfo.site_url}>">首页</a>&gt;<a href="<{$siteinfo.site_url}>c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a>&gt;<{$novelinfo.novelname}>
         </div>
-        <div class="clear"></div>
-        <ul>
-            <foreach name='similar_novels' item='similar_novel'>
-                <li>
-                    <a href="../<{$similar_novel.id}>" class="blue">
-                        <{$similar_novel.novelname}></a>/
-                    <a href="../s/<{$similar_novel.novelauthor}>">
-                        <{$similar_novel.novelauthor}></a></li>
-            </foreach>
-        </ul>
-    </div>
-</foreach>
-
-<div class="footer margin-top-5-percent">
-    <div class="float-left margin-left-12-percent"><a href="">首页</a></div>
-    <div class="float-left margin-left-12-percent"><a href="">搜索</a></div>
-    <div class="float-left margin-left-12-percent"><a href="">书架</a></div>
-    <div class="float-left margin-left-12-percent"><a href="">报错</a></div>
-    <div class="clear"></div>
-</div>
-</body>
+    </body>
 </html>
 <script src="__ROOT__/Public/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="__ROOT__/Public/js/mobile/vol.js" type="text/javascript"></script>
