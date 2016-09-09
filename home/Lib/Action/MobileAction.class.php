@@ -282,7 +282,7 @@
 
                     $chapter_info = array('con_nid'=>$novelInfo['id'],'id'=>$newChapters[0]['id']);
                     $first_con = $this->getContentByPath($chapter_info);
-                    $first_con['con_text']=mb_substr($first_con['con_text'],0,150,'utf-8')."...";
+                    $first_con['con_text']=mb_substr($first_con['con_text'],0,150,'utf-8').">";
 
                     //查询同一作家的作品
                     $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
