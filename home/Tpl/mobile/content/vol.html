@@ -26,12 +26,12 @@
 
         <div class="margin-top-10">
             <div class="float-left book_info_img">
-                <a href="<{$siteinfo.site_url}><{$novelinfo.id}>"><img alt="<{$novelinfo.novelname}>" src="<{$novelinfo.novelimg}>" border="0" width="85" height="100"></a>
+                <a href="<{$siteinfo.site_url}>/<{$novelinfo.id}>"><img alt="<{$novelinfo.novelname}>" src="<{$novelinfo.novelimg}>" border="0" width="85" height="100"></a>
             </div>
             <div class="float-left book_info">
-                <div class="book_info_box width_100_percent book_info_novelname"><a href="<{$siteinfo.site_url}><{$novelinfo.id}>"><{$novelinfo.novelname}></a></div>
-                <div class="book_info_box width_50_percent">作者：<a href="<{$siteinfo.site_url}>s/<{$novelinfo.novelauthor}>"><{$novelinfo.novelauthor}></a></div>
-                <div class="book_info_box width_50_percent">分类：<a href="<{$siteinfo.site_url}>c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a></div>
+                <div class="book_info_box width_100_percent book_info_novelname"><a href="<{$siteinfo.site_url}>/<{$novelinfo.id}>"><{$novelinfo.novelname}></a></div>
+                <div class="book_info_box width_50_percent">作者：<a href="<{$siteinfo.site_url}>/s/<{$novelinfo.novelauthor}>"><{$novelinfo.novelauthor}></a></div>
+                <div class="book_info_box width_50_percent">分类：<a href="<{$siteinfo.site_url}>/c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a></div>
                 <div class="book_info_box width_50_percent">状态：<if condition='$novelinfo.novelstate eq 0'>连载中<else/>已完本</if></div>
                 <div class="book_info_box width_50_percent">字数：<{$novelinfo.novelwords}></div>
                 <div class="book_info_box width_100_percent limit_lines-1">最新：<a href="<{$newestUrl}>" class=""><{$newestName}></a></div>
@@ -156,7 +156,7 @@
         </foreach>
 
         <div class="crumb">
-            <a href="<{$siteinfo.site_url}>">首页</a>&gt;<a href="<{$siteinfo.site_url}>c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a>&gt;<{$novelinfo.novelname}>
+            <a href="<{$siteinfo.site_url}>">首页</a>&gt;<a href="<{$siteinfo.site_url}>/c/<{$novelinfo.novel_cid}>"><{$novelinfo.classname}></a>&gt;<{$novelinfo.novelname}>
         </div>
     </body>
 </html>
