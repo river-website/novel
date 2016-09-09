@@ -9,11 +9,10 @@ $(function(){
     }
 });
 
-var novel_name = $("#selText1").text();
 $(function(){
     var page_num = $("#page_num").val() - '0';
-    $("#selText1").text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
-    $("#selText2").text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
+    $("#selText1").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
+    $("#selText2").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
 });
 
 var page_total_float = total / chp_page_size;
@@ -24,9 +23,8 @@ $(function(){
         page_total += 1;
     }
     for(var i = 0; i < page_total; i++){
-        str += "<option value='"+(i+1)+"'>"+novel_name +' 第'+(1+chp_page_size*i)+'章 - 第'+(chp_page_size*(i+1))+'章'+"</option>";
+        str += "<option value='"+(i+1)+"'>第"+(1+chp_page_size*i)+'章 - 第'+(chp_page_size*(i+1))+'章'+"</option>";
     }
-    console.log(str);
     $("#volumeList1").html(str);
     $("#volumeList2").html(str);
 });
@@ -63,7 +61,7 @@ function show_chp_list(id){
     var old_page_total = old_page_num * chp_page_size;
     var new_page_total = page_num * chp_page_size;
     $("#page_num").val(page_num);
-    $("#selText"+id).text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
+    $("#selText"+id).text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
     for(var i = (old_page_num - 1)*chp_page_size + 1; i <= old_page_total; i++){
         $(".chapter-"+i).addClass("hidden");
     }
@@ -76,15 +74,14 @@ function show_chp_list(id){
         id = '1';
     }
     $("#volumeList"+id+" option[value='"+page_num+"'").attr("selected",true);
-    $("#selText"+id).text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
+    $("#selText"+id).text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
 }
 
 function pre_page_list(id){
     var page_num = $("#page_num").val() - '0';
     if(page_num > 1){
         page_num -= 1;
-        $("#selText1").text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
-        $("#volumeList"+id+" option[value='"+page_num+"'").attr("selected",true);
+        $("#volumeList"+id+" option[value='"+page_num+"']").attr("selected",true);
         show_chp_list(id);
     }
 }
@@ -93,8 +90,7 @@ function next_page_list(id){
     var page_num = $("#page_num").val() - '0';
     if(page_num < page_total){
         page_num += 1;
-        $("#selText1").text(novel_name +' 第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
-        $("#volumeList"+id+" option[value='"+page_num+"'").attr("selected",true);
+        $("#volumeList"+id+" option[value='"+page_num+"']").attr("selected",true);
         show_chp_list(id);
     }
 }

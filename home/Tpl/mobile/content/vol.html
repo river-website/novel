@@ -75,9 +75,11 @@
                     <input id="page_num" class="hidden" value="1">
                     <div class="pages" style="padding-bottom: 5px;">
                         <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('1');">上一页</a>
-                        <span class="selectbox"> <span id="selText1" class="cur"><{$novelinfo.novelname}></span>
-                        <select id="volumeList1" onchange="show_chp_list('1');"></select>
-                        </span><a class="page-next" href="javascript:void(0)" onclick="next_page_list('1');">下一页</a>
+                        <span class="selectbox">
+                            <span id="selText1" class="cur"></span>
+                            <select id="volumeList1" onchange="show_chp_list('1');"></select>
+                        </span>
+                        <a class="page-next" href="javascript:void(0)" onclick="next_page_list('1');">下一页</a>
                     </div>
                     <foreach name='chapter[0]' item='con'>
                         <li><a class="chapter_list chapter-<{$con.chp_num}>" href="<{$con.con_url}>"><{$con.chp_num}>.<{$con.con_name}></a></li>
@@ -85,9 +87,11 @@
                     </foreach>
                     <div class="pages" style="padding-bottom: 5px;">
                         <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('2');">上一页</a>
-                        <span class="selectbox"> <span id="selText2" class="cur"><{$novelinfo.novelname}></span>
-                        <select id="volumeList2" onchange="show_chp_list('2');"></select>
-                        </span><a class="page-next" href="javascript:void(0)" onclick="next_page_list('2');">下一页</a>
+                        <span class="selectbox">
+                            <span id="selText2" class="cur"></span>
+                            <select id="volumeList2" onchange="show_chp_list('2');"></select>
+                        </span>
+                        <a class="page-next" href="javascript:void(0)" onclick="next_page_list('2');">下一页</a>
                     </div>
                 </dl>
             </foreach>
