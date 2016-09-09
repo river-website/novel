@@ -22,9 +22,7 @@
             $this->assign('firsttui',$ret['first']);
             $this->assign('tuinovels',$ret['tui']);
 
-            $c = M('Class');
-            $classs = $c->select();
-            foreach($classs as $class){
+            foreach($this->common_classs as $class){
                 $where['novel_cid'] = $class['id'];
                 $class_tuinovels = $n->where($where)->order('clickmonth desc limit 8')->select();
                 $ret = $this->gettui($class_tuinovels, $siteinfo, $siteurl);
@@ -71,7 +69,7 @@
             $siteurl=trim($siteinfo['site_url'],'/');
 
             if(isset($_GET['classname'])){
-                $where='`classpy` LIKE  "'.$_GET['classname'].'" OR `id`=\''.$_GET['classname'].'\'';
+                $where['id']=$_GET['classname'];
                 $C=M('Class');
 
                 $classinfo=$C->where($where)->find();
@@ -81,13 +79,15 @@
 
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
-                    $page=new NewPage($count,10);
-                    $pageshow=$page->show();
 
-                    $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/c',$pageshow);
-
-
-                    $tuinovels=$n->where($novel)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
+                    $p = $_GET['p'];
+                    if($p==null)$p=1;
+                    if($p==1)$preclass='disable';
+                    $firstRow = ($p-1) *10;
+                    $tempurl = $this->common_classs[$_GET['id']]['clsurl'].'p/';
+                    $preurl = $tempurl.($p-1);
+                    $nexturl=$tempurl.($p+1);
+                    $tuinovels=$n->where($novel)->order('id desc')->limit($firstRow.',10')->select();
 
                     foreach($tuinovels as $tuinovel){
                         //book URL
@@ -96,7 +96,8 @@
                         $des=mb_substr($tuinovel['noveldes'],0,60,'utf-8')."...";
                         $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
                     }
-                    $this->assign('pageshow',$pageshow);
+                    // $this->assign('pageshow',$pageshow);
+                    $this->assign('pagecontrol',array('preurl'=>$preurl,'nexturl'=>$nexturl,'pageid'=>$p,'preclass'=>$preclass));
                     $this->assign('tuinovels',$tui);
 
                     $this->display('mobile:content/cls');
@@ -339,11 +340,16 @@
 
             $n=M('novel');
             $count=$n->where('novelstate=1')->count();
-            $page=new NewPage($count,10);
-            $pageshow=$page->show();
-            $pageshow=str_ireplace(__ACTION__,$siteurl.'/d',$pageshow);
-            $this->assign('pageshow',$pageshow);
-            $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($page->firstRow.','.$page->listRows)->select();
+
+            $p = $_GET['p'];
+            if($p==null)$p=1;
+            if($p==1)$preclass='disable';
+            $firstRow = ($p-1) *10;
+            $tempurl = $siteurl.'/d/p/';
+            $preurl = $tempurl.($p-1);
+            $nexturl=$tempurl.($p+1);
+            $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($firstRow.',10')->select();
+            echo($firstRow);
             foreach($donenovels as $donenovel){
                 //book URL
                 $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$donenovel);
@@ -351,7 +357,7 @@
                 $des=mb_substr($donenovel['noveldes'],0,60,'utf-8')."...";
                 $tui[]=array_merge($donenovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
             }
-            $this->assign('pageshow',$pageshow);
+            $this->assign('pagecontrol',array('preurl'=>$preurl,'nexturl'=>$nexturl,'pageid'=>$p,'preclass'=>$preclass));
             $this->assign('tuinovels',$tui);
             $this->display('mobile:content/done');
         }

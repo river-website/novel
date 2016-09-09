@@ -25,7 +25,7 @@ function setScrollTop(height){
 
 $('#webhtml').click(function(event) {
   	y=event.clientY;
-  	height=screen.height;
+  	height=window.screen.height;
   	if ($(".topMenu").attr("style")=="display:none"){
   		height3 = height /3;
   		state = parseInt(y / height3) +1;
@@ -71,6 +71,20 @@ $('#font_l').click(function(){
   newsizestr=size + 'px';
   content.css('font-size',newsizestr);
 })
-$('.button.bm_ry').click(function(){
-  
+$('.bm_ry').click(function(){
+  str = $(".bm_ry").text();
+  if(str=='夜间'){
+    $('#zhangjieming').css('background','#000');
+    $('#zhangjieming').attr('class','');
+    $('#zhangjieming>h1').css('color','RGB(110,110,110)');
+    $('#content').css('color','RGB(110,110,110)');
+    $(".bm_ry").text('白天');
+  }
+  else if(str=='白天'){
+    $('#zhangjieming').css('background','');
+    $('#zhangjieming').attr('class','zhangjieming');
+    $('#zhangjieming>h1').css('color','');
+    $('#content').css('color','');
+    $(".bm_ry").text('夜间');
+  }
 })

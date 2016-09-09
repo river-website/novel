@@ -1,0 +1,28 @@
+<div class="header">
+    <div class="logo"><h2><a href="http://m.dianxiaoshuo.com">点点小说手机版</a></h2><p>http://m.dianxiaoshuo.com</p></div>
+</div>
+<div class="nav">
+	<ul>
+		<li>
+			<a href="http://m.dianxiaoshuo.com">首页</a></li>
+		<li>
+			<a href="http://m.dianxiaoshuo.com/c/xuanhuanmofa">分类</a></li>
+		<li>
+			<a href="http://m.dianxiaoshuo.com/d">全本</a></li>
+		<li>
+			<a href="http://m.dianxiaoshuo.com/h/">历史</a></li>
+	</ul>
+</div>
+<div class="search_box">
+    <div class="search_cont">
+        <div class="s_input">
+            <input type="text" placeholder="快速搜索、找书、找武侠">
+        </div>
+        <input type="button" class="s_btn" onclick="searchbook()">
+    </div>
+</div>
+<script type="text/javascript">
+	function searchbook(){
+	keyword = $('.s_input input').val();
+    window.location.href='/s/'+keyword;}
+</script>

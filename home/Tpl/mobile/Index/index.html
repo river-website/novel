@@ -9,33 +9,14 @@
 	<meta name="MobileOptimized" content="240">
 	<meta http-equiv="Cache-Control" content="max-age=300" />
 	<meta http-equiv="Cache-Control" content="no-transform" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/base.css" />
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/css/mobile/index.css" />
 </head>
 <body>
-<div class="header">
-    <div class="logo"><h2><a href="http://localhost/novel/m">点点小说手机版</a></h2><p>localhost/novel/m</p></div>
-</div>
-<div class="nav">
-	<ul>
-		<li>
-			<a href="__ROOT__">首页</a></li>
-		<li>
-			<a href="__ROOT__/c/xuanhuanmofa">分类</a></li>
-		<li>
-			<a href="__ROOT__/d">全本</a></li>
-		<li>
-			<a href="__ROOT__/h/">历史</a></li>
-	</ul>
-</div>
-<div class="search_box">
-    <div class="search_cont">
-        <div class="s_input">
-            <input type="text" placeholder="快速搜索、找书、找武侠">
-        </div>
-        <input type="button" class="s_btn" onclick="Common.toSearch(this);">
-    </div>
-</div>
+<include file='mobile:Public/header'/>
+
 <div class="div_head_gg">
 	<img class="img_head_gg" src="__ROOT__/Public/images/gg.jpg">
 </div>
@@ -52,7 +33,7 @@
 				<p><a href="<{$firsttui.tuiUrl}>"></a></p>
 				<h2><a href="<{$firsttui.tuiUrl}>"><{$firsttui.novelname}></a></h2>
 				<p></p>
-				<p>作者：<a href="s/<{$firsttui.novelauthor}>"><{$firsttui.novelauthor}></a></p>
+				<p>作者：<a href="<{$commonurl.searchurl}><{$firsttui.novelauthor}>"><{$firsttui.novelauthor}></a></p>
 				<p><a href="<{$firsttui.tuiUrl}>" class="limit_lines"><{$firsttui.noveldes}></a></p>
 			</div>
 		</div>
@@ -63,7 +44,7 @@
 					<a href="<{$tuinovel.classurl}>" class="gray">[<{$tuinovel.classname}>]</a>
 					<a href="<{$tuinovel.tuiUrl}>" class="blue">
 						<{$tuinovel.novelname}></a>/
-					<a href="s/<{$tuinovel.novelauthor}>">
+					<a href="<{$commonurl.searchurl}><{$tuinovel.novelauthor}>">
 						<{$tuinovel.novelauthor}></a></li>
 			</foreach>
 		</ul>
@@ -74,8 +55,8 @@
 <h2 class="title">
         <span>
            <i class="home-icon-tit home-icon-tit-a"></i>
-          <a href="###"><{$class_tuinovels.class.classname}></a></span>
-	<a href="c/<{$class_tuinovels.class.classpy}>">更多...</a></h2>
+          <a href="<{$class_tuinovels.class.clsurl}>"><{$class_tuinovels.class.classname}></a></span>
+	<a href="<{$class_tuinovels.class.clsurl}>">更多...</a></h2>
 <div class="block">
 	<div class="block">
 		<div class="block_img"><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><img height="100" width="80" src="<{$class_tuinovels.tuinovels.first.novelimg}>"></a></div>
@@ -83,7 +64,7 @@
 			<p><a href="<{$class_tuinovels.tuinovels.first.tuiurl}>"></a></p>
 			<h2><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><{$class_tuinovels.tuinovels.first.novelname}></a></h2>
 			<p></p>
-			<p>作者：<a href="s/<{$class_tuinovels.tuinovels.first.novelauthor}>"><{$class_tuinovels.tuinovels.first.novelauthor}></a></p>
+			<p>作者：<a href="<{$commonurl.searchurl}><{$class_tuinovels.tuinovels.first.novelauthor}>"><{$class_tuinovels.tuinovels.first.novelauthor}></a></p>
 			<p><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>" class="limit_lines"><{$class_tuinovels.tuinovels.first.noveldes}></a></p>
 		</div>
 	</div>
@@ -93,7 +74,7 @@
 			<li>
 				<a href="<{$class_tuinovel.tuiUrl}>" class="blue">
 					<{$class_tuinovel.novelname}></a>/
-				<a href="s/<{$class_tuinovel.novelauthor}>">
+				<a href="<{$commonurl.searchurl}><{$class_tuinovel.novelauthor}>">
 					<{$class_tuinovel.novelauthor}></a></li>
 		</foreach>
 	</ul>
@@ -101,3 +82,4 @@
 </foreach>
 </body>
 </html>
+   <script src="__ROOT__/Public/js/jquery-1.7.1.min.js" type="text/javascript"></script>
