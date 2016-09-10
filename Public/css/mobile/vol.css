@@ -397,14 +397,6 @@ header .topnav1 {
     margin-top: 10px;
 }
 
-.limit_lines-1 {
-    word-break: break-all;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
 .limit_lines-3 {
     word-break: break-all;
     display: -webkit-box;
