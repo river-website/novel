@@ -277,7 +277,11 @@
                     foreach($chapter as $chp){
                         //con URl
                         $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
-                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl,'chp_num'=>$chp_num));
+                        $chp_css = 'hidden';
+                        if($chp_num < 51){
+                            $chp_css = '';
+                        }
+                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl,'chp_num'=>$chp_num,'chp_css'=>$chp_css));
                         $chp_num++;
                     }
                     $vol['chapter_num'] = $chp_num - 1;
