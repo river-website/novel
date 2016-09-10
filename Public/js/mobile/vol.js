@@ -3,18 +3,6 @@
  */
 var chp_page_size = 50;
 var total = parseInt($("#chp_all_num").val());
-$(function(){
-    for(var i = chp_page_size + 1; i <= total; i++){
-        $(".chapter-"+i).addClass("hidden");
-    }
-});
-
-$(function(){
-    var page_num = parseInt($("#page_num").val());
-    $("#selText1").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
-    $("#selText2").text('第'+(1+chp_page_size*(page_num-1))+'章 - 第'+(chp_page_size*page_num)+'章');
-});
-
 var page_total_float = total / chp_page_size;
 var page_total = parseInt(page_total_float);
 $(function(){

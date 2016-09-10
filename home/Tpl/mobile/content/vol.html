@@ -76,19 +76,19 @@
                     <div class="pages" style="padding-bottom: 5px;">
                         <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('1');">上一页</a>
                         <span class="selectbox">
-                            <span id="selText1" class="cur"></span>
+                            <span id="selText1" class="cur">第1章 - 第50章</span>
                             <select id="volumeList1" onchange="show_chp_list('1');"></select>
                         </span>
                         <a class="page-next" href="javascript:void(0)" onclick="next_page_list('1');">下一页</a>
                     </div>
                     <foreach name='chapter[0]' item='con'>
-                        <li><a class="chapter_list chapter-<{$con.chp_num}>" href="<{$con.con_url}>"><{$con.chp_num}>.<{$con.con_name}></a></li>
-                        <li class="chapter_border chapter-<{$con.chp_num}>"></li>
+                        <li><a class="chapter_list chapter-<{$con.chp_num}> <{$con.chp_css}>" href="<{$con.con_url}>"><{$con.chp_num}>.<{$con.con_name}></a></li>
+                        <li class="chapter_border chapter-<{$con.chp_num}> <{$con.chp_css}>"></li>
                     </foreach>
                     <div class="pages" style="padding-bottom: 5px;">
                         <a class="page-pre" href="javascript:void(0)" onclick="pre_page_list('2');">上一页</a>
                         <span class="selectbox">
-                            <span id="selText2" class="cur"></span>
+                            <span id="selText2" class="cur">第1章 - 第50章</span>
                             <select id="volumeList2" onchange="show_chp_list('2');"></select>
                         </span>
                         <a class="page-next" href="javascript:void(0)" onclick="next_page_list('2');">下一页</a>
