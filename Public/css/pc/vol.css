@@ -1,0 +1,32 @@
+.left_block{
+    float:left;
+    width:90%;
+}
+
+.right_block{
+    float:left;
+    width:10%;
+}
+
+.clear{
+    clear: both;
+}
+
+.box_con {
+    border:2px solid #88C6E5;
+    margin:10px auto;
+    line-height:100%;
+    width:100%;
+    overflow:hidden;border-radius: 10px;
+    text-align:left;
+}
+
+.con_top {
+    background-color: #E1ECED;
+    height: 40px;
+    border-bottom: 1px solid #88C6E5;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 16px;
+    line-height: 40px;
+}
