@@ -213,22 +213,21 @@
                     $this->display('pc:content/chapter');
                 }else{
                     //小说章节目录
-                    //小说章节目录
 
-
-                    //查询最新的几章节
+                    //查询最新章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 9')->select();
+                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
                         $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$newChapter);
-                        $chapters_tmp[]=array_merge($newChapter,array('con_url'=>$conUrl));
+                        $this->assign('newestUrl',$conUrl);
+                        $this->assign('newestName',$newChapter['con_name']);
                     }
-                    array_push($vol,$chapters_tmp );
-                    $chapters[]=$vol;
-                    //查询最新的几章节
 
+                    //查询所有章节
+                    $firstUrl = null;
+                    $firstName = null;
                     $vol=null;
                     $vol['volname']='所有章节';
                     $where=null;
@@ -236,17 +235,65 @@
                     //循环章节列表
                     $chapter=$c->field('id,con_name')->where($where)->select();
                     $chapters_tmp=null;
+                    $chp_num = 1;
                     foreach($chapter as $chp){
                         //con URl
                         $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novelInfo,$chp);
-                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl));
-
+                        $chp_css = 'hidden';
+                        if($chp_num < 51){
+                            $chp_css = '';
+                        }
+                        $chapters_tmp[]=array_merge($chp,array('con_url'=>$conUrl,'chp_num'=>$chp_num,'chp_css'=>$chp_css));
+                        $chp_num++;
                     }
-
+                    $vol['chapter_num'] = $chp_num - 1;
+                    $firstUrl = $chapters_tmp[0]['con_url'];
                     array_push($vol,$chapters_tmp );
                     $chapters[]=$vol;
-                    $this->assign('chapters',$chapters);
 
+                    $chapter_info = array('con_nid'=>$novelInfo['id'],'id'=>$newChapters[0]['id']);
+                    $first_con = $this->getContentByPath($chapter_info);
+                    $first_con['con_text']=mb_substr($first_con['con_text'],0,700,'utf-8').">";
+
+                    //查询同一作家的作品
+                    $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
+                    $author_novels=$n->where($where)->order('novelgrade desc limit 10')->select();
+                    $is_first_novel = true;
+                    $author_first_novels = array();
+                    $author_second_novels = array();
+                    foreach ($author_novels as $author_novel) {
+                        $author_novel = array_merge($author_novel,array('cls_name'=>$this->common_classs[$author_novel['novel_cid']-1]['classname']));
+                        if($is_first_novel){
+                            array_push($author_first_novels,$author_novel);
+                            $is_first_novel = false;
+                        }else{
+                            array_push($author_second_novels,$author_novel);
+                        }
+                    }
+
+                    //查询同一类型评分相近的十本小说
+                    $com_condition='novel_cid='.$novelInfo['novel_cid'].' and id!='.$novelInfo['id'];
+                    $similar_novels=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
+                        ->order('novelgrade asc limit 5')->select();
+                    $bottom_novel_array=$n->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])
+                        ->order('novelgrade desc limit 5')->select();
+                    if(!$similar_novels){
+                        $similar_novels = array();
+                    }
+                    foreach ($bottom_novel_array as $bottom_novel){
+                        array_push($similar_novels,$bottom_novel);
+                    }
+                    $top_similars = array();
+                    array_push($top_similars,array_shift($similar_novels));
+
+                    $this->assign('author_first_novels',$author_first_novels);
+                    $this->assign('author_second_novels',$author_second_novels);
+                    $this->assign('top_similars',$top_similars);
+                    $this->assign('similar_novels',$similar_novels);
+                    $this->assign('novelInfo',$novelInfo);
+                    $this->assign('first_con',$first_con);
+                    $this->assign('firstUrl',$firstUrl);
+                    $this->assign('chapters',$chapters);
                     $this->display('pc:content/vol');
                 }
             }else{
