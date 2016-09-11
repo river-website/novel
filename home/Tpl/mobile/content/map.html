@@ -30,7 +30,7 @@
             <div class="margin-top-10">
                 <foreach name="novelInfos" item="novelInfo">
                     <div class="float-left list-item">
-                        <div class="float-left"><a href="__ROOT__/<{$novelInfo.id}>" class="<if condition='$novelInfo.novelstate eq 0'>black<else/>orange</if>"><{$novelInfo.novelname}></a></div>
+                        <div class="float-left limit_lines-1"><a href="__ROOT__/<{$novelInfo.id}>" class="<if condition='$novelInfo.novelstate eq 0'>black<else/>orange</if>"><{$novelInfo.novelname}></a></div>
                     </div>
                 </foreach>
                 <div class="clear"></div>

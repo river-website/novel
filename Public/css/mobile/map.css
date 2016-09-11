@@ -18,3 +18,10 @@
 .nav-item a{  width: 48%; text-align: center;  padding: 4px 0px; overflow: hidden;  background-color: #fff;  color: #000;  border: 1px solid #999; float:left; }
 
 div {margin: 0; padding: 0; border: 0;}
+.limit_lines-1 {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
