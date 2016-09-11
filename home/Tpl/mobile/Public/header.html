@@ -1,16 +1,16 @@
 <div class="header">
-    <div class="logo"><h2><a href="http://m.dianxiaoshuo.com">点点小说手机版</a></h2><p>http://m.dianxiaoshuo.com</p></div>
+    <div class="logo"><h2><a href="<{$ommonurl.mainul}>">点点小说手机版</a></h2><p><{$ommonurl.mainul}></p></div>
 </div>
 <div class="nav">
 	<ul>
 		<li>
-			<a href="http://m.dianxiaoshuo.com">首页</a></li>
+			<a href="<{$commonurl.mainurl}>">首页</a></li>
 		<li>
-			<a href="http://m.dianxiaoshuo.com/c/1">分类</a></li>
+			<a href="<{$commonurl.classurl}>">分类</a></li>
 		<li>
-			<a href="http://m.dianxiaoshuo.com/d">全本</a></li>
+			<a href="<{$commonurl.doneurl}>">全本</a></li>
 		<li>
-			<a href="http://m.dianxiaoshuo.com/h/">历史</a></li>
+			<a href="<{$commonurl.hisurl}>">历史</a></li>
 	</ul>
 </div>
 <div class="search_box">
@@ -24,5 +24,5 @@
 <script type="text/javascript">
 	function searchbook(){
 	keyword = $('.s_input input').val();
-    window.location.href='/s/'+keyword;}
+    window.location.href='<{$commonurl.searchurl}>'+keyword;}
 </script>

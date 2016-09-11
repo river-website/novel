@@ -1,0 +1,109 @@
+.readBody{
+       position: relative;
+    z-index: 3;
+}
+
+.back-div{
+    background: url(../images/readrecbg.jpg) center top no-repeat;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.w920{
+	width:862px;
+	margin: 0 auto;
+}
+.top{
+    width: 100%;
+    margin: 50px auto 5px 5px; 
+}
+.top a{
+color: #666;
+}
+.left-set{
+    float:left;
+    width: 60px;
+}
+.barList{
+    margin-left: 2px;
+}
+.barList li{
+    height: 60px;
+    background-color: #F6F4EC;
+    margin-bottom: 2px;
+    line-height: 60px;
+    text-align: center;
+}
+.barList a{
+    height: 60px;
+    width: 60px;
+    display: block;
+    cursor: pointer;
+}
+.barList a:hover{
+    background-color: #dddddd;
+}
+.right-set{
+    margin-left: 800px;
+    width: 62px;
+    position:fixed;
+    bottom:4px;
+}
+.content-read{
+    width: 800px;
+    text-align: left;
+    background-color: #F6F4EC;
+    
+}
+ .content-top{
+margin: auto 40px;
+padding: 0 0 10px 10px;
+}
+.content-top h1{
+    padding-top: 24px;
+    font: 26px/1 "Microsoft YaHei";
+    margin-bottom: 10px;
+    color: #000;
+}
+.zhangjieTXT{
+    width: 90%;
+    margin: 0 auto;
+
+
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    line-height: 1.8;
+    min-height: 360px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+.top a{
+    font: 12px/1 "Microsoft YaHei";
+    margin: 0 5px;
+}
+.textinfo a{
+    color: #999;
+    font: 12px/1.8 "Microsoft YaHei";
+    position: relative;
+    margin-right: 15px;
+}
+
+#back-to-top{
+    background-image: url(../images/readpageico.png);
+    background-position: -304px -56px;
+    position: relative;
+    display: block;
+}
+.shade_one {
+    height: 7px;
+    background: url("../images/shadow.png") center top no-repeat;
+    margin: 10px auto;
+    overflow: hidden;
+}
+.content-body { 
+    padding-bottom: 25px;
+}

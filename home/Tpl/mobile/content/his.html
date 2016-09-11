@@ -19,17 +19,17 @@
 <include file='mobile:Public/header'/>
 <div class="cover">
     <foreach name='hislist' item='his'>
-        <div style="width:90%;overflow:hidden">
+        <div style="width:100%;overflow:hidden">
                 <div class="float-left">
                     <a href="<{$his.bookurl}>">
                         <img alt="<{$his.novelname}>" src="<{$his.novelimg}>" border="0" width="85" height="100">
                     </a>    
                 </div>
-                <div class="float-left margin-left-5-percent">
-                    <div style="font-size: 18px;"><a href="<{$his.bookurl}>"><{$his.novelname}></a></div>
-                    <div>作者：<a href="<{$commonurl.searchurl}><{$his.novelauthor}>"><{$his.novelauthor}></a></div>
+                <div class="float-des">
+                    <div class="limit-lines-1" style="font-size: 18px;"><a href="<{$his.bookurl}>"><{$his.novelname}></a></div>
+                    <div class="limit-lines-1">作者：<a href="<{$commonurl.searchurl}><{$his.novelauthor}>"><{$his.novelauthor}></a></div>
                     <div>状态：<if condition='$his.novelstate eq 0'>连载中<else/>已完本</if></div>
-                    <div>继续：<a href="<{$his.con.contenturl}>" class="red"><{$his.con.con_name}></a></div>
+                    <div class="limit-lines-1">继续：<a href="<{$his.con.contenturl}>"><{$his.con.con_name}></a></div>
                 </div>
             </div>
     </foreach>
