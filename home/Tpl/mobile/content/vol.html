@@ -107,21 +107,21 @@
             </h2>
             <div class="block">
                 <div class="block">
-                    <div class="block_img"><a href="../<{$author_first_novel.id}>"><img height="100" width="80" src="<{$author_first_novel.novelimg}>"></a></div>
+                    <div class="block_img"><a href="<{$siteinfo.site_url}>/<{$author_first_novel.id}>"><img height="100" width="80" src="<{$author_first_novel.novelimg}>"></a></div>
                     <div class="block_txt">
-                        <h2><a href="../<{$author_first_novel.id}>"><{$author_first_novel.novelname}></a></h2>
+                        <h2><a href="<{$siteinfo.site_url}>/<{$author_first_novel.id}>"><{$author_first_novel.novelname}></a></h2>
                         <p></p>
-                        <p>作者：<a href="../s/<{$author_first_novel.novelauthor}>"><{$author_first_novel.novelauthor}></a></p>
-                        <p><a href="../<{$author_first_novel.id}>" class="limit_lines"><{$author_first_novel.noveldes}></a></p>
+                        <p>作者：<a href="<{$siteinfo.site_url}>/s/<{$author_first_novel.novelauthor}>"><{$author_first_novel.novelauthor}></a></p>
+                        <p><a href="<{$siteinfo.site_url}>/<{$author_first_novel.id}>" class="limit_lines"><{$author_first_novel.noveldes}></a></p>
                     </div>
                 </div>
                 <div class="clear"></div>
                 <ul>
                     <foreach name='author_second_novels' item='author_second_novel'>
                         <li>
-                            <a href="../<{$author_second_novel.id}>" class="blue">
+                            <a href="<{$siteinfo.site_url}>/<{$author_second_novel.id}>" class="blue">
                                 <{$author_second_novel.novelname}></a>/
-                            <a href="../s/<{$author_second_novel.novelauthor}>">
+                            <a href="<{$siteinfo.site_url}>/s/<{$author_second_novel.novelauthor}>">
                                 <{$author_second_novel.novelauthor}></a></li>
                     </foreach>
                 </ul>
@@ -138,21 +138,21 @@
             </h2>
             <div class="block">
                 <div class="block">
-                    <div class="block_img"><a href="../<{$top_similar.id}>"><img height="100" width="80" src="<{$top_similar.novelimg}>"></a></div>
+                    <div class="block_img"><a href="<{$siteinfo.site_url}>/<{$top_similar.id}>"><img height="100" width="80" src="<{$top_similar.novelimg}>"></a></div>
                     <div class="block_txt">
-                        <h2><a href="../<{$top_similar.id}>"><{$top_similar.novelname}></a></h2>
+                        <h2><a href="<{$siteinfo.site_url}>/<{$top_similar.id}>"><{$top_similar.novelname}></a></h2>
                         <p></p>
-                        <p>作者：<a href="../s/<{$top_similar.novelauthor}>"><{$top_similar.novelauthor}></a></p>
-                        <p><a href="../<{$top_similar.id}>" class="limit_lines"><{$top_similar.noveldes}></a></p>
+                        <p>作者：<a href="<{$siteinfo.site_url}>/s/<{$top_similar.novelauthor}>"><{$top_similar.novelauthor}></a></p>
+                        <p><a href="<{$siteinfo.site_url}>/<{$top_similar.id}>" class="limit_lines"><{$top_similar.noveldes}></a></p>
                     </div>
                 </div>
                 <div class="clear"></div>
                 <ul>
                     <foreach name='similar_novels' item='similar_novel'>
                         <li>
-                            <a href="../<{$similar_novel.id}>" class="blue">
+                            <a href="<{$siteinfo.site_url}>/<{$similar_novel.id}>" class="blue">
                                 <{$similar_novel.novelname}></a>/
-                            <a href="../s/<{$similar_novel.novelauthor}>">
+                            <a href="<{$siteinfo.site_url}>/s/<{$similar_novel.novelauthor}>">
                                 <{$similar_novel.novelauthor}></a></li>
                     </foreach>
                 </ul>
