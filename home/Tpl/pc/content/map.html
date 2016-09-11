@@ -11,23 +11,23 @@
         <div id="main" class="list">
             <div class="title margin-top-5">点小说大全_全部<{$classname[0].classname}>小说列表</div>
             <div class="margin-top-5">
-                <a class="nav-item" href="__ROOT__">首页</a>
-                <a class="nav-item" href="__ROOT__/map/1">玄幻魔法</a>
-                <a class="nav-item" href="__ROOT__/map/2">武侠修真</a>
-                <a class="nav-item" href="__ROOT__/map/3">都市言情</a>
-                <a class="nav-item" href="__ROOT__/map/5">侦探推理</a>
-                <a class="nav-item" href="__ROOT__/map/6">网游动漫</a>
-                <a class="nav-item" href="__ROOT__/map/7">科幻小说</a>
-                <a class="nav-item" href="__ROOT__/map/8">恐怖灵异</a>
-                <a class="nav-item" href="__ROOT__/map/4">历史军事</a>
-                <a class="nav-item" href="__ROOT__/map/9">散文诗词</a>
-                <a class="nav-item" href="__ROOT__/map/10">其他</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>">首页</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/1">玄幻魔法</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/2">武侠修真</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/3">都市言情</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/5">侦探推理</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/6">网游动漫</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/7">科幻小说</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/8">恐怖灵异</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/4">历史军事</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/9">散文诗词</a>
+                <a class="nav-item" href="<{$siteinfo.site_url}>/map/10">其他</a>
             </div>
             <div class="tip margin-top-5">提示：本站收录的全部<{$classname[0].classname}>小说均在此页，推荐使用Ctrl+F来查找小说<span>(橘色为已完结小说)</span></div>
             <div class="margin-top-10">
                 <foreach name="novelInfos" item="novelInfo">
                     <div class="float-left list-item">
-                        <div class="float-left limit_lines-1"><a href="__ROOT__/<{$novelInfo.id}>" class="<if condition='$novelInfo.novelstate eq 0'>black<else/>orange</if>"><{$novelInfo.novelname}></a></div>
+                        <div class="float-left limit_lines-1"><a href="<{$siteinfo.site_url}>/<{$novelInfo.id}>" class="<if condition='$novelInfo.novelstate eq 0'>black<else/>orange</if>"><{$novelInfo.novelname}></a></div>
                     </div>
                 </foreach>
                 <div class="clear"></div>
