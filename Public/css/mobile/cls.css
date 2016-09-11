@@ -64,3 +64,15 @@
 a.active{
     background-color: #ccc;
 }
+.limit-lines-1{
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+  overflow:hidden;   
+}
+.float-des{
+    float: left;
+    width:70%;
+    margin-left: 3%;
+}
