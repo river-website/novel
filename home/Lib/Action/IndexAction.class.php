@@ -48,8 +48,7 @@
                 $cid=$novel['novel_cid']-1;
                 $class=$classes[$cid];
 
-
-                $coninfo=$C->where($where)->order('id desc limit 1')->select();
+                $coninfo=$C->query('select * from ck_content where id in(select id from ck_content where con_nid='.$novel['id'].') order by id desc limit 1');
 
                 //con URl
                 $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novel,$coninfo[0]);
@@ -135,14 +134,14 @@
 
                 //当前小说的链接
                 $tuiUrl = $this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novelInfo);
-                $NovelUrl=$tuiUrl;	//当前URL，保存一份，用于上下翻页时没有页面
+                $NovelUrl=$tuiUrl;  //当前URL，保存一份，用于上下翻页时没有页面
                 $novelInfo=array_merge($novelInfo,array('classname'=>$clssss['classname'] , 'classurl'=>$clsUrl,'bookurl'=>$tuiUrl) );
 
                 $this->assign('novelinfo',$novelInfo);
 
 
 
-                if(isset($_GET['id']) ){	//内容
+                if(isset($_GET['id']) ){  //内容
                     //内容
                     $c=M('Content');
                     $data['con_namepy']=$_GET['id'];
@@ -185,7 +184,7 @@
 
                     $this->assign('coninfo',$coninfo);
 
-                    $addMath=rand(20,50);	//每访问一次页面随机加几
+                    $addMath=rand(20,50); //每访问一次页面随机加几
 
                     date_default_timezone_set('PRC');
                     //总阅读自增加
@@ -210,13 +209,16 @@
                     $n->save($click);
 
 
-                    $this->display('pc:content/chapter');
+                    if ($_GET['buildHtml'])
+                          $this->buildHtml($coninfo['id'], HTML_PATH . 'pc/look/' . $novelInfo['id'] . '/','pc:content/chapter');
+                      else
+                          $this->display('pc:content/chapter');
                 }else{
                     //小说章节目录
 
                     //查询最新章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
+                    $newChapters=$c->query('select id,con_name from ck_content where id in(select id from ck_content where con_nid='.$novelInfo['id'].') order by id desc limit 1');
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
@@ -257,7 +259,8 @@
 
                     //查询同一作家的作品
                     $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
-                    $author_novels=$n->where($where)->order('novelgrade desc limit 10')->select();
+                    $sub_query=$n->field('id')->where($where)->buildSql();
+                    $author_novels=$n->where('id in '.$sub_query)->order('novelgrade desc limit 10')->select();
                     $is_first_novel = true;
                     $author_first_novels = array();
                     $author_second_novels = array();
@@ -273,10 +276,10 @@
 
                     //查询同一类型评分相近的十本小说
                     $com_condition='novel_cid='.$novelInfo['novel_cid'].' and id!='.$novelInfo['id'];
-                    $similar_novels=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
-                        ->order('novelgrade asc limit 5')->select();
-                    $bottom_novel_array=$n->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])
-                        ->order('novelgrade desc limit 5')->select();
+                    $sub_query=$n->field('id')->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])->buildSql();
+                    $similar_novels=$n->where('id in '.$sub_query)->order('novelgrade asc limit 5')->select();
+                    $sub_query=$n->field('id')->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])->buildSql();
+                    $bottom_novel_array=$n->where('id in '.$sub_query)->order('novelgrade desc limit 5')->select();
                     if(!$similar_novels){
                         $similar_novels = array();
                     }
@@ -294,7 +297,10 @@
                     $this->assign('first_con',$first_con);
                     $this->assign('firstUrl',$firstUrl);
                     $this->assign('chapters',$chapters);
-                    $this->display('pc:content/vol');
+                    if ($_GET['buildHtml'])
+                          $this->buildHtml('', HTML_PATH . 'pc/look/' . $novelInfo['id'] . '/','pc:content/vol');
+                      else
+                          $this->display('pc:content/vol');
                 }
             }else{
                 $this->error('错误的访问！');
@@ -432,33 +438,45 @@
             }
         }
         public function novels_build() {
-            ignore_user_abort(false);
-            ini_set('max_execution_time', '0');
-            ini_set('memory_limit', '500M');
-            $start_id = $_GET['startId'];
-            $end_id = $_GET['endId'];
-            if ($start_id == 0) $id = 1;
-            else $id = $start_id;
-            if ($id > $end_id) return;
-            //网站信息
-            $s = M('Site');
-            $siteinfo = $s->find(1);
-            $this->assign('siteinfo', $siteinfo);
-            $siteurl = trim($siteinfo['site_url'], '/');
-            // 获取类别信息
-            $cls = M('Class');
-            // 所有章节
-            $c = M('Content');
-            //循环分卷
-            $v = M('Vol');
-            //获取小说、
-            $n = M('Novel');
-            $novels = $n->where('id=' . $id)->select();
-            $novelInfo = $novels[0];
-            if (!$this->getState()) return;
-            $this->novel_build($n, $c, $v, $cls, $siteinfo, $siteurl, $novelInfo);
-            $id+= 1;
-            redirect('/novel/index.php/index/novels_build/startId/'.$id.'/endId/'.$end_id);
+              file_put_contents('/home/htmltime', 'start-time:'.date('Y-m-d H:i:s')."\r\n" ,FILE_APPEND);
+              ignore_user_abort(true);
+              ini_set('max_execution_time', '0');
+              ini_set('memory_limit', '500M');
+              $id = $_GET['Id'];
+              $chapter_num =$_GET['chpnum'];
+              if ($id == null) return;
+              if ($id == 0) return;
+              if ($chapter_num == 0)return;
+              $_GET['buildHtml'] = true;
+              $n=M('novel');
+              $c=M('content');
+              $novelInfo=$n->field('id')->where('id<='.$id)->select();
+
+              foreach ($novelInfo as $novel) {
+                    $_GET['name'] = $novel['id'];
+                    $_GET['id'] =null;
+                  $this->look();
+                  $subsql=$c->field('id')->where('con_nid='.$novel['id'])->buildSql();
+                  $max=$c->where('id in '.$subsql)->order('id desc limit 1')->select();
+                  if(is_array($max)){
+                    $max=$max[0];
+                    }
+                    else continue;
+                  $maxid=$max['id'] -$novel['id'] * 10000;
+                  $manum=min($maxid,$chapter_num);
+                  for ($i=1;$i<=$manum;$i++){
+                      $chid=$novel['id'] * 10000 + $i;
+                      // $conents=$c->where('id='.$chid)->find();
+                      // if(is_array($conents)){
+                          $_GET['id'] = $chid;
+                          $this->look();
+                      // }
+                  }
+              }
+              file_put_contents('/home/htmltime', 'end-time:'.date('Y-m-d H:i:s')."\r\n",FILE_APPEND);
         }
+
+
+
     }
 ?>
