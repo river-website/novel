@@ -1,0 +1,310 @@
+html body{
+    font-family: "microsoft yahei";
+    height: 14px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #a6a6a6;
+}
+
+ul li{margin:0;padding:0;}
+
+li{
+    list-style: none;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover{
+    color: #c00;
+}
+
+.left_block{
+    float: left;
+    width: 20%;
+    margin-left: 3%;
+    margin-right: 2%;
+    margin-top: 10px;
+}
+
+.right_block{
+    float:left;
+    width:72%;
+    margin-right: 3%;
+    margin-top: 10px;
+}
+
+.info_img{
+    float: left;
+    width: 12%;
+    height: 12%;
+}
+
+.info_author{
+    float: left;
+    width: 88%;
+    height: 12%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.clear{
+    clear: both;
+}
+
+.sub_block{
+    width : 50%;
+    float: left;
+    border-top: 1px solid #ebebeb;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+.sub_left_block{
+    float: left;
+    width: 20%;
+    height: 120px;
+}
+
+.sub_right_block{
+    float:left;
+    width:76%;
+    height: 120px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.sub_right_block_novelname{
+    height: 25px;
+    line-height: 25px;
+    font-size: 18px;
+}
+
+.sub_right_block_info{
+    float:left;
+    width:33%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.sub_right_block_info a{
+    color: #a6a6a6;
+}
+
+.sub_right_block_info a:hover{
+    color: #c00;
+}
+
+.img_all{
+    width: 100%;
+    height: 100%;
+}
+
+.limit_lines-1 {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.limit_lines-4 {
+    word-break: break-all;
+    display: -webkit-box;
+    height: 68px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.limit_lines-4 br {
+    display: none;
+}
+
+.tui_click_set{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    overflow: hidden;
+    height: 24px;
+    padding-bottom: 4px;
+    color: #1a1a1a;
+    border-bottom: 1px solid #666;
+}
+
+.tui_sort_set{
+    z-index: 1;
+    height: 40px;
+    padding: 0 12px;
+    background: #f7f6f2;
+}
+
+.tui_sort_action{
+    float: left;
+    font-weight: 700;
+    color: #ed4259;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.tui_count{
+    height: 40px;
+    line-height: 40px;
+    margin: 0 5px;
+    color: #262626;
+}
+
+.float_right{
+    float: right;
+}
+
+.tui_click_box{
+    height: 31px;
+    line-height: 30px;
+    font-size: 14px;
+    border-top: 1px solid #e6e6e6;
+}
+
+.tui_click_box div{
+    float:left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.width_25_percent{
+    width:25%;
+}
+
+.width_35_percent{
+    width: 35%;
+    font-size: 12px;
+}
+
+.width_35_percent a{
+    padding-left: 10px;
+    color:grey;
+}
+
+.width_35_percent a:hover{
+    padding-left: 9px;
+    color: #c00;
+}
+
+.width_40_percent{
+    width:40%;
+}
+
+.margin_top_2{
+    margin-top: 2px;
+}
+
+.width_50_per{
+    float: left;
+    width:50%;
+}
+
+.hidden{
+    display: none;
+}
+
+.page_box {
+    min-height: 25px;
+    padding: 40px 0;
+}
+
+.page_box ul{
+    float: right;
+    margin: 0;
+    height: 25px;
+    line-height: 25px;
+}
+
+.page_box li {
+    float: left;
+    width: 22px;
+    height: 22px;
+    padding: 0 7px;
+    border: 1px solid #fff;
+}
+
+.normal a {
+    float: left;
+    height: 22px;
+    padding: 0 7px;
+    border: 1px solid #fff;
+}
+
+.normal a:hover{
+    color: #ed4259;
+    border: 1px solid #ed4259;
+}
+
+.active a{
+    float: left;
+    height: 22px;
+    padding: 0 7px;
+    color: #fff;
+    border: 1px solid #ed4259;
+    background: #ed4259;
+}
+
+.active a:hover{
+    color: #fff;
+    border: 1px solid #ed4259;
+    background: #ed4259;
+}
+
+.page_box div {
+    float: right;
+    width: 114px;
+    height: 22px;
+    padding: 0 7px;
+    border: 1px solid #fff;
+}
+
+.input_box input {
+    float: left;
+    width: 40px;
+    height: 22px;
+    line-height: 22px;
+    padding: 0;
+    margin-right: 10px;
+    text-align: center;
+    border: 1px solid #f2f2f2;
+}
+
+.input_box input:focus{
+    outline: 0;
+    border: 1px solid #000000;
+}
+
+#page_go {
+    float: right;
+    width: 44px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    padding: 0 7px;
+    border: 1px solid #fff;
+}
+
+#page_go:hover{
+    color: #ed4259;
+    border: 1px solid #ed4259;
+    cursor: pointer;
+}
+
+.unclick a{
+    padding: 0 7px;
+    cursor: default;
+    color: #ccc;
+}

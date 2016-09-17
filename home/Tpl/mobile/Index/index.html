@@ -26,11 +26,10 @@
            <i class="home-icon-tit home-icon-tit-a"></i>
           <a href="###">小说风云榜</a></span>
 		<a href="###">更多...</a></h2>
-	<dv class="block">
+	<div class="block">
 		<div class="block">
 			<div class="block_img"><a href="<{$firsttui.tuiUrl}>"><img height="100" width="80" src="<{$firsttui.novelimg}>"></a></div>
 			<div class="block_txt">
-				<p><a href="<{$firsttui.tuiUrl}>"></a></p>
 				<h2><a href="<{$firsttui.tuiUrl}>"><{$firsttui.novelname}></a></h2>
 				<p></p>
 				<p>作者：<a href="<{$commonurl.searchurl}><{$firsttui.novelauthor}>"><{$firsttui.novelauthor}></a></p>
@@ -48,7 +47,7 @@
 						<{$tuinovel.novelauthor}></a></li>
 			</foreach>
 		</ul>
-	</dv>
+	</div>
 </div>
 <foreach name='classs_tuinovels' item='class_tuinovels'>
 <div class="split_block"></div>	
@@ -61,7 +60,6 @@
 	<div class="block">
 		<div class="block_img"><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><img height="100" width="80" src="<{$class_tuinovels.tuinovels.first.novelimg}>"></a></div>
 		<div class="block_txt">
-			<p><a href="<{$class_tuinovels.tuinovels.first.tuiurl}>"></a></p>
 			<h2><a href="<{$class_tuinovels.tuinovels.first.tuiUrl}>"><{$class_tuinovels.tuinovels.first.novelname}></a></h2>
 			<p></p>
 			<p>作者：<a href="<{$commonurl.searchurl}><{$class_tuinovels.tuinovels.first.novelauthor}>"><{$class_tuinovels.tuinovels.first.novelauthor}></a></p>
