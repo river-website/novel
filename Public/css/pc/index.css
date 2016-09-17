@@ -1,0 +1,541 @@
+li{
+	list-style: none;
+}
+div.block{
+	display: block;
+}
+em{
+    font-style: normal;
+}
+a{
+    text-decoration:none;
+}
+.cls1,.cls2{
+    margin-top: 40px;
+}
+.clear{
+	clear: both;
+}
+.content{
+    width: 1230px;
+    margin: 0px auto;
+}
+.leftdiv{
+    margin-right: 30px;
+    margin-left: 15px;
+    float: left;
+    width: 216px;
+}
+.rightdiv{
+    float: right;
+    width: 216px;
+    margin-right: 15px;
+}
+.midlediv {
+    float: left;
+    width: 708px;
+}
+.class-list {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: 216px;
+    margin: auto 15px;
+}
+
+.class-list .book-list li.unfold {
+    zoom: 1;
+    height: 114px;
+    margin-bottom: -1px;
+}
+.class-list .book-list li{
+    clear: both;
+    height: 31px;
+    border: 0px;
+}
+
+.cf {
+    zoom: 1;
+    padding: 15px 0px;
+}
+.fl {
+    width: 132px;
+    float: left;
+}
+.book-cover{
+    transform: perspective(60px) rotateY(-10deg);
+    position: relative;
+    z-index: 4;
+    float: right;
+    width: 52px;
+    margin-top: -3px;
+    margin-right: 8px;
+    text-align: center;
+}
+.link{
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    transform: translateZ(50px);
+}
+
+.num-box {
+    float: left;
+    width: 28px;
+    height: 32px;
+}
+.name-box {
+    position: relative;
+    float: left;
+    height: 30px;
+    border-top: 1px solid rgb(230, 230, 230);
+}
+.name-box a.name {
+    height: 31px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(26, 26, 26);
+    overflow: hidden;
+}
+.name-box a {
+    float: left;
+    width: 116px;
+    font: 14px/31px PingFangSC-Regular, -apple-system, Simsun;
+}
+.name-box i.total {
+    float: right;
+    width: 72px;
+    text-align: right;
+    white-space: normal;
+    text-overflow: ellipsis;
+    color: rgb(179, 179, 179);
+    font: 12px/32px PingFangSC-Regular, -apple-system, Simsun;
+    overflow: hidden;
+}
+.butoomtui li{
+    width: 50%;
+    float: left;
+}
+.limit-lines-2{
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;   
+}
+.title h3{
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    overflow: hidden;
+    height: 24px;
+    padding-bottom: 4px;
+    color: #1a1a1a;
+    border-bottom: 1px solid rgb(102, 102, 102);
+}
+.content li{
+    height: 31px;
+    border-top: 1px solid #e6e6e6;
+}
+div.leftdiv a.channel,div.rightdiv a.channel {
+    overflow: hidden;
+    min-width: 56px;
+    height: 32px;
+    margin-left: -8px;
+    color: grey;
+    font: 14px/32px PingFangSC-Regular,'-apple-system',Simsun;
+    float: left;
+}
+a.channel em{
+    font-family: PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+    font-size: 13px;
+}
+.content strong{
+    position: relative;
+    float: left;
+    margin-left: -3px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #1a1a1a;
+}
+.content strong .name{
+    overflow: hidden;
+    max-width: 85px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #1a1a1a;
+    font: 14px/32px PingFangSC-Regular,'-apple-system',Simsun;
+    float: left;
+}
+.content a.author{
+font: 12px/32px PingFangSC-Regular,'-apple-system',Simsun;
+    float: right;
+    overflow: hidden;
+    width: 60px;
+    text-align: right;
+    white-space: normal;
+    text-overflow: ellipsis;
+    color: #b3b3b3;
+}
+.fl h3 {
+    font: 700 14px/18px Arial;
+    width: 36px;
+    height: 18px;
+    margin-bottom: 3px;
+    text-align: center;
+    color: #fff;
+    background: #bf2c24;
+}
+.fl h4 {
+    font: 16px/24px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+    overflow: hidden;
+    height: 24px;
+    color: #1a1a1a;
+}
+.fl h4 a{ 
+    transition: color .3s,background-color .3s;
+    text-decoration: none;
+    outline: 0;
+   color: #262626;
+}
+
+ p.digital {
+    font-size: 12px;
+    overflow: hidden;
+    height: 24px;
+    margin-bottom: 4px;
+    padding: 3px 0 0;
+    color: #bf2c24;
+}
+ p.digital em {
+    font-family: Arial;
+    font-size: 18px;
+    margin-right: 3px;
+}
+ p.author {
+    font-family: PingFangSC-Regular,'-apple-system',Simsun;
+    font-size: 12px;
+    overflow: hidden;
+    height: 16px;
+}
+p.author a {
+    color: #a6a6a6;
+}
+.book-cover img {
+    width: 52px;
+    height: 87px;
+}
+.book-cover:after {
+    position: absolute;
+    z-index: 2;
+    top: 2%;
+    left: 100%;
+    width: 10%;
+    height: 92%;
+    content: ' ';
+    -webkit-transform: perspective(60px) rotateY(30deg);
+    -moz-transform: perspective(60px) rotateY(30deg);
+    transform: perspective(60px) rotateY(30deg);
+    background-color: #efefef;
+    box-shadow: inset 0 0 5px #333;
+}
+.contnent{
+    overflow: hidden;
+}
+
+.toptui{
+    left: -15px;
+    position: relative;
+    width: 738px;    
+}
+.toptui li{
+    padding: 27px 15px 28px 15px;
+    float: left;
+    width: 216px;
+    list-style: none;   
+    height:auto;
+    border-top: 1px solid #ebebeb;
+}
+.toptui li h3{
+    width: 100%;
+    font-size: 14px;
+    overflow: hidden;
+    height: 20px;
+}
+.toptui li h3 a{
+    font: 16px/20px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+    color: #1a1a1a;
+    transition: color .3s,background-color .3s;
+    text-decoration: none;
+    outline: 0;
+}
+.toptui li em{
+    display: block;
+    overflow: hidden;
+    height: 21px;
+    padding: 2px 0 4px;
+    color: #bf2c24;
+}
+.toptui li em cite {
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 3px;
+    vertical-align: middle;
+    font-style: normal;   
+}
+.toptui li em i {
+    vertical-align: middle;
+    font-family: PingFangSC-Regular,'-apple-system',Simsun;
+    font-size: 12px;
+    font-style: normal;
+}
+.toptui li p {
+    line-height: 20px;
+    overflow: hidden;
+    height: 36px;
+    color: #666;
+    font-family: PingFangSC-Regular,'-apple-system',Simsun;
+    font-size: 12px;
+}
+.butoomtui li{
+    border: 0;
+    margin-right: 15px;
+    height: auto;
+    float: left;
+    overflow: hidden;
+    width: 339px;
+    height: 100px;
+    background: #f7f6f2;
+}
+
+.butoomtui li .hover-box {
+    position: absolute;
+    z-index: 1;
+    width: 339px;
+    height: 94px;
+    transition: box-shadow .5s;
+}
+.butoomtui li .book-info{
+    float: left;
+    width: 228px;
+    margin: 14px 0 0 14px;
+}
+.butoomtui li .book-info h3 {
+    overflow: hidden;
+    height: 21px;
+    margin-bottom: 5px;
+}
+.butoomtui li .book-info h3 a{
+    color: #fc6c28;
+    font: 700 16px/21px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+}
+
+.butoomtui li .book-info p {
+    font: 12px/20px PingFangSC-Regular,'-apple-system',Simsun;
+    overflow: hidden;
+    height: 38px;
+}
+.butoomtui li .book-img {
+    float: right;
+    width: 51px;
+    height: 68px;
+    margin: 12px 14px 0 0;
+}
+
+.butoomtui li .book-img a {
+    display: block;
+    width: 51px;
+    height: 68px;
+    position: relative;
+    box-shadow: 0 1px 6px rgba(0,0,0,.35),0 0 5px #f9f2e9 inset;
+    overflow: hidden;
+}
+.gg_img img{ 
+    display: block;
+    width: 708px;
+    border: none;
+}
+.more{
+    display: inline;
+    margin-left: 5px;
+    font: 12px/1 Arail,PingFangSC-Regular,'-apple-system',Simsun;
+    color: #2972cc
+}
+.num-box span.normal{
+    font: 700 14px/16px Arial;
+    display: block;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    margin-top: 8px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #666;
+    background: #ededed;
+}
+.num-box span.num2{
+    color: #fff;
+    background: #e67225;
+}
+.num-box span.num3{
+    color: #fff;
+    background: #e6bf25;
+}
+
+.fl h4 a:hover{ 
+    color: #ed4259;
+}
+
+.more-list {
+    font: 14px/1 PingFangSC-Regular,'-apple-system',Simsun;
+    position: relative;
+    display: block;
+    width: 70px;
+    height: 19px;
+    margin: 20px auto;
+    color: #3f5a93;
+}
+.more-list span {
+    top: 5px;
+right: -3px;
+border-top: 5px solid #3f5a93;
+position: absolute;
+width: 0;
+height: 0;
+border-right: 5px solid transparent;
+border-bottom: 0 none;
+border-left: 5px solid transparent;
+}
+
+.more-list.up span{
+    border-top: 0 none;
+border-bottom: 5px solid #3f5a93;
+}
+
+.more-list span i {
+top: -7px;
+right: -5px;
+border-top: 5px solid #fff;
+position: absolute;
+width: 0;
+height: 0;
+border-right: 5px solid transparent;
+border-bottom: 0 none;
+border-left: 5px solid transparent;
+font-style: normal;
+}
+
+.more-list.up span i{
+    top: 2px;
+border-top: 0 none;
+border-bottom: 5px solid #fff;
+}
+
+
+
+
+
+
+
+.logo-wrap{
+overflow: hidden;
+    width: 100%;
+    height: 84px;
+}
+
+.logo {
+    float: left;
+    width: 219px;
+    height: 52px;
+    margin: 16px 184px 0 0;
+}
+.logo a {
+    display: block;
+    width: 219px;
+    height: 52px;
+    background: url(../../images/logo.0.2.png) no-repeat;
+    transition: color .3s,background-color .3s;
+    text-decoration: none;
+    outline: 0;
+}
+.box-center{
+zoom: 1;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.book-shelf{
+    float:right;
+    margin-top: 22px;
+}
+
+.search-wrap {
+    margin-top: 22px;
+    float: left;
+}
+.search-wrap p {
+    float: left;
+    overflow: hidden;
+    width: 348px;
+    height: 38px;
+    border: 1px solid #dbdbdb;
+    border-right: none;
+}
+.search-box {
+    font: 14px/38px PingFangSC-Regular,'-apple-system',Simsun;
+    width: 326px;
+    height: 38px;
+    padding: 0 11px;
+    border: none;
+    outline: 0;
+}
+.search-btn {
+    float: left;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background-color: #bf2c24;
+    cursor: pointer;
+}
+.search-btn em {
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.main-nav-wrap {
+    z-index: 30;
+    margin-bottom: 10px;
+        background-color: #3e3d43;
+    position: relative;
+}
+
+.main-nav {
+    height: 40px;
+    background-color: #3e3d43;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+.main-nav li.main {
+    position: relative;
+    width: 216px;
+    height: 40px;
+    margin-right: 15px;
+    cursor: pointer;
+    background-color: #313035;
+}
+.main-nav li {
+    float: left;
+}
+.main-nav li a{
+    font: 15px/38px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
+    float: left;
+    height: 38px;
+    padding: 0 15px;
+    color: #fff;
+    border-bottom: 2px solid #333;
+}
