@@ -62,6 +62,9 @@
         }
 
         public function cls(){
+            //页面显示最大书籍数
+            $page_max_num = 10;
+
             //网站信息
             $s=M('Site');
             $siteinfo=$s->find(1);
@@ -69,34 +72,96 @@
             $siteurl=trim($siteinfo['site_url'],'/');
 
             if(isset($_GET['classname'])){
-                $where='`classpy` LIKE  "'.$_GET['classname'].'" OR `id`=\''.$_GET['classname'].'\'';
+                $class_name = $_GET['classname'];
+                $where='`id`=\''.$class_name.'\'';
                 $C=M('Class');
 
                 $classinfo=$C->where($where)->find();
                 if(is_array($classinfo)){
+                    /*
                     $n=M('Novel');
                     $this->assign('classinfo',$classinfo);
 
                     $novel['novel_cid']=$classinfo['id'];
                     $count=$n->where($novel)->count();
-                    $page=new NewPage($count,9);
+                    $page=new NewPage($count,24);
                     $pageshow=$page->show();
 
                     $pageshow=str_ireplace(__ACTION__.'/classname',$siteurl.'/c',$pageshow);
 
 
-                    $tuinovels=$n->where($novel)->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
-
+                    $tuinovels=$n->where($novel)->order('novelgrade desc')->limit($page->firstRow.','.$page->listRows)->select();
+                    */
+                    $n=M('Novel');
+                    $query_page_num = $_GET['p'];
+                    $query_novel_start_id = 1;
+                    if($query_page_num){
+                        $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num + 1;
+                    }else{
+                        $query_page_num = 1;
+                    }
+                    $w = 'novel_cid='.$classinfo['id'];
+                    $sub_query = $n->field('id')->where($w)->buildSql();
+                    $tuinovels = $n->where('id in '.$sub_query)->order('novelgrade desc')->limit($query_novel_start_id,$page_max_num)->select();
+                    if(!isset($tuinovels)){
+                        $this->error('人家还满足不了你吗！');
+                    }
                     foreach($tuinovels as $tuinovel){
                         //book URL
                         $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
 
-                        $des=mb_substr($tuinovel['noveldes'],0,60,'utf-8')."...";
-                        $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                        $words = round(floatval($tuinovel['novelwords']) / 10000,2);
+                        $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'words'=>$words));
                     }
-                    $this->assign('pageshow',$pageshow);
-                    $this->assign('tuinovels',$tui);
 
+                    //查询同一类型月点击率前50本小说
+                    $where = 'novel_cid ='.$class_name;
+                    $novel_count = $n->where($where)->count();
+                    $sub_query = $n->field('id')->where($where)->buildSql();
+                    $click_month_novels = $n->where('id in '.$sub_query)->order('clickmonth desc limit 50')->select();
+
+                    $max_page = intval(ceil($novel_count/$page_max_num));
+                    $first_ellipsis = 'hidden';
+                    $last_ellipsis = 'hidden';
+                    $page_set = array();
+                    if($max_page < 7){
+                        for($i = 1; $i <= $max_page; $i++){
+                            array_push($page_set,$i);
+                        }
+                    }else{
+                        if($query_page_num >= 5){
+                            $first_ellipsis = '';
+                        }
+                        if($query_page_num < $max_page - 3){
+                            $last_ellipsis = '';
+                        }
+                        if($query_page_num > 3 && $query_page_num < $max_page - 2){
+                            $tmp = $query_page_num + 2;
+                            for($i = $query_page_num - 2; $i <= $tmp; $i++){
+                                array_push($page_set,$i);
+                            }
+                        }
+
+                        if($query_page_num < 4){
+                            $page_set = array(2,3,4,5);
+                        }
+
+                        if($query_page_num > $max_page - 3){
+                            $page_set = array($max_page - 4,$max_page - 3,$max_page - 2,$max_page - 1);
+                        }
+                    }
+                    $c_url_prefix = $siteinfo['site_url'].'/c/'.$classinfo['id'];
+
+                    $this->assign('classinfo',$classinfo);
+                    $this->assign('novel_count',$novel_count);
+                    $this->assign('click_month_novels',$click_month_novels);
+                    $this->assign('query_page_num',$query_page_num);
+                    $this->assign('c_url_prefix',$c_url_prefix);
+                    $this->assign('max_page',$max_page);
+                    $this->assign('page_set',$page_set);
+                    $this->assign('first_ellipsis',$first_ellipsis);
+                    $this->assign('last_ellipsis',$last_ellipsis);
+                    $this->assign('tuinovels',$tui);
 
                     $this->display('pc:content/cls');
                 }else{
@@ -255,7 +320,7 @@
 
                     $chapter_info = array('con_nid'=>$novelInfo['id'],'id'=>$newChapters[0]['id']);
                     $first_con = $this->getContentByPath($chapter_info);
-                    $first_con['con_text']=mb_substr($first_con['con_text'],0,700,'utf-8').">";
+                    $first_con['con_text']=mb_substr($first_con['con_text'],0,350,'utf-8').">";
 
                     //查询同一作家的作品
                     $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
