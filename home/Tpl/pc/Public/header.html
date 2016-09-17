@@ -2,7 +2,7 @@
 	<div class="box-center">
 		<div class="book-shelf">
 			<a href="">
-				<em class="iconfont shelf"></em><i>我的书架</i>
+				<em class="shelf"></em><i>我的书架</i>
 			</a>
 		</div>
 		<div class="logo">
@@ -10,7 +10,7 @@
 		</div>
 		<div class="search-wrap">
 			<p><input class="search-box" type="text"></p>
-			<a class="search-btn" onclick="searchbook()"><em class="iconfont"></em></a>
+			<a class="search-btn" onclick="searchbook()">搜索</a>
 		</div>
 	</div>
 </div>
@@ -18,15 +18,15 @@
 	<div class="main-nav">
 	<ul>
 		<li class="main">
-			<a href="<{$siteinfo.site_url}>" title="<{$siteinfo.site_name}>"><i class="ui-icon home-nav"></i></a>
+			<a href="<{$siteinfo.site_url}>" title="<{$siteinfo.site_name}>"><i class="home-nav">看点小说网</i></a>
 		</li>
 		<foreach name='classes' item='class'>
-			<li class="nav-li">
+			<li class="nav-li <if condition='$classes[$_GET["classname"]-1] eq $class'>nav_active</if>">
 				<a class="nav-link" target="_self" href="<{$class.clsurl}>" title="<{$class.classname}>"><i class="ui-icon cartoon-nav"></i><{$class.classname}></a>
 			</li>
 		</foreach>
-		<li class="nav-li">
-				<a class="nav-link" style="padding-right:0px" href="<{$commonurl.doneurl}>" title="全本"><i class="ui-icon cartoon-nav"></i>全本</a>
+		<li class="nav-li <if condition='$_GET["classname"] eq null'>nav_active</if>">
+				<a class="nav-link" href="<{$commonurl.doneurl}>" title="全本"><i class="ui-icon cartoon-nav"></i>全本</a>
 		</li>
 	</ul>
 </div>
