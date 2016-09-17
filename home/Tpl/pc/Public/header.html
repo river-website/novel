@@ -1,0 +1,38 @@
+<div class="logo-wrap">
+	<div class="box-center">
+		<div class="book-shelf">
+			<a href="">
+				<em class="iconfont shelf"></em><i>我的书架</i>
+			</a>
+		</div>
+		<div class="logo">
+			<a href="<{$commonurl.mainurl}>"></a>
+		</div>
+		<div class="search-wrap">
+			<p><input class="search-box" type="text"></p>
+			<a class="search-btn" onclick="searchbook()"><em class="iconfont"></em></a>
+		</div>
+	</div>
+</div>
+<div class="main-nav-wrap">
+	<div class="main-nav">
+	<ul>
+		<li class="main">
+			<a href="<{$siteinfo.site_url}>" title="<{$siteinfo.site_name}>"><i class="ui-icon home-nav"></i></a>
+		</li>
+		<foreach name='classes' item='class'>
+			<li class="nav-li">
+				<a class="nav-link" target="_self" href="<{$class.clsurl}>" title="<{$class.classname}>"><i class="ui-icon cartoon-nav"></i><{$class.classname}></a>
+			</li>
+		</foreach>
+		<li class="nav-li">
+				<a class="nav-link" style="padding-right:0px" href="<{$commonurl.doneurl}>" title="全本"><i class="ui-icon cartoon-nav"></i>全本</a>
+		</li>
+	</ul>
+</div>
+</div>
+<script type="text/javascript">
+	function searchbook(){
+		var keyword=$('.logo-wrap input.search-box').val();
+		window.location.href='<{$commonurl.searchurl}>'+keyword;}
+</script>
