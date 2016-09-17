@@ -9,55 +9,54 @@
             $this->assign('currentindex','current');
             $siteurl=trim($siteinfo['site_url'],'/');
 
-            //友情链接
-            $L=M('Links');
-            $links=$L->order('linkweight desc')->select();
-            $this->assign('links',$links);
-
             $n=M('Novel');
-            //查询推荐小说
-            $tuinovels=$n->order('tuitime desc limit 6')->select();
-            foreach($tuinovels as $tuinovel){
+
+            //查询高分小说
+            $gradelist=$n->order('novelgrade desc limit 25')->select();
+            foreach($gradelist as $grade){
                 //book URL
-                $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
-
-                $des=mb_substr($tuinovel['noveldes'],0,60,'utf-8')."...";
-                $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                $gradeUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$grade);
+                $gradecls = $this->common_classs[$grade['novel_cid']-1];
+                $gradelist_ret[]=array_merge($grade , array('bookurl'=>$gradeUrl,'cls'=>$gradecls));
             }
+            $this->assign('gradelist',$gradelist_ret);
 
-            $this->assign('tuinovels',$tui);
-            //查询最新更新的小说
-            $novels=$n->field('id,novel_cid,novelname,novelauthor,insert_time')->order('insert_time desc limit 15')->select();
-
-            $C=M('Content');
-            $novelinfos=array();
-            foreach($novels as $novel){
-                $where['con_nid']=$novel['id'];
-                $novelname=$novel['novelname'];
-                $novelpy=$novel['id'];
-
-                $novelauthor=$novel['novelauthor'];
-                $insert_time=$novel['insert_time'];
-
+            //查询一个月点击最高
+            $clicklist=$n->order('clickmonth desc limit 25')->select();
+            foreach($clicklist as $click){
                 //book URL
-                //$bookUrl=str_ireplace('%book_name%',urlencode($novelname),$bookUrl);绝世武神
-                $bookUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$novel);
-                $c=M('Class');
-                $classes=$c->select();
-                //分类
-                $cid=$novel['novel_cid']-1;
-                $class=$classes[$cid];
-
-                $coninfo=$C->query('select * from ck_content where id in(select id from ck_content where con_nid='.$novel['id'].') order by id desc limit 1');
-
-                //con URl
-                $conUrl=$this->chapterToUrl($siteinfo['urlrewrite_con'],$siteurl,$novel,$coninfo[0]);
-
-                if($coninfo != null )
-                    $novelinfos[]=array_merge( array('novelname' => $novelname,'novelauthor'=>$novelauthor,'update_time'=>$insert_time,'class'=>$class,'bookurl'=>$bookUrl,'conurl'=>$conUrl) , $coninfo[0]);
+                $clickurl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$click);
+                $clickcls = $this->common_classs[$click['novel_cid']-1];
+                $clicklist_ret[]=array_merge($click , array('bookurl'=>$clickurl,'cls'=>$clickcls));
             }
-            $this->assign('novels',$novelinfos);
+            $this->assign('clicklist',$clicklist_ret);
 
+            //查询最新推荐
+            $tuilist=$n->order('tuitime desc limit 11')->select();
+            foreach ($tuilist as $tui) {
+                $tuiurl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tui);
+                $tuilist_ret[]=array_merge($tui,array('bookurl'=>$tuiurl));
+            }
+            $tuis=array_chunk($tuilist_ret, 9);
+            $this->assign('toptuilist',$tuis[0]);
+            $this->assign('bottomtuilist',$tuis[1]);
+            
+            foreach ($this->common_classs as $class) {
+                $Sql=$n->field('id')->where('novel_cid='.$class['id'])->buildSql();
+                $class_grade_list=$n->field('id,novelname,novelauthor,novelimg,novelgrade')->where('id in '.$Sql)->order('id desc limit 20')->select();
+                for($orderid=0;$orderid<count($class_grade_list);$orderid++){
+                    $class_grade_temp =$class_grade_list[$orderid];
+                    $class_grade_list[$orderid] = array_merge($class_grade_temp,array('orderid'=>($orderid+1)));
+                }
+                $cls_first_grade= array_shift($class_grade_list);
+                $class_grade['cls']=$class;
+                $class_grade['first']=$cls_first_grade;
+                $class_grade['after']=$class_grade_list;
+                $classs_grade_ret[]=$class_grade;
+            }
+            $classs_grade_ret=array_chunk($classs_grade_ret, 5);
+            $this->assign('classs_grade0',$classs_grade_ret[0]);
+            $this->assign('classs_grade1',$classs_grade_ret[1]);
             $this->display('pc:index/index');
         }
 
