@@ -30,4 +30,7 @@
 
    RewriteRule ^d/([0-9]+)/$ index.php/index/done/p/$1/ [L]
    RewriteRule ^d/([0-9]+)$ index.php/index/done/p/$1/ [L]
+
+   RewriteRule ^upload/$ index.php/index/upload/ [L]
+   RewriteRule ^upload$ index.php/index/upload/ [L]
 </IfModule>
