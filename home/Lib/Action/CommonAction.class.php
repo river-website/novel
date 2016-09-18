@@ -110,6 +110,7 @@
 			$commonurl['hisurl'] = $siteurl.'/h';
 			$commonurl['searchurl']=$siteurl.'/s/';
 			$this->assign('commonurl',$commonurl);
+			$this->assign('build_time',date("y-m-d,h:i:s",time()));
 			//热词搜索
 			if($siteinfo['hotkeyopen']){
 				$N=M('Novel');

@@ -1,15 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><{$novelinfo.novelname}> <{$coninfo.con_name}> - <{$siteinfo.site_name}></title>
-<meta name="keywords" content="<{$coninfo.con_name}>">
-<meta name="description" content="<{$coninfo.con_name}>">
-
-<link type="text/css" rel="stylesheet" href="__ROOT__/Public/css/mobile/base.css" />
-<link type="text/css" rel="stylesheet" href="__ROOT__/Public/css/pc/chapter.css" />
-
-
+    <include file='pc:Public/head'/>
+    <title><{$novelinfo.novelname}> <{$coninfo.con_name}> - <{$siteinfo.site_name}></title>
+    <meta name="keywords" content="<{$coninfo.con_name}>">
+    <meta name="description" content="<{$coninfo.con_name}>">
+    <link type="text/css" rel="stylesheet" href="__ROOT__/Public/css/pc/chapter.css" />
 </head>
 <body>
     <div class='back-div'></div>
@@ -54,6 +50,7 @@
             </div>
         </div>
      </div>
+    <include file='pc:Public/footer'/>
 </body>
 </html>
 

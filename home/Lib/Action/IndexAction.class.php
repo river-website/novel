@@ -60,6 +60,15 @@
             $this->display('pc:index/index');
         }
 
+        public function upload(){
+            $s=M('Site');
+            $siteinfo=$s->find(1);
+            $this->assign('siteinfo',$siteinfo);
+            $siteurl=trim($siteinfo['site_url'],'/');
+
+            $this->display("pc:content/upload");
+        }
+
         public function cls(){
             //页面显示最大书籍数
             $page_max_num = 24;
@@ -206,15 +215,19 @@
             $novel_count = $n->where($w)->count();
             $sub_query = $n->field('id')->where($w)->buildSql();
             $click_month_novels = $n->where('id in ' . $sub_query)->order('clickmonth desc limit 50')->select();
+            foreach($click_month_novels as $novel){
+                $lick_month_novels_return[] = array_merge($novel,array('done_cls'=> $this->common_classs[$novel['novel_cid']-1]));
+            }
 
             $this->page($novel_count,$query_page_num,$page_max_num,$siteinfo,null);
 
             $this->assign('novel_count', $novel_count);
-            $this->assign('click_month_novels', $click_month_novels);
+            $this->assign('click_month_novels', $lick_month_novels_return);
             $this->assign('query_page_num', $query_page_num);
             $this->assign('tuinovels', $tui);
+            $this->assign('pc_done_css','nav_active');
 
-            $this->display('pc:content/cls');
+            $this->display('pc:content/done');
 
         }
 
@@ -419,19 +432,28 @@
         //搜索功能
         public function search(){
 
-            //网站信息
-            $s=M('Site');
-            $siteinfo=$s->find(1);
-            $this->assign('siteinfo',$siteinfo);
-            $siteurl=trim($siteinfo['site_url'],'/');
+            //页面显示最大书籍数
+            #$page_max_num = 10;
 
-            //print_r($_GET);
-            //查询小说信息
-            $n=M('Novel');
+            //网站信息
+            $s = M('Site');
+            $siteinfo = $s->find(1);
+            $this->assign('siteinfo', $siteinfo);
+            $siteurl = trim($siteinfo['site_url'], '/');
+
+            $n = M('Novel');
+//            $query_page_num = $_GET['p'];
+//            $query_novel_start_id = 1;
+//            if ($query_page_num) {
+//                $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num + 1;
+//            } else {
+//                $query_page_num = 1;
+//            }
 
             if($_GET['key'] != null){
                 $where='`novelname` LIKE  "%'.$_GET['key'].'%" OR `novelauthor` LIKE "%'.$_GET['key'].'%"';
-                $novelInfo=$n->where($where)->select();
+                $novelInfo=$n->where($where)->order('novelgrade desc limit 24')->select();
+                $novel_count = count($novelInfo);
             }else{
                 $this->error('请输入小说名或者作者！');
             }
@@ -440,13 +462,24 @@
                     //book URL
                     $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
 
-                    $des=mb_substr($tuinovel['noveldes'],0,60,'utf-8')."...";
-                    $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl,'des'=>$des) );
+                    $words = round(floatval($tuinovel['novelwords']) / 10000, 2);
+                    $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl, 'words' => $words));
                 }
 
                 $this->assign('tuinovels',$tui);
             }
-            $this->assign('searchkey',$_GET['key']);
+
+            //查询月点击率前50本小说
+            $w = 'novel_cid = 1';
+            $sub_query = $n->field('id')->where($w)->buildSql();
+            $click_month_novels = $n->where('id in ' . $sub_query)->order('clickmonth desc limit 20')->select();
+
+            #$this->page($novel_count,$query_page_num,$page_max_num,$siteinfo,null);
+
+            $this->assign('novel_count', $novel_count);
+            $this->assign('click_month_novels', $click_month_novels);
+            #$this->assign('query_page_num', $query_page_num);
+            $this->assign('tuinovels', $tui);
 
             $this->display('pc:content/search');
         }

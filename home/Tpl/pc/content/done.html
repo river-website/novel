@@ -16,9 +16,9 @@
 			<div class="tui_click_set">本月强推榜</div>
 			<foreach name="click_month_novels" item="novel">
 				<div class="tui_click_box">
-					<div class="width_25_percent"><if condition='$novel.novelstate eq 0'>「连载」<else/>「完本」</if></div>
+					<div class="width_25_percent" style="width:30%;font-size: 12px;">「<a href="<{$novel.done_cls.clsurl}>"><{$novel.done_cls.classname}></a>」</div>
 					<div class="width_40_percent"><a href="<{$siteinfo.site_url}>/<{$novel.id}>"><{$novel.novelname}></a></div>
-					<div class="width_35_percent"><a href="<{$siteinfo.site_url}>/s/<{$novel.novelauthor}>"><{$novel.novelauthor}></a></div>
+					<div class="width_35_percent" style="width:30%;"><a href="<{$siteinfo.site_url}>/s/<{$novel.novelauthor}>"><{$novel.novelauthor}></a></div>
 					<div class="clear"></div>
 				</div>
 			</foreach>

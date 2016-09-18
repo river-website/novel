@@ -1,15 +1,14 @@
 html {
     background: #fff;
-    font: 16px/1.5 'microsoft yahei';
+    font-size: 12px;
+    font-family: 'microsoft yahei';
     font-style: normal;
     font-variant-ligatures: normal;
     font-variant-caps: normal;
     font-variant-numeric: normal;
     font-weight: normal;
     font-stretch: normal;
-    font-size: 16px;
     line-height: 1.5;
-    font-family: "microsoft yahei";
 }
 
 body, h1, h2, h3, h4, h5, h6, p, div, ul, li, dl, dt, dd, h1 {  margin: 0;  padding: 0; }
@@ -143,4 +142,21 @@ a.search-btn{
     padding: 0 15px;
     color: #fff;
     border-bottom: 2px solid #333;
+}
+
+.footer{
+    padding: 20px 0;
+    overflow: hidden;
+    color: #a6a6a6;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+.footer a{
+    color: #0e0e0e;
+    cursor: pointer;
+}
+
+.footer a:hover{
+    color: #ed4259;
 }

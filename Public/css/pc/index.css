@@ -174,7 +174,7 @@ font: 12px/32px PingFangSC-Regular,'-apple-system',Simsun;
     overflow: hidden;
     width: 60px;
     text-align: right;
-    white-space: normal;
+    white-space: nowrap;
     text-overflow: ellipsis;
     color: #b3b3b3;
 }
