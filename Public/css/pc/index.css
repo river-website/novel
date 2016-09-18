@@ -97,6 +97,9 @@ a{
     color: rgb(26, 26, 26);
     overflow: hidden;
 }
+.name-box a.name:hover {
+    color:#ed4259;
+}
 .name-box a {
     float: left;
     width: 116px;
@@ -138,7 +141,7 @@ a{
     height: 31px;
     border-top: 1px solid #e6e6e6;
 }
-div.leftdiv a.channel,div.rightdiv a.channel {
+a.channel {
     overflow: hidden;
     min-width: 56px;
     height: 32px;
@@ -146,6 +149,9 @@ div.leftdiv a.channel,div.rightdiv a.channel {
     color: grey;
     font: 14px/32px PingFangSC-Regular,'-apple-system',Simsun;
     float: left;
+}
+a.channel:hover{
+    color:#ed4259;
 }
 a.channel em{
     font-family: PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
@@ -177,6 +183,9 @@ font: 12px/32px PingFangSC-Regular,'-apple-system',Simsun;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #b3b3b3;
+}
+.content a.author:hover{
+    color:#ed4259;
 }
 .fl h3 {
     font: 700 14px/18px Arial;
@@ -221,6 +230,9 @@ font: 12px/32px PingFangSC-Regular,'-apple-system',Simsun;
 }
 p.author a {
     color: #a6a6a6;
+}
+p.author a:hover {
+    color:#ed4259;
 }
 .book-cover img {
     width: 52px;
@@ -269,6 +281,9 @@ p.author a {
     transition: color .3s,background-color .3s;
     text-decoration: none;
     outline: 0;
+}
+.toptui li h3 a:hover{
+    color:#ed4259;
 }
 .toptui li em{
     display: block;
@@ -331,7 +346,9 @@ p.author a {
     color: #fc6c28;
     font: 700 16px/21px PingFangSC-Regular,HelveticaNeue-Light,'Helvetica Neue Light','Microsoft YaHei',sans-serif;
 }
-
+.butoomtui li .book-info h3 a:hover{
+    color:#ed4259;
+}
 .butoomtui li .book-info p {
     font: 12px/20px PingFangSC-Regular,'-apple-system',Simsun;
     overflow: hidden;
