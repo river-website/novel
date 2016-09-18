@@ -19,7 +19,7 @@
 				<ul>
 				<foreach name="gradelist" item='em'>
 						<li>
-							<a class="channel" href="<{$em.gradecls.clsurl}>"><em>「</em><{$em.cls.classname}><em>」</em></a>
+							<a class="channel" href="<{$em.cls.clsurl}>"><em>「</em><{$em.cls.classname}><em>」</em></a>
 							<strong><a class="name" href="<{$em.bookurl}>"><{$em.novelname}></a></strong>
 							<a class="author" href="<{$commonurl.searchurl}><{$em.novelauthor}>" ><{$em.novelauthor}></a>
 						</li>
@@ -59,7 +59,7 @@
 									</div>
 								</div>
 								<div class="book-img">
-									<a href=""><img class="lazy" src="<{$em.novelimg}>" alt="<{$em.novelname}>" style="display: inline;"></a>
+									<a href="<{$em.bookurl}>"><img class="lazy" src="<{$em.novelimg}>" alt="<{$em.novelname}>" style="display: inline;"></a>
 								</div>
 							</div>
 						</li>
@@ -74,7 +74,7 @@
 				<ul>
 				<foreach name="clicklist" item='em'>
 						<li class="">
-							<a class="channel" href"<{$em.bookurl}>"><em>「</em><{$em.cls.classname}><em>」</em></a>
+							<a class="channel" href="<{$em.cls.clsurl}>"><em>「</em><{$em.cls.classname}><em>」</em></a>
 							<strong><a class="name" href="<{$em.bookurl}>"><{$em.novelname}></a></strong>
 							<a class="author" href="<{$commonurl.searchurl}><{$em.novelauthor}>" ><{$em.novelauthor}></a>
 						</li>
@@ -109,7 +109,7 @@
 					</p>
 				</div>
 				<div class="book-cover">
-					<a class="link" href="<{$em.first.novelimg}>">
+					<a class="link" href="<{$em.first.bookurl}>">
 						<img src="<{$em.first.novelimg}>" alt="<{$em.first.novelname}>">
 					</a>
 					<span></span>

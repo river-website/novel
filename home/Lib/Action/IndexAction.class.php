@@ -46,7 +46,8 @@
                 $class_grade_list=$n->field('id,novelname,novelauthor,novelimg,novelgrade')->where('id in '.$Sql)->order('id desc limit 20')->select();
                 for($orderid=0;$orderid<count($class_grade_list);$orderid++){
                     $class_grade_temp =$class_grade_list[$orderid];
-                    $class_grade_list[$orderid] = array_merge($class_grade_temp,array('orderid'=>($orderid+1)));
+                    $bookurl = $this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$class_grade_temp);
+                    $class_grade_list[$orderid] = array_merge($class_grade_temp,array('orderid'=>($orderid+1),'bookurl'=>$bookurl));
                 }
                 $cls_first_grade= array_shift($class_grade_list);
                 $class_grade['cls']=$class;
