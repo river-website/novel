@@ -40,13 +40,17 @@ overflow: hidden;
 }
 .logo a {
     display: block;
-    width: 219px;
-    height: 52px;
-    background: url(../../images/logo.0.2.png) no-repeat;
-    transition: color .3s,background-color .3s;
     text-decoration: none;
     outline: 0;
 }
+.logo_images{
+    float:left;
+    width: 52px;
+    height: 52px;
+    background: url(../../images/site_log.png) no-repeat;
+    transition: color .3s,background-color .3s;
+}
+
 .box-center{
 zoom: 1;
     position: relative;

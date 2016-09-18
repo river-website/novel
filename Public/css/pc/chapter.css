@@ -4,7 +4,7 @@
 }
 
 .back-div{
-    background: url(../images/readrecbg.jpg) center top no-repeat;
+    background: url(../../images/readrecbg.jpg) center top no-repeat;
     height: 100%;
     width: 100%;
     position: fixed;
@@ -30,6 +30,7 @@ color: #666;
 }
 .barList{
     margin-left: 2px;
+    list-style: none;
 }
 .barList li{
     height: 60px;
@@ -93,14 +94,14 @@ padding: 0 0 10px 10px;
 }
 
 #back-to-top{
-    background-image: url(../images/readpageico.png);
+    background-image: url(../../images/readpageico.png);
     background-position: -304px -56px;
     position: relative;
     display: block;
 }
 .shade_one {
     height: 7px;
-    background: url("../images/shadow.png") center top no-repeat;
+    background: url("../../images/shadow.png") center top no-repeat;
     margin: 10px auto;
     overflow: hidden;
 }
