@@ -9,11 +9,6 @@
             $this->assign('currentindex','current');
             $siteurl=trim($siteinfo['site_url'],'/');
 
-            //友情链接
-            $L=M('Links');
-            $links=$L->order('linkweight desc')->select();
-            $this->assign('links',$links);
-
             $n=M('Novel');
             //查询推荐小说
             $tuinovels=$n->order('tuitime desc limit 8')->select();
@@ -24,7 +19,8 @@
 
             foreach($this->common_classs as $class){
                 $where['novel_cid'] = $class['id'];
-                $class_tuinovels = $n->where($where)->order('clickmonth desc limit 8')->select();
+                $subsql = $n->field('id')->where($where)->buildSql();
+                $class_tuinovels = $n->where('id in '.$subsql)->order('clickmonth desc limit 8')->select();
                 $ret = $this->gettui($class_tuinovels, $siteinfo, $siteurl);
                 $class_tui['class'] = $class;
                 $class_tui['tuinovels'] = $ret;
@@ -92,7 +88,8 @@
                         $preurl = $tempurl.($p-1);
                     }
                     $nexturl=$tempurl.($p+1);
-                    $tuinovels=$n->where($novel)->order('id desc')->limit($firstRow.',10')->select();
+                    $subsql = $n->field('id')->where($novel)->buildSql();
+                    $tuinovels = $n->where('id in '.$subsql)->order('id desc')->limit($firstRow.',10')->select();
 
                     foreach($tuinovels as $tuinovel){
                         //book URL
@@ -181,24 +178,11 @@
                         $this->error('错误的访问！');
                     }
                     $coninfo=$this->getContentByPath($coninfo);
-                    //随机推荐小说
-                    $strLength=0;
-                    $strMaxLength=225;
-                    $tuinovels=$n->field('id,novelname')->order('rand() limit 15')->select();
-                    foreach($tuinovels as $tuinovel){
-                        //book URL
-                        $strLength+=strlen($tuinovel['novelname']);
-                        if($strLength >= $strMaxLength){
-                            break;
-                        }
-                        $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
-                        $tui[]=array_merge($tuinovel , array('tuiUrl'=>$tuiUrl) );
-                    }
-                    $this->assign('pagetuis',$tui);
 
                     //上一章，下一章
-                    $Pre=$c->where('id <'.$coninfo['id'].' and con_nid='.$novelInfo['id'])->order('id desc')->find();
-                    $Nex=$c->where('id >'.$coninfo['id'].' and con_nid='.$novelInfo['id'])->order('id asc')->find();
+                    $subsql = $c->field('id')->where('con_nid='.$novelInfo['id'])->buildSql();
+                    $Pre=$c->where('id <'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
+                    $Nex=$c->where('id >'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
 
                     $prePage=$NovelUrl;
                     $nextPage=$NovelUrl;
@@ -254,7 +238,7 @@
 
                     //查询最新章节
                     $c=M('Content');
-                    $newChapters=$c->field('id,con_name')->where('con_nid='.$novelInfo['id'])->order('id desc limit 1')->select();
+                    $newChapters=$c->query('select id,con_name from ck_content where id in(select id from ck_content where con_nid='.$novelInfo['id'].') order by id desc limit 1');
                     $vol['volname']='最新章节';
                     foreach($newChapters as $newChapter){
                         //con URl
@@ -295,7 +279,8 @@
 
                     //查询同一作家的作品
                     $where='novelauthor="'.$novelInfo['novelauthor'].'"'.' and id!='.$novelInfo['id'];
-                    $author_novels=$n->where($where)->order('novelgrade desc limit 10')->select();
+                    $sub_query=$n->field('id')->where($where)->buildSql();
+                    $author_novels=$n->where('id in '.$sub_query)->order('novelgrade desc limit 10')->select();
                     $is_first_novel = true;
                     $author_first_novels = array();
                     $author_second_novels = array();
@@ -310,10 +295,10 @@
 
                     //查询同一类型评分相近的十本小说
                     $com_condition='novel_cid='.$novelInfo['novel_cid'].' and id!='.$novelInfo['id'];
-                    $similar_novels=$n->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])
-                        ->order('novelgrade asc limit 5')->select();
-                    $bottom_novel_array=$n->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])
-                        ->order('novelgrade desc limit 5')->select();
+                    $sub_query=$n->field('id')->where($com_condition.' and novelgrade>='.$novelInfo['novelgrade'])->buildSql();
+                    $similar_novels=$n->where('id in '.$sub_query)->order('novelgrade asc limit 5')->select();
+                    $sub_query=$n->field('id')->where($com_condition.' and novelgrade<'.$novelInfo['novelgrade'])->buildSql();
+                    $bottom_novel_array=$n->where('id in '.$sub_query)->order('novelgrade desc limit 5')->select();
                     if(!$similar_novels){
                         $similar_novels = array();
                     }
@@ -359,7 +344,10 @@
                 $preurl = $tempurl.($p-1);
             }
             $nexturl=$tempurl.($p+1);
-            $donenovels=$n->where('novelstate=1')->order('novelwords desc')->limit($firstRow.',10')->select();
+
+            $w = 'novelstate=1';
+            $sub_query = $n->field('id')->where($w)->buildSql();
+            $donenovels = $n->where('id in ' . $sub_query)->order('novelgrade desc')->limit($firstRow.',10')->select();
             foreach($donenovels as $donenovel){
                 //book URL
                 $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$donenovel);

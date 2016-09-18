@@ -289,8 +289,9 @@
                     $this->assign('pagetuis',$tui);
 
                     //上一章，下一章
-                    $Pre=$c->where('id <'.$coninfo['id'].' and con_nid='.$novelInfo['id'])->order('id desc')->find();
-                    $Nex=$c->where('id >'.$coninfo['id'].' and con_nid='.$novelInfo['id'])->order('id asc')->find();
+                    $subsql = $c->field('id')->where('con_nid='.$novelInfo['id'])->buildSql();
+                    $Pre=$c->where('id <'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
+                    $Nex=$c->where('id >'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
 
                     $prePage=$NovelUrl;
                     $nextPage=$NovelUrl;
@@ -442,14 +443,6 @@
             $siteurl = trim($siteinfo['site_url'], '/');
 
             $n = M('Novel');
-//            $query_page_num = $_GET['p'];
-//            $query_novel_start_id = 1;
-//            if ($query_page_num) {
-//                $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num + 1;
-//            } else {
-//                $query_page_num = 1;
-//            }
-
             if($_GET['key'] != null){
                 $where='`novelname` LIKE  "%'.$_GET['key'].'%" OR `novelauthor` LIKE "%'.$_GET['key'].'%"';
                 $novelInfo=$n->where($where)->order('novelgrade desc limit 24')->select();
@@ -473,8 +466,6 @@
             $w = 'novel_cid = 1';
             $sub_query = $n->field('id')->where($w)->buildSql();
             $click_month_novels = $n->where('id in ' . $sub_query)->order('clickmonth desc limit 20')->select();
-
-            #$this->page($novel_count,$query_page_num,$page_max_num,$siteinfo,null);
 
             $this->assign('novel_count', $novel_count);
             $this->assign('click_month_novels', $click_month_novels);
