@@ -117,6 +117,7 @@
 
                     $this->page($novel_count,$query_page_num,$page_max_num,$siteinfo,$classinfo);
 
+                    $this->assign('classinfo',$classinfo);
                     $this->assign('novel_count',$novel_count);
                     $this->assign('click_month_novels',$click_month_novels);
                     $this->assign('query_page_num',$query_page_num);
