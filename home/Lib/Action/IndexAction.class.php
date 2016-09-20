@@ -210,7 +210,7 @@
                 $tuiUrl = $this->bookToUrl($siteinfo['urlrewrite_book'], $siteurl, $tuinovel);
 
                 $words = round(floatval($tuinovel['novelwords']) / 10000, 2);
-                $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl, 'words' => $words));
+                $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl, 'words' => $words,'classname'=> $this->common_classs[$tuinovel['novel_cid']-1]['classname']));
             }
 
             //查询月点击率前50本小说
@@ -458,7 +458,7 @@
                     $tuiUrl=$this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$tuinovel);
 
                     $words = round(floatval($tuinovel['novelwords']) / 10000, 2);
-                    $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl, 'words' => $words));
+                    $tui[] = array_merge($tuinovel, array('tuiUrl' => $tuiUrl, 'words' => $words, 'classname'=> $this->common_classs[$tuinovel['novel_cid']-1]['classname']));
                 }
 
                 $this->assign('tuinovels',$tui);

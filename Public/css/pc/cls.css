@@ -104,6 +104,7 @@ li{
 }
 
 .limit_lines-4 {
+    width:100%;
     word-break: break-all;
     display: -webkit-box;
     height: 68px;
