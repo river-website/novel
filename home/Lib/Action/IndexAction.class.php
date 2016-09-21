@@ -2,8 +2,6 @@
     import("ORG.Util.Newpage");
     class indexAction extends CommonAction {
         public function index(){
-            ignore_user_abort(true);
-            ini_set('max_execution_time', '0');
             //网站信息
             $s=M('Site');//echo ROOT;
             $siteinfo=$s->find(1);
@@ -12,8 +10,6 @@
             $siteurl=trim($siteinfo['site_url'],'/');
 
             $n=M('Novel');
-
-            $this->novel_rank();
 
             //查询高分小说
             $gradelist=$n->order('novelgrade desc limit 25')->select();
@@ -47,7 +43,7 @@
             
             foreach ($this->common_classs as $class) {
                 $Sql=$n->field('id')->where('novel_cid='.$class['id'])->buildSql();
-                $class_grade_list=$n->field('id,novelname,novelauthor,novelimg,novelgrade')->where('id in '.$Sql)->order('id desc limit 20')->select();
+                $class_grade_list=$n->field('id,novelname,novelauthor,novelimg,novelgrade')->where('id in '.$Sql)->order('novelgrade desc limit 20')->select();
                 for($orderid=0;$orderid<count($class_grade_list);$orderid++){
                     $class_grade_temp =$class_grade_list[$orderid];
                     $bookurl = $this->bookToUrl($siteinfo['urlrewrite_book'],$siteurl,$class_grade_temp);
