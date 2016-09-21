@@ -6,19 +6,16 @@
 		'HTML_CACHE_ON'=>true,
 		'HTML_FILE_SUFFIX'  =>  '.html', // ���þ�̬�����׺
 		'HTML_CACHE_RULES'=>array(
-			'index:look'=>array('pc/{:action}/{name}/{id}',600),	//Ŀ¼������ҳ����10����
-			'index:index'=>array('pc/{:action}',600),	//��ҳ����10����{:module}/
-			'index:cls'=>array('pc/{:action}/{classname}/{p}',1200),	//��Ŀҳ����20����
-			'mobile:look'=>array('mobile/{:action}/{name}/{id}',600),	//Ŀ¼������ҳ����10����
-			'mobile:index'=>array('mobile/{:action}',600),	//��ҳ����10����{:module}/
-			'mobile:cls'=>array('mobile/{:action}/{classname}/{p}',1200),	//��Ŀҳ����20����
-			'mobile:done'=>array('mobile/{:action}/{p}',1200),	//��Ŀҳ����20����
-
-			// 'index:look'=>array('{:action}/{name}/{$_SERVER.REQUEST_URI}',600),	//Ŀ¼������ҳ����10����
-			// 'index:index'=>array('{:action}/{$_SERVER.REQUEST_URI}',600),	//��ҳ����10����{:module}/
-			// 'index:cls'=>array('{:action}/{$_SERVER.REQUEST_URI}',1200),	//��Ŀҳ����20����
-			//'index:search'=>array('',false),	//����ҳ�����л���
-			//'*'=>array('{:action}/{$_SERVER.REQUEST_URI|md5}',600),	//����10����{:module}/
+			'index:look'=>array('pc/{:action}/{name}/{id}',0),	//Ŀ¼������ҳ����10����
+			'index:index'=>array('pc/{:action}',86400),	//��ҳ����10����{:module}/
+			'index:cls'=>array('pc/{:action}/{classname}/{p}',86400),	//��Ŀҳ����20����
+			'index:done'=>array('index/{:action}/{p}',86400),
+			'index:map'=>array('index/{:action}/{name}',0),
+			'mobile:look'=>array('mobile/{:action}/{name}/{id}',0),	//Ŀ¼������ҳ����10����
+			'mobile:index'=>array('mobile/{:action}',86400),	//��ҳ����10����{:module}/
+			'mobile:cls'=>array('mobile/{:action}/{classname}/{p}',86400),	//��Ŀҳ����20����
+			'mobile:done'=>array('mobile/{:action}/{p}',86400),	//��Ŀҳ����20����
+			'mobile:map'=>array('mobile/{:action}/{name}',0),
 		),
 		'APP_SUB_DOMAIN_DEPLOY'=>1,
 		'APP_SUB_DOMAIN_RULES'=>array('m'=>array('home/Mobile'))
