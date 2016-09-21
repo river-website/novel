@@ -2,6 +2,8 @@
     import("ORG.Util.Newpage");
     class indexAction extends CommonAction {
         public function index(){
+            ignore_user_abort(true);
+            ini_set('max_execution_time', '0');
             //网站信息
             $s=M('Site');//echo ROOT;
             $siteinfo=$s->find(1);
@@ -10,6 +12,8 @@
             $siteurl=trim($siteinfo['site_url'],'/');
 
             $n=M('Novel');
+
+            $this->novel_rank();
 
             //查询高分小说
             $gradelist=$n->order('novelgrade desc limit 25')->select();
@@ -168,7 +172,7 @@
             if($classinfo) {
                 $c_url_prefix = $siteinfo['site_url'] . '/c/' . $classinfo['id'];
             }else {
-                $c_url_prefix = $siteinfo['site_url'] .'/d/';
+                $c_url_prefix = $siteinfo['site_url'] .'/d';
             }
 
 
@@ -572,6 +576,7 @@
                 $this->chapter_build($n, $c, $content, $novelInfo, $siteurl, $siteinfo, $NovelUrl);
             }
         }
+
         public function novels_build() {
               file_put_contents('/home/htmltime', 'start-time:'.date('Y-m-d H:i:s')."\r\n" ,FILE_APPEND);
               ignore_user_abort(true);
@@ -611,7 +616,49 @@
               file_put_contents('/home/htmltime', 'end-time:'.date('Y-m-d H:i:s')."\r\n",FILE_APPEND);
         }
 
+        private function novel_rank(){
+            $novel_cid_dict =array(1=>100,2=>100,3=>100,4=>100,5=>100,6=>100,7=>100,8=>100,9=>50,10=>50);
+            $novel_name_dict=array();
+            $novel_author_dict=array();
+            $novel_state_dict=array(1=>5000,0=>rand(1000,3000));
+            $fields_arr =array_merge(array($novel_cid_dict),array($novel_name_dict));
+            $fields_arr =  array_merge($fields_arr,array($novel_author_dict));
+            $fields_arr = array_merge($fields_arr,array($novel_state_dict));
+            $novel_fields = 'novel_cid,novelname,novelauthor,novelstate,clicktoday,clickmonth,clicksum,novelwords,noveldes';
+            $novel_field_arr = explode(',',$novel_fields);
+            $n=M('Novel');
+            $novels = $n->field('id,'.$novel_fields)->select();
+            foreach($novels as $novel){
+                $novel_grade = 0;
+                $count = 0;
+                foreach($novel_field_arr as $novel_field){
+                    $novel_grade += $this->get_field_grade($fields_arr,$novel[$novel_field],$count);
+                    $count++;
+                }
+                $data['novelgrade'] = floor($novel_grade / 200);
+                $n->where('id='.$novel['id'])->save($data);
+            }
+        }
 
+        private function get_field_grade($field_arr,$f,$count){
+            $filed_grade = null;
+            if($count < 4){
+                $filed_grade = $field_arr[$count][$f];
+                if($filed_grade == null){
+                    $filed_grade = rand(100,1000);
+                }
+            }else if($count < 7){
+                $filed_grade = floor(((10/($count - 3))*$f)/20);
+            }else if($count == 7){
+                $filed_grade = floor($f/1000);
+            }else{
+                $filed_grade = -10000;
+                if(strlen($f) > 16){
+                    $filed_grade = 0;
+                }
+            }
+            return $filed_grade;
+        }
 
     }
 ?>

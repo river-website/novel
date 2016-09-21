@@ -23,7 +23,7 @@
 	<div class="main-nav">
 	<ul>
 		<li class="main">
-			<a href="<{$siteinfo.site_url}>" title="<{$siteinfo.site_name}>"><i class="home-nav">看点小说网</i></a>
+			<a href="<{$siteinfo.site_url}>" style="width: 100%;padding-right: 0px;padding-left: 0px;" title="<{$siteinfo.site_name}>"><i class="home-nav"><{$siteinfo.site_name}></i></a>
 		</li>
 		<foreach name='classes' item='class'>
 			<li class="nav-li <if condition='$classes[$_GET["classname"]-1] eq $class'>nav_active</if>">
