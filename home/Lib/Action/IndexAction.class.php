@@ -92,9 +92,9 @@
                 if(is_array($classinfo)){
                     $n=M('Novel');
                     $query_page_num = $_GET['p'];
-                    $query_novel_start_id = 1;
+                    $query_novel_start_id = 0;
                     if($query_page_num){
-                        $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num + 1;
+                        $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num;
                     }else{
                         $query_page_num = 1;
                     }
@@ -196,9 +196,9 @@
 
             $n = M('Novel');
             $query_page_num = $_GET['p'];
-            $query_novel_start_id = 1;
+            $query_novel_start_id = 0;
             if ($query_page_num) {
-                $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num + 1;
+                $query_novel_start_id = (intval($_GET['p']) - 1) * $page_max_num;
             } else {
                 $query_page_num = 1;
             }
