@@ -296,7 +296,7 @@
                     //上一章，下一章
                     $subsql = $c->field('id')->where('con_nid='.$novelInfo['id'])->buildSql();
                     $Pre=$c->where('id <'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
-                    $Nex=$c->where('id >'.$coninfo['id'].' and id in '.$subsql)->order('id desc')->find();
+                    $Nex=$c->where('id >'.$coninfo['id'].' and id in '.$subsql)->order('id asc')->find();
 
                     $prePage=$NovelUrl;
                     $nextPage=$NovelUrl;
