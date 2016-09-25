@@ -25,3 +25,5 @@ div {margin: 0; padding: 0; border: 0;}
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.clear{clear: both;}
