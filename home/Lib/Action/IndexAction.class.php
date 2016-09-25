@@ -2,8 +2,6 @@
     import("ORG.Util.Newpage");
     class indexAction extends CommonAction {
         public function index(){
-            ignore_user_abort(true);
-            ini_set('max_execution_time', '0');
             //网站信息
             $s=M('Site');//echo ROOT;
             $siteinfo=$s->find(1);
@@ -12,7 +10,6 @@
             $siteurl=trim($siteinfo['site_url'],'/');
 
             $n=M('Novel');
-            $this->novel_rank();
 
             //查询高分小说
             $gradelist=$n->order('novelgrade desc limit 25')->select();
@@ -613,6 +610,12 @@
                   }
               }
               file_put_contents('/home/htmltime', 'end-time:'.date('Y-m-d H:i:s')."\r\n",FILE_APPEND);
+        }
+
+        public function _sajfoijaoidhs_foanhuhqwebriudsaf234923047sdbvuia(){
+            ignore_user_abort(true);
+            ini_set('max_execution_time', '0');
+            $this->novel_rank();
         }
 
         private function novel_rank(){
