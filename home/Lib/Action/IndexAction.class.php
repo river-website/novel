@@ -612,7 +612,7 @@
               file_put_contents('/home/htmltime', 'end-time:'.date('Y-m-d H:i:s')."\r\n",FILE_APPEND);
         }
 
-        public function _sajfoijaoidhs_foanhuhqwebriudsaf234923047sdbvuia(){
+        public function sajfoijaoidhs_foanhuhqwebriudsaf234923047sdbvuia(){
             ignore_user_abort(true);
             ini_set('max_execution_time', '0');
             $this->novel_rank();
@@ -645,8 +645,10 @@
             $novels = $n->field('id,novelgrade')->select();
             foreach($novels as $novel){
                 $cur_grade = $novel['novelgrade'];
+                echo($cur_grade.'xxx');
                 $cur_grade = floor(($cur_grade/$max_grade)*100);
                 $data['novelgrade'] = $cur_grade;
+                echo($cur_grade.'<br/>');
                 $n->where('id='.$novel['id'])->save($data);
             }
         }
