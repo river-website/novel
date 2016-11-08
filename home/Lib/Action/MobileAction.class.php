@@ -540,8 +540,16 @@
                     $novel_grade += $this->get_field_grade($fields_arr,$novel[$novel_field],$count);
                     $count++;
                 }
-                echo($novel_grade.'<br>');
                 $data['novelgrade'] = $novel_grade;
+                $n->where('id='.$novel['id'])->save($data);
+            }
+            $max_grade_arr = $n->order('novelgrade desc limit 1')->select();
+            $max_grade = $max_grade_arr[0]['novelgrade'];
+            $novels = $n->field('id,novelgrade')->select();
+            foreach($novels as $novel){
+                $cur_grade = $novel['novelgrade'];
+                $cur_grade = floor(($cur_grade/$max_grade)*100);
+                $data['novelgrade'] = $cur_grade;
                 $n->where('id='.$novel['id'])->save($data);
             }
         }
