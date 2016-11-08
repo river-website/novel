@@ -640,6 +640,15 @@
                 $data['novelgrade'] = floor($novel_grade / 200);
                 $n->where('id='.$novel['id'])->save($data);
             }
+            $max_grade_arr = $n->order('novelgrade desc limit 1')->select();
+            $max_grade = $max_grade_arr[0]['novelgrade'];
+            $novels = $n->field('id,novelgrade')->select();
+            foreach($novels as $novel){
+                $cur_grade = $novel['novelgrade'];
+                $cur_grade = floor(($cur_grade/$max_grade)*100);
+                $data['novelgrade'] = $cur_grade;
+                $n->where('id='.$novel['id'])->save($data);
+            }
         }
 
         private function get_field_grade($field_arr,$f,$count){
